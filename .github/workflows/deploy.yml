@@ -43,13 +43,6 @@ jobs:
           VITE_SUPABASE_URL:       ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY:  ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist
-          path: trustwork-ui/dist
-          retention-days: 7
-
   # ── Job 2: Deploy to Vercel ───────────────────────────────────────────────
   deploy:
     name: Deploy to Vercel
@@ -61,9 +54,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install latest Vercel CLI
+      - name: Install Vercel CLI
         run: npm install -g vercel@latest
 
+      # 🔥 VERY IMPORTANT STEP (missing tha)
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+        working-directory: trustwork-ui
+
+      # 🔥 FINAL DEPLOY
       - name: Deploy to Vercel
         run: vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
         working-directory: trustwork-ui
