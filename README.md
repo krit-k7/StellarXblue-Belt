@@ -12,7 +12,7 @@
 
 **→ [https://trust-work26.vercel.app](https://trust-work26.vercel.app)**
 
-### 📹 Demo Video
+### 📹 Demo Video:- 
 
 https://github.com/Vedang24-hash/TrustWork26/raw/master/ScreenRecording/demo.mp4
 
