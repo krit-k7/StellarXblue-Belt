@@ -379,6 +379,6 @@ TrustWork is **enterprise-ready** and **production-tested**. With comprehensive 
 
 [🌐 Live App](https://trust-work26.vercel.app) • [� Demo Video](https://github.com/Vedang24-hash/TrustWork26/raw/master/ScreenRecording/demo.mp4) • [💬 Community](https://discord.gg/trustwork) • [🐛 Issues](https://github.com/Vedang24-hash/TrustWork26/issues)
 
-**© 2026 TrustWork. All rights reserved.**
+**© 2026 TrustWork. All rights reserved. **
 
 </div>
