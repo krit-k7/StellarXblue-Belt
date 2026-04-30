@@ -148,11 +148,11 @@ We collected feedback from **30+ real users** who tested TrustWork on Stellar Te
 
 | User Name | User Email | User Wallet Address | User Feedback |
 |----------|-----------|--------------------|--------------|
-| Kunal Sathe | kunalsathe18@gmail.com | GAOFS35LNWKZBY7RJKBJHVYDTL3SX2NKVDP5HTCPUEFC6L3Q4YLJLWPA | "Transaction fails with Freighter showing 'Signing not possible' error on testnet" |
-| Nisha Bahirat | bahirat.nisha@gmail.com | GBTT2S5AYMJ26RAMZNMWJR6M3HL6DTJCFQQMTRFNVL3F6Q7AGVWBJBQn | "Freighter is installed but app still shows 'Install Freighter' screen" |
-| Omkar Jagtap | omkarjagtap2105@gmail.com | GAF57COCDLHE27JYGSB6YUIDHWU53SJUJ522CLEDVH4SFPAWR2WTAFZ | "Fake demo contracts appear on dashboard when connecting wallet for the first time" |
-| Aniket Bhilare | bhilareaniket2424@gmail.com | GDRTJRMXK43GQL5EE25Q6ULXYRVLJ646ES5CXRX376VMSLSSKSLWONM7 | "Contract creation fails with 'InvalidInput' error when milestone titles have special characters" |
-| Pranali Bahirat | bahirat.pranali22@gmail.com | GAWOMT3S7OHVZJRMS4VND2HK5NBMBBWKBQSSELPFEI7SH4D63E2WGAK | "Both client and freelancer see approve/reject buttons after work submission — only client should see them" |
+| Kunal Sathe | kunalsathe18@gmail.com | `GAOFS35LNWKZBY7RJKBJHVYDTL3SX2NKVDP5HTCPUEFC6L3Q4YLJLWPA` | "Transaction fails with Freighter showing 'Signing not possible' error on testnet" |
+| Nisha Bahirat | bahirat.nisha@gmail.com | `GBTT2S5AYMJ26RAMZNMWJR6M3HL6DTJCFQQMTRFNVL3F6Q7AGVWBJBQn` | "Freighter is installed but app still shows 'Install Freighter' screen" |
+| Omkar Jagtap | omkarjagtap2105@gmail.com | `GAF57COCDLHE27JYGSB6YUIDHWU53SJUJ522CLEDVH4SFPAWR2WTAFZ` | "Fake demo contracts appear on dashboard when connecting wallet for the first time" |
+| Aniket Bhilare | bhilareaniket2424@gmail.com | `GDRTJRMXK43GQL5EE25Q6ULXYRVLJ646ES5CXRX376VMSLSSKSLWONM7` | "Contract creation fails with 'InvalidInput' error when milestone titles have special characters" |
+| Pranali Bahirat | bahirat.pranali22@gmail.com | `GAWOMT3S7OHVZJRMS4VND2HK5NBMBBWKBQSSELPFEI7SH4D63E2WGAK` | "Both client and freelancer see approve/reject buttons after work submission — only client should see them" |
 
 ---
 
@@ -162,10 +162,10 @@ We collected feedback from **30+ real users** who tested TrustWork on Stellar Te
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                      User Browser                        │
-│                                                          │
+│                      User Browser                       │
+│                                                         │
 │   ┌──────────────┐        ┌─────────────────────────┐   │
-│   │   React SPA  │◀──────▶│  Freighter Wallet Ext.  │   │
+│   │   React SPA  │◀──────▶│  Freighter Wallet Ext. │   │
 │   │  (Vercel)    │        │  (Signs transactions)   │   │
 │   └──────┬───────┘        └─────────────────────────┘   │
 └──────────┼──────────────────────────────────────────────┘
@@ -182,7 +182,7 @@ We collected feedback from **30+ real users** who tested TrustWork on Stellar Te
 ┌─────────────────────────────────────────────────────────┐
 │              Soroban Smart Contract (Rust)              │
 │         CBEUUVKJD2FM5CL57COXJV55HXYSEDW7VXR...          │
-│                                                          │
+│                                                         │
 │   create_escrow → deposit → submit_work →               │
 │   approve_and_release / refund / raise_dispute          │
 └─────────────────────────────────────────────────────────┘
