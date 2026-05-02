@@ -132,6 +132,26 @@ We collected feedback from **30+ real users** who tested TrustWork on Stellar Te
 
 ---
 
+## 📊 Metrics Dashboard
+
+TrustWork provides a **personalized metrics dashboard** for each user upon wallet connection. The dashboard displays:
+
+- **Total Contracts Created** — Number of escrow contracts initiated by the user
+- **Total Value Locked** — Sum of all funds currently held in active escrows
+- **Active Contracts** — Contracts awaiting action (deposit, submission, approval)
+- **Completed Contracts** — Successfully closed escrow transactions
+- **Role-based Stats** — Separate metrics for client vs. freelancer activities
+
+**Access:** Connect your wallet at [https://trust-work26.vercel.app](https://trust-work26.vercel.app) → Navigate to Dashboard
+
+**Screenshot:**
+
+![User Dashboard](./ScreenRecording/Screenshot%202026-05-02%20035036.png)
+
+*Note: Metrics are user-specific and calculated in real-time from on-chain contract data. Each wallet address has its own isolated dashboard view.*
+
+---
+
 ### 👥 Table 1 — Test Users
 
 | User Name | User Email | User Wallet Address |
