@@ -343,7 +343,7 @@ Display on personalized dashboard
 
 We've shared TrustWork with the Stellar community to gather feedback and drive adoption:
 
-**→ [View Twitter/X Post](https://x.com/B)**
+**→ [View Twitter/X Post](https://x.com/krit_giri/status/2050516673879527867)**
 
 The post includes:
 - Vercel deployed link for live testing
