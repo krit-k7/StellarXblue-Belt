@@ -146,7 +146,8 @@ TrustWork provides a **personalized metrics dashboard** for each user upon walle
 
 **Screenshot:**
 
-![User Dashboard](./ScreenRecording/Screenshot%202026-05-02%20035036.png)
+![User Dashboard](<img width="1457" height="690" alt="image" src="https://github.com/user-attachments/assets/944e53d8-551c-44c8-8045-cd606e1a1b7c" />
+)
 
 *Note: Metrics are user-specific and calculated in real-time from on-chain contract data. Each wallet address has its own isolated dashboard view.*
 
