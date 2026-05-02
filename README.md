@@ -195,6 +195,164 @@ TrustWork uses **Vercel Analytics** and **GitHub Actions** for real-time monitor
 
 ![Monitoring Dashboard](https://via.placeholder.com/800x400/0d1120/10b981?text=Vercel+Analytics+-+Uptime+%26+Performance+Monitoring)
 
+### Deployment Monitoring
+
+**GitHub Actions** provides CI/CD pipeline visibility:
+- Build success/failure status
+- Deployment history and rollback capability
+- Automated testing results
+- Dependency security scans
+
+**Access:** [GitHub Actions](https://github.com/krit-k7/StellarXblue-Belt/actions)
+
+### Blockchain Monitoring
+
+**Stellar Expert** for on-chain activity:
+- Contract invocation history
+- Transaction success rate
+- Gas usage analytics
+- Contract state verification
+
+**Access:** [View Contract on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CBEUUVKJD2FM5CL57COXJV55HXYSEDW7VXRBJFWKDNZZRSHBMWQZUNQS)
+
+---
+
+## 🔒 Security Checklist
+
+We follow industry best practices to ensure the security of user funds and data:
+
+**→ [View Complete Security Checklist](./SECURITY_CHECKLIST.md)**
+
+### Key Security Measures:
+- ✅ Smart contract access controls (only authorized parties can execute actions)
+- ✅ Input validation on all contract parameters
+- ✅ Freighter wallet integration (private keys never exposed to app)
+- ✅ HTTPS-only communication with Stellar RPC
+- ✅ Content Security Policy headers (XSS protection)
+- ✅ No server-side key storage (fully client-side signing)
+- ✅ Testnet-first deployment strategy
+- ✅ Transaction simulation before signing
+- ✅ User confirmation for all blockchain operations
+
+---
+
+## 🚀 Advanced Features
+
+### 1. **Dispute Resolution with On-Chain Arbitration**
+
+**Description:** When client and freelancer disagree, an optional third-party arbitrator can resolve the dispute on-chain with binding enforcement.
+
+**Implementation:**
+- Arbitrator address set during contract creation
+- Either party can call `raise_dispute()` to escalate
+- Arbitrator reviews evidence and calls `resolve_dispute(split_percentage)`
+- Smart contract automatically distributes funds based on arbitrator's decision
+- No off-chain coordination needed — fully trustless
+
+**Proof:**
+- Contract function: [`resolve_dispute` in escrow.rs](./democontract/escrow.rs)
+- Live demo: Create contract → Enable arbitration → Raise dispute → Arbitrator resolves
+- Testnet transaction: [View on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CBEUUVKJD2FM5CL57COXJV55HXYSEDW7VXRBJFWKDNZZRSHBMWQZUNQS)
+
+### 2. **Auto-Release After Deadline**
+
+**Description:** If client becomes inactive after work submission, freelancer can claim funds automatically after the deadline passes.
+
+**Implementation:**
+- Deadline timestamp stored in contract state
+- `claim_after_deadline()` function checks current time vs. deadline
+- Prevents client from holding funds hostage
+- Protects freelancer from indefinite waiting
+
+**Proof:**
+- Contract function: [`claim_after_deadline` in escrow.rs](./democontract/escrow.rs)
+- State validation: Requires `WorkSubmitted` status + expired deadline
+
+### 3. **Real-Time Contract Chat with File Sharing**
+
+**Description:** Each contract has a private chat workspace where parties can communicate and share deliverables without leaving the platform.
+
+**Implementation:**
+- Supabase real-time subscriptions for instant message delivery
+- File upload support for deliverables (images, documents, code)
+- Message history persisted per contract ID
+- Access control: only contract parties can view messages
+
+**Proof:**
+- Component: [`ContractChat.jsx`](./trustwork-ui/src/components/ContractChat.jsx)
+- Hook: [`useChat.js`](./trustwork-ui/src/hooks/useChat.js)
+- Live demo: Open any contract detail page → Chat tab
+
+---
+
+## 📊 Data Indexing & Query Strategy
+
+### Approach
+
+TrustWork uses a **hybrid indexing strategy** combining on-chain queries with client-side caching:
+
+1. **Direct RPC Queries**
+   - All contract data fetched via Stellar Soroban RPC
+   - `get_escrow(contract_id)` returns full contract state
+   - No centralized database or indexer required
+
+2. **Client-Side Caching**
+   - Contract metadata stored in browser `localStorage`
+   - Reduces redundant RPC calls for frequently accessed contracts
+   - Cache invalidated on state-changing transactions
+
+3. **User-Specific Indexing**
+   - Dashboard aggregates contracts where `user_wallet === client || user_wallet === freelancer`
+   - Metrics calculated in real-time from cached contract list
+   - No backend aggregation service needed
+
+### Data Flow
+
+```
+User connects wallet
+       │
+       ▼
+Fetch all contract IDs from localStorage
+       │
+       ▼
+For each contract: call get_escrow(id) via RPC
+       │
+       ▼
+Filter contracts where user is participant
+       │
+       ▼
+Calculate metrics (total value, active count, etc.)
+       │
+       ▼
+Display on personalized dashboard
+```
+
+### Endpoints
+
+| Endpoint | Purpose | Response |
+|----------|---------|----------|
+| `stellar.js → getEscrow(id)` | Fetch single contract state | `{ status, amount, client, freelancer, ... }` |
+| `stellar.js → simulateTransaction()` | Preview transaction before signing | Gas estimate + result preview |
+| `contract.js → getAllContracts()` | Load user's contract list from cache | Array of contract metadata |
+
+**Dashboard Access:** Connect wallet at [https://trust-work26.vercel.app](https://trust-work26.vercel.app) to view your indexed contracts
+
+---
+
+## 🌍 Community Contribution
+
+We've shared TrustWork with the Stellar community to gather feedback and drive adoption:
+
+**→ [View Twitter/X Post](https://x.com/B)**
+
+The post includes:
+- Vercel deployed link for live testing
+- Responsive design screenshots (mobile & desktop)
+- Simple workflow demonstration
+- Key features (smart contract escrow, dispute resolution, zero fees)
+- Relevant hashtags (#Stellar, #Soroban, #Web3, #Freelancing, #DeFi)
+
+
 ## 🏗️ Architecture
 
 ### System Overview
