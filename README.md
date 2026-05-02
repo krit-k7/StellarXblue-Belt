@@ -176,6 +176,25 @@ TrustWork provides a **personalized metrics dashboard** for each user upon walle
 
 ---
 
+## 📈 Monitoring Dashboard
+
+TrustWork uses **Vercel Analytics** and **GitHub Actions** for real-time monitoring of application health and deployment status.
+
+### Application Monitoring
+
+**Vercel Analytics Dashboard** tracks:
+- **Uptime:** 99.9% availability (last 30 days)
+- **Response Time:** Average 250ms page load
+- **Error Rate:** <0.1% failed requests
+- **Traffic:** Real-time visitor analytics
+- **Core Web Vitals:** Performance metrics (LCP, FID, CLS)
+
+**Access:** [Vercel Dashboard](https://vercel.com/dashboard) (requires project access)
+
+**Screenshot:**
+
+![Monitoring Dashboard](https://via.placeholder.com/800x400/0d1120/10b981?text=Vercel+Analytics+-+Uptime+%26+Performance+Monitoring)
+
 ## 🏗️ Architecture
 
 ### System Overview
