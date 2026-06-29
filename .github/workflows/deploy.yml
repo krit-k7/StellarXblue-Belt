@@ -35,9 +35,9 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_CONTRACT_ID:        ${{ secrets.VITE_CONTRACT_ID }}
-          VITE_STELLAR_NETWORK:    ${{ secrets.VITE_STELLAR_NETWORK }}
-          VITE_RPC_URL:            ${{ secrets.VITE_RPC_URL }}
+          VITE_CONTRACT_ID: ${{ secrets.VITE_CONTRACT_ID }}
+          VITE_STELLAR_NETWORK: ${{ secrets.VITE_STELLAR_NETWORK }}
+          VITE_RPC_URL: ${{ secrets.VITE_RPC_URL }}
           VITE_NETWORK_PASSPHRASE: ${{ secrets.VITE_NETWORK_PASSPHRASE }}
-          VITE_SUPABASE_URL:       ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY:  ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
