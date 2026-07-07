@@ -186,7 +186,7 @@ Before deploying to Stellar Mainnet, the following must be completed:
 
 If you discover a security vulnerability, please report it responsibly:
 
-- **GitHub Issues:** [https://github.com/Vedang24-hash/TrustWork26/issues](https://github.com/Vedang24-hash/TrustWork26/issues)
+- **GitHub Issues:** [https://github.com/krit-k7/TrustWork26/issues](https://github.com/krit-k7/TrustWork26/issues)
 - **Email:** [Your security contact email]
 - **Response Time:** We aim to respond within 48 hours
 
