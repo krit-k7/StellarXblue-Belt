@@ -2,7 +2,7 @@
 
 > A blockchain-based escrow platform where clients and freelancers transact trustlessly using Soroban smart contracts on the Stellar network.
 
-[![Live App](https://img.shields.io/badge/Live_App-trust--work26.vercel.app-success?style=flat-square)](https://trust-work26.vercel.app)
+[![Live App](https://img.shields.io/badge/Live_App-stellar--xblue--belt.vercel.app-success?style=flat-square)](https://stellar-xblue-belt.vercel.app/)
 [![Network](https://img.shields.io/badge/Network-Stellar_Testnet-blue?style=flat-square)](https://stellar.org)
 [![Contract](https://img.shields.io/badge/Soroban-Deployed-purple?style=flat-square)](https://soroban.stellar.org)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
