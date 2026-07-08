@@ -1,7 +1,7 @@
 {
-  "name": "stellarx-ui",
+  "name": "trustwork-ui",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,7 +14,6 @@
     "@stellar/stellar-sdk": "^14.6.1",
     "@supabase/supabase-js": "^2.103.0",
     "framer-motion": "^12.42.2",
-    "lucide-react": "^0.474.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
