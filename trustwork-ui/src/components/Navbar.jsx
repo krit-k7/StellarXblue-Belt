@@ -21,8 +21,10 @@ export default function Navbar({ page, setPage, wallet, onOpenWallet, onDisconne
     return () => document.removeEventListener('mousedown', handleClick)
   }, [])
 
+  const isHome = page === 'home'
+
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${isHome ? 'navbar-dark' : ''}`}>
       {/* Brand */}
       <div className="navbar-brand" onClick={() => setPage('home')}>
         <div className="navbar-logo">⚡</div>
