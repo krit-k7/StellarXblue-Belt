@@ -1,11 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-/* ── ParticleField ─────────────────────────────────────────────────────────
-   Lightweight canvas network background (nodes + connecting lines that
-   drift and link when close) — no external deps. Used behind the Home
-   page dark hero, echoing the GovVault look. Respects reduced-motion and
-   auto-pauses when the tab isn't visible. ── */
-export default function ParticleField({ density = 60, color = '110, 231, 214' }) {
+export default function ParticleField({ density = 80, color = '255, 255, 255' }) {
   const canvasRef = useRef(null)
 
   useEffect(() => {
@@ -29,13 +24,13 @@ export default function ParticleField({ density = 60, color = '110, 231, 214' })
       canvas.style.height = height + 'px'
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
-      const count = Math.min(density, Math.floor((width * height) / 14000))
+      const count = Math.min(density, Math.floor((width * height) / 10000))
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.28,
-        vy: (Math.random() - 0.5) * 0.28,
-        r: Math.random() * 1.6 + 0.6,
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: (Math.random() - 0.5) * 0.2,
+        r: Math.random() * 1.5 + 0.5,
       }))
     }
 
@@ -45,19 +40,22 @@ export default function ParticleField({ density = 60, color = '110, 231, 214' })
       for (const p of particles) {
         p.x += p.vx
         p.y += p.vy
-        if (p.x < 0 || p.x > width) p.vx *= -1
-        if (p.y < 0 || p.y > height) p.vy *= -1
+        if (p.x < 0) p.x = width
+        if (p.x > width) p.x = 0
+        if (p.y < 0) p.y = height
+        if (p.y > height) p.y = 0
       }
 
-      const linkDist = Math.min(150, width / 5)
+      const linkDist = 180
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const a = particles[i], b = particles[j]
           const dx = a.x - b.x, dy = a.y - b.y
           const dist = Math.sqrt(dx * dx + dy * dy)
           if (dist < linkDist) {
-            ctx.strokeStyle = `rgba(${color}, ${0.16 * (1 - dist / linkDist)})`
-            ctx.lineWidth = 1
+            const opacity = (1 - dist / linkDist) * 0.15
+            ctx.strokeStyle = `rgba(${color}, ${opacity})`
+            ctx.lineWidth = 0.8
             ctx.beginPath()
             ctx.moveTo(a.x, a.y)
             ctx.lineTo(b.x, b.y)
@@ -69,7 +67,7 @@ export default function ParticleField({ density = 60, color = '110, 231, 214' })
       for (const p of particles) {
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${color}, 0.55)`
+        ctx.fillStyle = `rgba(${color}, 0.3)`
         ctx.fill()
       }
 
