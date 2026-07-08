@@ -125,11 +125,11 @@ TrustWork26/
 
 ---
 
-## 📊 User Feedback — 30+ Real Responses
+## 📊 User Feedback — 50+ Real Responses
 
-We collected feedback from **30+ real users** who tested TrustWork on Stellar Testnet.
+We collected feedback from **50+ real users** who tested TrustWork on Stellar Testnet.
 
-**→ [View Full Feedback Spreadsheet](https://docs.google.com/spreadsheets/d/10T2ffMEWhxmX97yFe9HG5z5gC-0IqlprxsF2_YdVZj4/edit?usp=sharing)**
+**→ [View Full Feedback Spreadsheet ~TRUSTWORK](https://docs.google.com/spreadsheets/d/1zOhuFVbrQZlJ1NcUoBrmZxb7JP9WRP9J/edit?gid=1132381471#gid=1132381471)**
 
 ---
 
