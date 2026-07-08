@@ -13,20 +13,32 @@ const stagger = {
 export default function Home({ wallet, onOpenWallet, setPage }) {
   const features = [
     { 
-      icon: '🛡️', 
-      title: 'Decentralized Escrow', 
-      desc: 'Smart contract based funds protection. Payments are only released when milestones are met.' 
-    },
-    { 
-      icon: '⚖️', 
-      title: 'Quadratic Arbitration', 
-      desc: 'Fair and transparent dispute resolution powered by community-driven quadratic voting.' 
+      icon: '🔒', 
+      title: 'Escrow Protection', 
+      desc: 'Funds are locked in a Soroban smart contract before work begins. No trust required.' 
     },
     { 
       icon: '⚡', 
       title: 'Stellar Speed', 
-      desc: 'Near-instant settlement and negligible fees thanks to the Stellar network architecture.' 
+      desc: 'Payments settle in seconds on the Stellar network with near-zero fees.' 
+    },
+    { 
+      icon: '⚖️', 
+      title: 'Dispute Resolution', 
+      desc: 'Human arbitrators resolve disagreements fairly when parties can\'t agree.' 
+    },
+    { 
+      icon: '🤖', 
+      title: 'Auto-Release', 
+      desc: 'If the client is inactive past the review period, the freelancer can claim automatically.' 
     }
+  ]
+
+  const steps = [
+    { num: '1', title: 'Connect Wallet', desc: 'Link your Stellar wallet to identify yourself on the platform.' },
+    { num: '2', title: 'Create Contract', desc: 'Set terms, deadline, and deposit funds into the escrow smart contract.' },
+    { num: '3', title: 'Work & Submit', desc: 'Freelancer completes the project and submits deliverables.' },
+    { num: '4', title: 'Approve & Pay', desc: 'Client approves the work and funds are instantly released.' },
   ]
 
   return (
@@ -41,32 +53,75 @@ export default function Home({ wallet, onOpenWallet, setPage }) {
           animate="show"
           variants={stagger}
         >
+          <motion.div className="hero-badge" variants={fadeUp} style={{ 
+            background: 'var(--accent-glow)', 
+            color: 'var(--accent)', 
+            padding: '6px 16px', 
+            borderRadius: '20px',
+            fontSize: '0.75rem',
+            fontWeight: '700',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            marginBottom: '24px',
+            display: 'inline-block',
+            border: '1px solid var(--border-glow)'
+          }}>
+            Built on Stellar · Powered by Soroban
+          </motion.div>
+          
           <motion.h1 className="hero-title" variants={fadeUp}>
-            Democratic Governance <br />
-            powered by <span>Quadratic Voting</span>
+            Freelance contracts,<br /><span>sealed before work starts.</span>
           </motion.h1>
           
           <motion.p className="hero-description" variants={fadeUp}>
-            Empower DAO members to propose, vote quadratically on funding allocations, 
-            and execute decentralized treasury grants trustlessly.
+            TrustWork locks project funds in a smart contract before work begins.
+            Clients and freelancers collaborate with confidence — no middlemen,
+            no disputes left unresolved.
           </motion.p>
           
           <motion.div className="hero-actions" variants={fadeUp}>
-            <button className="btn btn-primary" onClick={() => wallet ? setPage('dashboard') : onOpenWallet()}>
-              {wallet ? 'Enter Voting Portal' : 'Connect Wallet'}
+            <button className="btn btn-primary" onClick={() => wallet ? setPage('create') : onOpenWallet()}>
+              {wallet ? 'Create a Contract' : 'Connect Wallet to Start'}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginLeft: 8 }}>
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
             </button>
-            <button className="btn btn-outline" onClick={() => setPage('transfer')}>
-              Direct XLM Transfer
+            <button className="btn btn-outline" onClick={() => setPage('dashboard')}>
+              View Dashboard
             </button>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* Pillars Section */}
-      <section className="pillars-section" style={{ padding: '100px 0', background: '#05070a' }}>
+      {/* Trust Row */}
+      <motion.div 
+        className="trust-row"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          gap: '12px', 
+          padding: '20px 0 60px',
+          flexWrap: 'wrap'
+        }}
+      >
+        {['Stellar Network', 'Soroban Contracts', '✓ Open Source'].map((text, i) => (
+          <span key={i} style={{
+            background: 'rgba(255,255,255,0.03)',
+            border: '1px solid var(--border)',
+            borderRadius: '20px',
+            padding: '6px 16px',
+            fontSize: '0.8rem',
+            color: text.includes('✓') ? 'var(--green)' : 'var(--text-muted)',
+            fontWeight: '600'
+          }}>{text}</span>
+        ))}
+      </motion.div>
+
+      {/* Features Section */}
+      <section style={{ padding: '80px 0', background: '#05070a' }}>
         <div className="section-title">
           <motion.h2 
             initial={{ opacity: 0 }} 
@@ -74,9 +129,9 @@ export default function Home({ wallet, onOpenWallet, setPage }) {
             viewport={{ once: true }}
             style={{ marginBottom: 16 }}
           >
-            StellarX Core Protocol Pillars
+            Trustless Collaboration
           </motion.h2>
-          <p style={{ color: 'var(--text-muted)' }}>Building the future of decentralized collaboration</p>
+          <p style={{ color: 'var(--text-muted)' }}>Secure your freelance workflow with blockchain escrow</p>
         </div>
 
         <motion.div 
@@ -96,8 +151,43 @@ export default function Home({ wallet, onOpenWallet, setPage }) {
         </motion.div>
       </section>
 
+      {/* How It Works Section */}
+      <section style={{ padding: '100px 24px', borderTop: '1px solid var(--border)' }}>
+        <div className="section-title">
+          <h2>How it works</h2>
+          <p style={{ color: 'var(--text-muted)' }}>Four steps to secure, trustless freelance collaboration.</p>
+        </div>
+        
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
+          gap: '32px', 
+          maxWidth: '1100px', 
+          margin: '48px auto 0' 
+        }}>
+          {steps.map(s => (
+            <div key={s.num} style={{ textAlign: 'center' }}>
+              <div style={{ 
+                width: '40px', 
+                height: '40px', 
+                borderRadius: '50%', 
+                background: 'var(--accent)', 
+                color: 'var(--accent-ink)', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                fontWeight: '800', 
+                margin: '0 auto 16px' 
+              }}>{s.num}</div>
+              <h3 style={{ marginBottom: 8 }}>{s.title}</h3>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Bottom CTA */}
-      <section style={{ padding: '100px 24px', textAlign: 'center', borderTop: '1px solid var(--border)' }}>
+      <section style={{ padding: '100px 24px', textAlign: 'center', borderTop: '1px solid var(--border)', background: 'radial-gradient(circle at center, rgba(79,216,206,0.05) 0%, transparent 70%)' }}>
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
