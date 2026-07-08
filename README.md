@@ -6,6 +6,7 @@
 [![Network](https://img.shields.io/badge/Network-Stellar_Testnet-blue?style=flat-square)](https://stellar.org)
 [![Contract](https://img.shields.io/badge/Soroban-Deployed-purple?style=flat-square)](https://soroban.stellar.org)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+![CI/CD](https://github.com/krit-k7/StellarXblue-Belt/actions/workflows/deploy.yml/badge.svg)
 
 ---
 
