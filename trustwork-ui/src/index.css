@@ -693,6 +693,144 @@ a:hover { color: var(--accent-hover); }
 }
 
 /* =============================================================================
+   HOME — DARK THEME (GovVault-inspired)
+   Scoped to `.home-dark`. Re-declaring the same custom properties here means
+   every existing component (hero, cards, badges, the iso illustration, etc.)
+   re-themes automatically — only Home gets this treatment, everything else
+   (Dashboard, ContractDetail, Arbitration...) stays on the light theme.
+   ============================================================================= */
+.home-dark {
+  --bg: #05070d;
+  --bg-card: #0d1220;
+  --bg-elevated: #10162a;
+  --bg-sunken: #0a0e18;
+
+  --border: rgba(255,255,255,0.09);
+  --border-strong: rgba(255,255,255,0.18);
+  --border-glow: rgba(110,231,214,0.35);
+
+  --text: #aab2c4;
+  --text-muted: #757f92;
+  --text-heading: #f3f6fb;
+
+  --accent: #4fd8ce;
+  --accent-hover: #7ee6dd;
+  --accent-glow: rgba(79,216,206,0.14);
+  --accent-ink: #04110f;
+
+  --green: #4fd8ac;
+  --green-bg: rgba(79,216,172,0.12);
+  --yellow: #e8b96a;
+  --yellow-bg: rgba(232,185,106,0.12);
+  --red: #ef7a72;
+  --red-bg: rgba(239,122,114,0.12);
+  --purple: #9b9ff0;
+  --purple-bg: rgba(155,159,240,0.12);
+
+  position: relative;
+  background: var(--bg);
+  isolation: isolate;
+}
+
+/* Ambient glow blobs behind the hero content */
+.home-dark::before,
+.home-dark::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+}
+.home-dark::before {
+  top: -120px; left: -80px;
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(79,216,206,0.16), transparent 70%);
+}
+.home-dark::after {
+  top: 120px; right: -140px;
+  width: 460px; height: 460px;
+  background: radial-gradient(circle, rgba(155,159,240,0.12), transparent 70%);
+}
+
+.particle-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  opacity: 0.9;
+}
+
+.home-dark .hero-split,
+.home-dark .trust-row,
+.home-dark .section-wrap,
+.home-dark .how-it-works {
+  position: relative;
+  z-index: 1;
+}
+
+.home-dark .hero-badge {
+  color: var(--accent);
+  border-color: var(--border-glow);
+  background: var(--accent-glow);
+}
+
+.home-dark .hero-title-split {
+  text-shadow: 0 0 40px rgba(79,216,206,0.18);
+}
+.home-dark .hero-title-split span {
+  background: linear-gradient(90deg, var(--accent), #9b9ff0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.home-dark .feature-card,
+.home-dark .trust-chip {
+  backdrop-filter: blur(6px);
+}
+.home-dark .feature-card:hover {
+  border-color: var(--border-glow);
+  box-shadow: 0 0 0 1px var(--border-glow), 0 16px 40px rgba(0,0,0,0.35);
+}
+.home-dark .trust-chip.audited {
+  background: var(--green-bg);
+  border-color: rgba(79,216,172,0.3);
+}
+
+.home-dark .btn-secondary {
+  background: rgba(255,255,255,0.04);
+  color: var(--text-heading);
+  border-color: var(--border-strong);
+}
+.home-dark .btn-secondary:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.home-dark .btn-primary {
+  box-shadow: 0 0 0 1px rgba(79,216,206,0.3), 0 8px 24px rgba(79,216,206,0.16);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particle-field { display: none; }
+}
+
+/* ===== NAVBAR — dark variant shown only while on the Home page ===== */
+.navbar.navbar-dark {
+  background: rgba(5,7,13,0.72);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.navbar-dark .navbar-title { color: #f3f6fb; }
+.navbar-dark .nav-btn { color: #aab2c4; }
+.navbar-dark .nav-btn:hover { background: rgba(255,255,255,0.06); color: #f3f6fb; }
+.navbar-dark .nav-btn.active { background: rgba(79,216,206,0.14); color: #4fd8ce; }
+.navbar-dark .wallet-badge {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.12);
+  color: #aab2c4;
+}
+
+/* =============================================================================
    MOBILE RESPONSIVE — breakpoints: 480px (xs), 640px (sm), 768px (md)
    ============================================================================= */
 
@@ -877,4 +1015,8 @@ a:hover { color: var(--accent-hover); }
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   .navbar { padding-top: env(safe-area-inset-top); }
   .toast-container { bottom: calc(16px + env(safe-area-inset-bottom)); }
+}
+
+@media (max-width: 640px) {
+  .home-dark::before, .home-dark::after { width: 260px; height: 260px; filter: blur(60px); }
 }
