@@ -12,7 +12,7 @@
 
 ## 🌐 Live Application
 
-**[https://trust-work26.vercel.app](https://stellar-xblue-belt.vercel.app/)**
+**[StellarXblue-TRUSTWORK-LINK](https://stellar-xblue-belt.vercel.app/)**
 
 ## 📹 Demo Video
 
