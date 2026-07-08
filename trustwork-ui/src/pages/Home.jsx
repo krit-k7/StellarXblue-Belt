@@ -1,3 +1,15 @@
+import { motion } from 'framer-motion'
+import ParticleField from '../components/ParticleField'
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.2, 0.8, 0.2, 1] } },
+}
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
+}
+
 export default function Home({ onConnect, wallet, setPage }) {
   const features = [
     { icon: '🔒', title: 'Escrow Protection', desc: 'Funds are locked in a Soroban smart contract before work begins. No trust required.' },
@@ -13,83 +25,151 @@ export default function Home({ onConnect, wallet, setPage }) {
   ]
 
   return (
-    <div>
+    <div className="home-dark">
+      <ParticleField />
+
       {/* ===== HERO — split layout with isometric illustration ===== */}
-      <div className="hero-split">
+      <motion.div
+        className="hero-split"
+        variants={stagger}
+        initial="hidden"
+        animate="show"
+      >
         <div className="hero-split-text">
-          <div className="hero-badge">Built on Stellar · Powered by Soroban</div>
-          <h1 className="hero-title-split">
+          <motion.div className="hero-badge" variants={fadeUp}>
+            Built on Stellar · Powered by Soroban
+          </motion.div>
+          <motion.h1 className="hero-title-split" variants={fadeUp}>
             Freelance contracts,<br /><span>sealed before work starts.</span>
-          </h1>
-          <p className="hero-desc-split">
+          </motion.h1>
+          <motion.p className="hero-desc-split" variants={fadeUp}>
             TrustWork locks project funds in a smart contract before work begins.
             Clients and freelancers collaborate with confidence — no middlemen,
             no disputes left unresolved.
-          </p>
-          <div className="hero-actions-split">
+          </motion.p>
+          <motion.div className="hero-actions-split" variants={fadeUp}>
             {wallet ? (
-              <button className="btn btn-primary btn-lg" onClick={() => setPage('create')}>
+              <motion.button
+                className="btn btn-primary btn-lg"
+                onClick={() => setPage('create')}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
                 Create a Contract
-              </button>
+              </motion.button>
             ) : (
-              <button className="btn btn-primary btn-lg" onClick={onConnect}>
+              <motion.button
+                className="btn btn-primary btn-lg"
+                onClick={onConnect}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
                 Connect Wallet to Start
-              </button>
+              </motion.button>
             )}
-            <button className="btn btn-secondary btn-lg" onClick={() => setPage('dashboard')}>
+            <motion.button
+              className="btn btn-secondary btn-lg"
+              onClick={() => setPage('dashboard')}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
               View Dashboard
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         </div>
 
-        <div className="hero-split-visual iso-rise" aria-hidden="true">
+        <motion.div
+          className="hero-split-visual"
+          aria-hidden="true"
+          initial={{ opacity: 0, y: 24, scale: 0.94 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1], delay: 0.15 }}
+        >
           <IsoIllustration />
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* ===== Trust badge row ===== */}
-      <div className="trust-row">
+      <motion.div
+        className="trust-row"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.6 }}
+        transition={{ duration: 0.5 }}
+      >
         <span className="trust-chip">Stellar Network</span>
         <span className="trust-chip">Soroban Contracts</span>
         <span className="trust-chip audited">✓ Open Source</span>
-      </div>
+      </motion.div>
 
       {/* ===== Features ===== */}
       <div className="section-wrap">
-        <div className="features-grid">
+        <motion.div
+          className="features-grid"
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {features.map(f => (
-            <div className="feature-card" key={f.title}>
+            <motion.div
+              className="feature-card"
+              key={f.title}
+              variants={fadeUp}
+              whileHover={{ y: -4 }}
+            >
               <div className="feature-icon">{f.icon}</div>
               <div className="feature-title">{f.title}</div>
               <div className="feature-desc">{f.desc}</div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* ===== How it works ===== */}
       <div className="how-it-works">
-        <h2 style={{ textAlign: 'center', marginBottom: 8 }}>How it works</h2>
-        <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: 32 }}>
+        <motion.h2
+          style={{ textAlign: 'center', marginBottom: 8 }}
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.5 }}
+        >
+          How it works
+        </motion.h2>
+        <motion.p
+          style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: 32 }}
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
+        >
           Four steps to secure, trustless freelance collaboration.
-        </p>
-        <div className="how-steps">
+        </motion.p>
+        <motion.div
+          className="how-steps"
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {steps.map(s => (
-            <div className="how-step" key={s.num}>
+            <motion.div className="how-step" key={s.num} variants={fadeUp}>
               <div className="how-step-num">{s.num}</div>
               <div className="how-step-title">{s.title}</div>
               <div className="how-step-desc">{s.desc}</div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   )
 }
 
 /* ── Signature element: an isometric stack of contract panels with a
-   lock at the core — built with simple isometric parallelograms in SVG,
-   themed to the light palette. Floats gently, no external image assets. ── */
+   lock at the core — built with simple isometric parallelograms in SVG.
+   Uses the same CSS custom properties as the rest of the page, so it
+   automatically re-themes to the dark palette via `.home-dark`. ── */
 function IsoIllustration() {
   return (
     <svg
