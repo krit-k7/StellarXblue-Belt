@@ -10,31 +10,36 @@
 
 ---
 
+## ✅ Submission Checklist
+
+| Requirement | Status | Where to find it |
+|---|---|---|
+| Public GitHub repository | ✅ | [github.com/krit-k7/StellarXblue-Belt](https://github.com/krit-k7/StellarXblue-Belt) |
+| Minimum 20+ meaningful commits | ✅ | [Commit history](https://github.com/krit-k7/StellarXblue-Belt/commits/master)  |
+| Live deployed application | ✅ | [stellar-xblue-belt.vercel.app](https://stellar-xblue-belt.vercel.app/) |
+| PPT / Pitch deck link | ✅ | [Pitch deck](https://docs.google.com/presentation/d/1Yu_DkhZf2RZBOToWg-lb9sQEd4B2GXMb/edit?slide=id.p1#slide=id.p1) |
+| Demo video link | ✅ | [Demo video](https://github.com/krit-k7/StellarXblue-Belt/raw/main/ScreenRecording/demo.mp4) |
+| Proof of 50+ users | ✅ | [Full feedback spreadsheet](https://docs.google.com/spreadsheets/d/10T2ffMEWhxmX97yFe9HG5z5gC-0IqlprxsF2_YdVZj4/edit?usp=sharing) (sample rows in README below) |
+| Screenshots of analytics or transaction activity | ⚠️ **Needs a real screenshot** | See [Monitoring](#-monitoring-dashboard) — replace placeholder image |
+| Updated README and documentation | ✅ | This file |
+| User feedback iteration summary | ✅ | See [User Feedback → What We Changed](#-what-we-changed-in-response) |
+
+---
+
 ## 🌐 Live Application
 
-**[StellarXblue-TRUSTWORK-LINK](https://stellar-xblue-belt.vercel.app/)**
+**[stellar-xblue-belt.vercel.app](https://stellar-xblue-belt.vercel.app/)**
 
 
-## 🔗 PPT/Pitch deck link
-
+## 🔗 Pitch Deck
 
 [![Pitch Deck Link](https://img.shields.io/badge/Pitch_Deck-View_Presentation-orange?style=flat-square)](https://docs.google.com/presentation/d/1Yu_DkhZf2RZBOToWg-lb9sQEd4B2GXMb/edit?slide=id.p1#slide=id.p1)
-
-
-## 📊 User Feedback — 50+ Real Responses
-
-We collected feedback from **50+ real users** who tested TrustWork on Stellar Testnet.
-
-**→ [View Full Feedback Spreadsheet ~TRUSTWORK](https://docs.google.com/spreadsheets/d/1zOhuFVbrQZlJ1NcUoBrmZxb7JP9WRP9J/edit?gid=1132381471#gid=1132381471)**
-
 
 ## 📹 Demo Video
 
 [Download Demo Video](https://github.com/krit-k7/StellarXblue-Belt/raw/main/ScreenRecording/demo.mp4)
 
-
 ---
-
 
 ## 📌 What is TrustWork?
 
@@ -75,14 +80,13 @@ TrustWork eliminates payment disputes in freelancing by locking funds in a Sorob
 
 ## 📸 Screenshots
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b5e92004-0e24-47e2-8443-e66827165f26" />
+<img width="1920" height="1080" alt="TrustWork app screenshot" src="https://github.com/user-attachments/assets/b5e92004-0e24-47e2-8443-e66827165f26" />
 
+<img width="1536" height="1024" alt="TrustWork app screenshot" src="https://github.com/user-attachments/assets/0360b9be-b9bd-4af6-9d37-f9d3a23bef9a" />
 
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/0360b9be-b9bd-4af6-9d37-f9d3a23bef9a" />
+<img width="1536" height="1024" alt="TrustWork app screenshot" src="https://github.com/user-attachments/assets/13ccd109-0899-43a3-bf51-01b8c2d6b966" />
 
-
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/13ccd109-0899-43a3-bf51-01b8c2d6b966" />
-
+---
 
 ## 🚀 Getting Started
 
@@ -96,7 +100,7 @@ TrustWork eliminates payment disputes in freelancing by locking funds in a Sorob
 ```bash
 # Clone the repository
 git clone https://github.com/krit-k7/StellarXblue-Belt.git
-   cd StellarXblue-Belt/trustwork-ui
+cd StellarXblue-Belt/trustwork-ui
 
 # Install dependencies
 npm install
@@ -156,7 +160,69 @@ TrustWork26/
 
 We collected feedback from **50+ real users** who tested TrustWork on Stellar Testnet.
 
-**→ [View Full Feedback Spreadsheet ~TRUSTWORK](https://docs.google.com/spreadsheets/d/1zOhuFVbrQZlJ1NcUoBrmZxb7JP9WRP9J/edit?gid=1132381471#gid=1132381471)**
+**→ [View Full Feedback Spreadsheet](https://docs.google.com/spreadsheets/d/10T2ffMEWhxmX97yFe9HG5z5gC-0IqlprxsF2_YdVZj4/edit?usp=sharing)**
+
+### Sample Test Users
+
+*(sample of the full list — see spreadsheet above for all 50+)*
+
+| User Name | User Email | User Wallet Address |
+|-----------|------------|---------------------|
+| Tushar Naik | naiktusha91@gmail.com | `GDAHV3UEBVSKMEJP5OFD4BUEQSEBX73FOOPHY7IOM3X5BQJ44OHSAPGMN` |
+| Vedant Pathak | vedantpathak002@gmail.com | `GBYW6GYZWPATOJDL7XYM4WPUFWQWHHI6D6XOAITGZS4DKU26UF5LJDYL` |
+| Sagar Shinde | Sagar.shinde@techbeansystems.com | `GDYH4ZTTH3ISXY254KYGNHOXCMID2Y6WDIYNVTOWY7N7EXOTVZFCDQBE`  |
+| Pralhad Naik | Naik.Pralhad@gmail.com | `GBTD3RMD5U2PLGY7KFFXYQP7V5JU5DXHUCSYTL5A5J7ZU2TUBVWKPQ7W` |
+| Amit Suryawanshi | amitsurya2411@gmail.com | `GC46W2ZJLS5BVTAD2JIJYGX43ZDORWEKMBJVFON7Y53VVPOJXDKRCAC`  |
+
+
+### 🔄 What We Changed (In Response)
+
+During testing, users reported multiple issues related to wallet connection, contract visibility, input validation, and role-based actions. Based on the feedback, the following improvements were implemented.
+
+#### 1. Freighter "Signing not possible" error
+**Feedback:** Users were unable to approve transactions because Freighter returned a signing error.
+**Fix:**
+- ✅ Updated Freighter wallet integration flow
+- ✅ Added proper transaction signing request handling before submission
+- ✅ Improved wallet permission checks
+
+#### 2. Freighter installed but still shows "Install Freighter"
+**Feedback:** Users who already had Freighter installed were incorrectly asked to install it again.
+**Fix:**
+- ✅ Fixed Freighter extension detection logic
+- ✅ Added wallet availability re-check after page load
+- ✅ Correct wallet connection state now displayed
+
+#### 3. Fake demo contracts appearing on first wallet connect
+**Feedback:** New users saw sample/demo contracts instead of their actual escrow data.
+**Fix:**
+- ✅ Removed default mock contract loading
+- ✅ Dashboard now loads only wallet-specific data
+- ✅ Added empty state for new users
+
+#### 4. `InvalidInput` error with special characters in milestone titles
+**Feedback:** Creating milestones with special characters caused contract input validation errors.
+**Fix:**
+- ✅ Added input sanitization before contract submission
+- ✅ Improved milestone title validation
+- ✅ Prevented unsupported character errors
+
+#### 5. Both client & freelancer seeing approve/reject buttons
+**Feedback:** Action buttons were visible to incorrect user roles.
+**Fix:**
+- ✅ Added role-based UI rendering
+- ✅ Client-only actions hidden from freelancers
+- ✅ Freelancer dashboard now shows only relevant controls
+
+#### Final Result
+After these iterations:
+- More reliable wallet connection flow
+- Accurate escrow contract display
+- Better smart contract input handling
+- Improved user role separation
+- Cleaner overall user experience
+
+These updates were implemented based on tester feedback to make TrustWork more production-ready.
 
 ---
 
@@ -170,38 +236,13 @@ TrustWork provides a **personalized metrics dashboard** for each user upon walle
 - **Completed Contracts** — Successfully closed escrow transactions
 - **Role-based Stats** — Separate metrics for client vs. freelancer activities
 
-**Access:** Connect your wallet at [https://stellar-xblue-belt.vercel.app/](https://stellar-xblue-belt.vercel.app/) → Navigate to Dashboard
+**Access:** Connect your wallet at [stellar-xblue-belt.vercel.app](https://stellar-xblue-belt.vercel.app/) → Navigate to Dashboard
 
 **Screenshot:**
 
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/8eb937a0-7b7a-459c-923b-5c36ffae4f7f" />
-
+<img width="1536" height="1024" alt="Metrics dashboard screenshot" src="https://github.com/user-attachments/assets/8eb937a0-7b7a-459c-923b-5c36ffae4f7f" />
 
 *Note: Metrics are user-specific and calculated in real-time from on-chain contract data. Each wallet address has its own isolated dashboard view.*
-
----
-
-### 👥 Table 1 — Test Users
-
-| User Name | User Email | User Wallet Address |
-|-----------|------------|---------------------|
-| Tushar Naik | naiktusha91@gmail.com | `GDAHV3UEBVSKMEJP5OFD4BUEQSEBX73FOOPHY7IOM3X5BQJ44OHSAPGMN` |
-| Vedant Pathak | vedantpathak002@gmail.com | `GBYW6GYZWPATOJDL7XYM4WPUFWQWHHI6D6XOAITGZS4DKU26UF5LJDYL` |
-| Sagar Shinde | Sagar.shinde@techbeansystems.com | `GDYH4ZTTH3ISXY254KYGNHOXCMID2Y6WDIYNVTOWY7N7EXOTVZFCDQBEn` |
-| Pralhad Naik | Naik.Pralhad@gmail.com | `GBTD3RMD5U2PLGY7KFFXYQP7V5JU5DXHUCSYTL5A5J7ZU2TUBVWKPQ7W` |
-| Amit Suryawanshi | amitsurya2411@gmail.com | `GC46W2ZJLS5BVTAD2JIJYGX43ZDORWEKMBJVFON7Y53VVPOJXDKRCACf` |
-
----
-
-### 🔄 Table 2 — User Feedback Implementation
-
-| User Name | User Email | User Wallet Address | User Feedback |
-|----------|-----------|--------------------|--------------|
-| Kunal Sathe | kunalsathe18@gmail.com | `GAOFS35LNWKZBY7RJKBJHVYDTL3SX2NKVDP5HTCPUEFC6L3Q4YLJLWPA` | "Transaction fails with Freighter showing 'Signing not possible' error on testnet" |
-| Nisha Bahirat | bahirat.nisha@gmail.com | `GBTT2S5AYMJ26RAMZNMWJR6M3HL6DTJCFQQMTRFNVL3F6Q7AGVWBJBQn` | "Freighter is installed but app still shows 'Install Freighter' screen" |
-| Omkar Jagtap | omkarjagtap2105@gmail.com | `GAF57COCDLHE27JYGSB6YUIDHWU53SJUJ522CLEDVH4SFPAWR2WTAFZ` | "Fake demo contracts appear on dashboard when connecting wallet for the first time" |
-| Aniket Bhilare | bhilareaniket2424@gmail.com | `GDRTJRMXK43GQL5EE25Q6ULXYRVLJ646ES5CXRX376VMSLSSKSLWONM7` | "Contract creation fails with 'InvalidInput' error when milestone titles have special characters" |
-| Pranali Bahirat | bahirat.pranali22@gmail.com | `GAWOMT3S7OHVZJRMS4VND2HK5NBMBBWKBQSSELPFEI7SH4D63E2WGAK` | "Both client and freelancer see approve/reject buttons after work submission — only client should see them" |
 
 ---
 
@@ -221,6 +262,8 @@ TrustWork uses **Vercel Analytics** and **GitHub Actions** for real-time monitor
 **Access:** [Vercel Dashboard](https://vercel.com/dashboard) (requires project access)
 
 **Screenshot:**
+
+> ⚠️ **The image below is a placeholder, not a real screenshot** — swap this out for an actual export from your Vercel Analytics dashboard before submitting.
 
 ![Monitoring Dashboard](https://via.placeholder.com/800x400/0d1120/10b981?text=Vercel+Analytics+-+Uptime+%26+Performance+Monitoring)
 
@@ -267,7 +310,7 @@ We follow industry best practices to ensure the security of user funds and data:
 
 ## 🚀 Advanced Features
 
-### 1. **Dispute Resolution with On-Chain Arbitration**
+### 1. Dispute Resolution with On-Chain Arbitration
 
 **Description:** When client and freelancer disagree, an optional third-party arbitrator can resolve the dispute on-chain with binding enforcement.
 
@@ -283,9 +326,9 @@ We follow industry best practices to ensure the security of user funds and data:
 - Live demo: Create contract → Enable arbitration → Raise dispute → Arbitrator resolves
 - Testnet transaction: [View on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CBEUUVKJD2FM5CL57COXJV55HXYSEDW7VXRBJFWKDNZZRSHBMWQZUNQS)
 
-### 2. **Auto-Release After Deadline**
+### 2. Auto-Release After Deadline
 
-**Description:** If client becomes inactive after work submission, freelancer can claim funds automatically after the deadline passes.
+**Description:** If the client becomes inactive after work submission, the freelancer can claim funds automatically after the deadline passes.
 
 **Implementation:**
 - Deadline timestamp stored in contract state
@@ -297,7 +340,7 @@ We follow industry best practices to ensure the security of user funds and data:
 - Contract function: [`claim_after_deadline` in escrow.rs](./democontract/escrow.rs)
 - State validation: Requires `WorkSubmitted` status + expired deadline
 
-### 3. **Real-Time Contract Chat with File Sharing**
+### 3. Real-Time Contract Chat with File Sharing
 
 **Description:** Each contract has a private chat workspace where parties can communicate and share deliverables without leaving the platform.
 
@@ -364,7 +407,7 @@ Display on personalized dashboard
 | `stellar.js → simulateTransaction()` | Preview transaction before signing | Gas estimate + result preview |
 | `contract.js → getAllContracts()` | Load user's contract list from cache | Array of contract metadata |
 
-**Dashboard Access:** Connect wallet at [TrustWork-Link](https://stellar-xblue-belt.vercel.app/) to view your indexed contracts
+**Dashboard Access:** Connect wallet at [stellar-xblue-belt.vercel.app](https://stellar-xblue-belt.vercel.app/) to view your indexed contracts
 
 ---
 
@@ -381,6 +424,7 @@ The post includes:
 - Key features (smart contract escrow, dispute resolution, zero fees)
 - Relevant hashtags (#Stellar, #Soroban, #Web3, #Freelancing, #DeFi)
 
+---
 
 ## 🏗️ Architecture
 
@@ -484,7 +528,7 @@ src/
     └── contract.js        # Local state, localStorage, validation
 ```
 
-
+### Contract Details
 
 - **Network:** Stellar Testnet
 - **Contract ID:** `CBEUUVKJD2FM5CL57COXJV55HXYSEDW7VXRBJFWKDNZZRSHBMWQZUNQS`
@@ -509,7 +553,7 @@ src/
 ## 🚢 Deployment & CI/CD
 
 ### Live Deployment
-The app is live at **[TrustWork-Link](https://stellar-xblue-belt.vercel.app/)** — deployed on Vercel.
+The app is live at **[stellar-xblue-belt.vercel.app](https://stellar-xblue-belt.vercel.app/)** — deployed on Vercel.
 
 ### CI/CD Pipeline
 Automated via **GitHub Actions** (`.github/workflows/deploy.yml`):
@@ -549,35 +593,6 @@ vercel --prod
 
 ---
 
-## 📋 Submission Checklist
-
-This project fulfills all required submission criteria:
-
-| Requirement | Status | Location |
-|-------------|--------|----------|
-| **Live Demo Link** | ✅ Complete | [https://trust-work26.vercel.app](https://trust-work26.vercel.app) |
-| **30+ User Wallet Addresses** | ✅ Complete | [User Feedback Spreadsheet](https://docs.google.com/spreadsheets/d/10T2ffMEWhxmX97yFe9HG5z5gC-0IqlprxsF2_YdVZj4/edit?usp=sharing) + Tables in README |
-| **Metrics Dashboard** | ✅ Complete | User-specific dashboard (connect wallet at live demo) |
-| **Monitoring Dashboard** | ✅ Complete | [Vercel Analytics](https://vercel.com/dashboard) + [GitHub Actions](https://github.com/krit-k7/StellarXblue-Belt/actions) + [Stellar Expert](https://stellar.expert/explorer/testnet/contract/CBEUUVKJD2FM5CL57COXJV55HXYSEDW7VXRBJFWKDNZZRSHBMWQZUNQS) |
-| **Security Checklist** | ✅ Complete | [SECURITY_CHECKLIST.md](./SECURITY_CHECKLIST.md) |
-| **Community Contribution** | ✅ Complete | [Twitter/X Post](https://x.com/krit_giri/status/2050516673879527867) |
-| **Advanced Features** | ✅ Complete | Dispute resolution, auto-release, real-time chat (documented above) |
-| **Data Indexing** | ✅ Complete | Hybrid RPC + client-side caching (documented above) |
-| **GitHub Repository** | ✅ Complete | [https://github.com/krit-k7/StellarXblue-Belt](https://github.com/krit-k7/StellarXblue-Belt) |
-| **Documentation** | ✅ Complete | This README + inline code comments |
-
-### Action Items Before Submission:
-1. ✅ Deploy to Vercel — **DONE**
-2. ✅ Collect 30+ user wallet addresses — **DONE**
-3. ✅ Create security checklist — **DONE**
-4. ✅ **Post on Twitter/X** — **DONE**
-5. ✅ Document advanced features — **DONE**
-6. ✅ Explain data indexing approach — **DONE**
-
-**🎉 All requirements completed! Ready for submission.**
-
----
-
 ## 📄 License
 
 MIT — free to use, modify, and distribute.
@@ -586,7 +601,7 @@ MIT — free to use, modify, and distribute.
 
 <div align="center">
 
-[🌐 Live App](https://trust-work26.vercel.app) &nbsp;•&nbsp; [📹 Demo Video](https://github.com/krit-k7/StellarXblue-Belt/raw/main/ScreenRecording/demo.mp4) &nbsp;•&nbsp; [📊 User Feedback](https://docs.google.com/spreadsheets/d/10T2ffMEWhxmX97yFe9HG5z5gC-0IqlprxsF2_YdVZj4/edit?usp=sharing) &nbsp;•&nbsp; [🐛 Issues](https://github.com/Vedang24-hash/TrustWork26/issues)
+[🌐 Live App](https://stellar-xblue-belt.vercel.app/) &nbsp;•&nbsp; [📹 Demo Video](https://github.com/krit-k7/StellarXblue-Belt/raw/main/ScreenRecording/demo.mp4) &nbsp;•&nbsp; [📊 User Feedback](https://docs.google.com/spreadsheets/d/10T2ffMEWhxmX97yFe9HG5z5gC-0IqlprxsF2_YdVZj4/edit?usp=sharing) &nbsp;•&nbsp; [🐛 Issues](https://github.com/krit-k7/StellarXblue-Belt/issues)
 
 Built with ❤️ on Stellar
 
