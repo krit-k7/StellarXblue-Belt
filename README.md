@@ -14,15 +14,18 @@
 
 **[StellarXblue-TRUSTWORK-LINK](https://stellar-xblue-belt.vercel.app/)**
 
+
 ## 🔗 PPT/Pitch deck link
 
 [![Pitch Deck Link](https://img.shields.io/badge/Pitch_Deck-View_Presentation-orange?style=flat-square)](https://docs.google.com/presentation/d/1Yu_DkhZf2RZBOToWg-lb9sQEd4B2GXMb/edit?slide=id.p1#slide=id.p1)
+
 
 ## 📊 User Feedback — 50+ Real Responses
 
 We collected feedback from **50+ real users** who tested TrustWork on Stellar Testnet.
 
 **→ [View Full Feedback Spreadsheet ~TRUSTWORK](https://docs.google.com/spreadsheets/d/1zOhuFVbrQZlJ1NcUoBrmZxb7JP9WRP9J/edit?gid=1132381471#gid=1132381471)**
+
 
 ## 📹 Demo Video
 
