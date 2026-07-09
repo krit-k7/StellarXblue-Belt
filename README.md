@@ -10,6 +10,26 @@
 
 ---
 
+## 🌐 Live Application
+
+Experience TrustWork directly on the Stellar Testnet:
+
+**[stellar-xblue-belt.vercel.app](https://stellar-xblue-belt.vercel.app/)**
+
+## 🔗 Pitch Deck
+
+Explore the vision, market opportunity, and technical details of TrustWork through our comprehensive pitch deck:
+
+[![Pitch Deck Link](https://img.shields.io/badge/Pitch_Deck-View_Presentation-orange?style=flat-square)](https://docs.google.com/presentation/d/1Yu_DkhZf2RZBOToWg-lb9sQEd4B2GXMb/edit?slide=id.p1#slide=id.p1)
+
+## 📹 Demo Video
+
+Watch a detailed demonstration of TrustWork in action, showcasing key features and user flows:
+
+[Download Demo Video](https://github.com/krit-k7/StellarXblue-Belt/raw/main/ScreenRecording/demo.mp4)
+
+---
+
 ## 🚀 Project Overview
 
 In the rapidly evolving landscape of freelance work, payment disputes and the lack of trust remain significant challenges. TrustWork addresses these critical issues by providing a **decentralized escrow solution** built on the Stellar blockchain. Our platform ensures that funds are securely locked in a Soroban smart contract, released to the freelancer only upon the client's explicit approval of the completed work. This innovative approach fosters a truly trustless environment, safeguarding both parties' interests without relying on centralized authorities.
@@ -39,7 +59,7 @@ For larger, more complex projects, TrustWork supports **milestone payments**. Th
 
 ### ⚖️ Dispute Resolution with On-Chain Arbitration
 
-TrustWork integrates an advanced **on-chain arbitration system** to handle disagreements fairly and transparently. If a client and freelancer cannot agree, a neutral third-party arbitrator, whose address is set during contract creation, can be called upon. The arbitrator reviews evidence and, through a specific smart contract function (`resolve_dispute`), makes a binding decision on fund distribution. This mechanism ensures that disputes are resolved efficiently and impartially, with the blockchain enforcing the outcome without any off-chain coordination.
+TrustWork integrates an advanced **on-chain arbitration system** to handle disagreements fairly and transparently. If a client and freelancer cannot agree, a neutral third-party arbitrator, whose address is set during contract creation, can be called upon. The arbitrator reviews evidence and, through a specific smart contract function (`resolve_dispute`), makes a binding decision on fund distribution. This mechanism ensures that disputes are resolved efficiently and impartially, with the blockchain enforcing the outcome without relying on any off-chain coordination.
 
 *   **Implementation Details:**
     *   Arbitrator address is specified during the initial contract setup.
@@ -75,12 +95,21 @@ Each TrustWork contract comes with a dedicated **private real-time chat workspac
 *   **Proof:**
     *   Component: [`ContractChat.jsx`](./trustwork-ui/src/components/ContractChat.jsx)
     *   Hook: [`useChat.js`](./trustwork-ui/src/hooks/useChat.js)
-    *   Live demo: Navigate to any contract detail page and access the 
-Chat tab.
+    *   Live demo: Navigate to any contract detail page and access the Chat tab.
 
 ### 🛡️ Zero-Error UX & Freighter Wallet Integration
 
 TrustWork prioritizes a seamless user experience. We have integrated the **Freighter Browser Extension** for secure and intuitive Stellar wallet management. Furthermore, we've implemented a **Zero-Error UX** philosophy, translating complex blockchain errors into clear, user-friendly messages, ensuring that even users unfamiliar with blockchain technology can navigate the platform with confidence.
+
+---
+
+## 📸 Screenshots
+
+Visual overview of the TrustWork application interface:
+
+<img width="1920" height="1080" alt="TrustWork app screenshot" src="https://github.com/user-attachments/assets/b5e92004-0e24-47e2-8443-e66827165f26" />
+<img width="1536" height="1024" alt="TrustWork app screenshot" src="https://github.com/user-attachments/assets/0360b9be-b9bd-4af6-9d37-f9d3a23bef9a" />
+<img width="1536" height="1024" alt="TrustWork app screenshot" src="https://github.com/user-attachments/assets/13ccd109-0899-43a3-bf51-01b8c2d6b966" />
 
 ---
 
@@ -136,6 +165,12 @@ Upon connecting their wallet, users are presented with a **personalized metrics 
 *   **Completed Contracts:** Successfully closed escrow transactions.
 *   **Role-based Stats:** Separate metrics for client versus freelancer activities.
 
+**Access:** Connect your wallet at [stellar-xblue-belt.vercel.app](https://stellar-xblue-belt.vercel.app/) → Navigate to Dashboard
+
+**Screenshot:**
+
+<img width="1536" height="1024" alt="Metrics dashboard screenshot" src="https://github.com/user-attachments/assets/8eb937a0-7b7a-459c-923b-5c36ffae4f7f" />
+
 *Note: Metrics are user-specific and calculated in real-time from on-chain contract data. Each wallet address has its own isolated dashboard view.*
 
 ### Application & Deployment Monitoring
@@ -143,8 +178,11 @@ Upon connecting their wallet, users are presented with a **personalized metrics 
 TrustWork utilizes **Vercel Analytics** and **GitHub Actions** for robust application health and deployment monitoring.
 
 *   **Vercel Analytics Dashboard:** Tracks uptime (99.9% availability), response time (average 250ms), error rates (<0.1%), real-time traffic, and Core Web Vitals (LCP, FID, CLS).
+    *   **Access:** [Vercel Dashboard](https://vercel.com/dashboard) (requires project access)
 *   **GitHub Actions:** Provides full visibility into the CI/CD pipeline, including build status, deployment history, automated testing results, and dependency security scans.
-*   **Blockchain Monitoring:** **Stellar Expert** is used to monitor on-chain activity, including contract invocation history, transaction success rates, gas usage, and contract state verification. [View Contract on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CBEUUVKJD2FM5CL57COXJV55HXYSEDW7VXRBJFWKDNZZRSHBMWQZUNQS)
+    *   **Access:** [GitHub Actions](https://github.com/krit-k7/StellarXblue-Belt/actions)
+*   **Blockchain Monitoring:** **Stellar Expert** is used to monitor on-chain activity, including contract invocation history, transaction success rates, gas usage, and contract state verification.
+    *   **Access:** [View Contract on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CBEUUVKJD2FM5CL57COXJV55HXYSEDW7VXRBJFWKDNZZRSHBMWQZUNQS)
 
 ---
 
@@ -160,7 +198,9 @@ Security is paramount at TrustWork. We adhere to industry best practices to prot
 *   **HTTPS-Only Communication:** Secure communication with the Stellar RPC using TLS 1.3.
 *   **Content Security Policy (CSP):** Headers implemented to protect against Cross-Site Scripting (XSS) attacks.
 *   **No Server-Side Key Storage:** Fully client-side signing architecture.
+*   **Testnet-First Deployment:** A strategic approach to deployment, ensuring thorough testing in a controlled environment.
 *   **Transaction Simulation:** Transactions are simulated before signing to ensure expected outcomes.
+*   **User Confirmation:** All blockchain operations require explicit user confirmation.
 
 ---
 
@@ -199,7 +239,7 @@ Follow these instructions to set up TrustWork locally for development and testin
 *   [Node.js](https://nodejs.org/) (v18 or higher)
 *   [Freighter Wallet](https://www.freighter.app/) browser extension
 *   Stellar testnet account (funded via [Stellar Laboratory](https://laboratory.stellar.org/#account-creator?network=test))
-*   Rust and Stellar CLI (for smart contract development)
+*   Rust and Stellar CLI (for smart contract development) - refer to [QUICK_START.md](./QUICK_START.md) for detailed setup.
 
 ### Local Setup
 
@@ -247,22 +287,142 @@ For detailed instructions on fixing and deploying the contract, refer to the [QU
 
 TrustWork has been rigorously tested by **50+ real users** on the Stellar Testnet. Their invaluable feedback has driven significant improvements to the platform.
 
-**→ [View Full Feedback Spreadsheet](https://docs.google.com/spreadsheets/d/1zOhuFVbrQZlJ1NcUoBrmZxb7JP9WRP9J/edit?gid=1132381471#gid=1132381471)**
+**→ [View Full Feedback Spreadsheet ~TRUSTWORK](https://docs.google.com/spreadsheets/d/1zOhuFVbrQZlJ1NcUoBrmZxb7JP9WRP9J/edit?gid=1132381471#gid=1132381471)**
+
+### Sample Test Users
+
+*(A sample of the full list — see the spreadsheet above for all 50+ users)*
+
+| User Name | User Email | User Wallet Address |
+|-----------|------------|---------------------|
+| Tushar Naik | naiktusha91@gmail.com | `GDAHV3UEBVSKMEJP5OFD4BUEQSEBX73FOOPHY7IOM3X5BQJ44OHSAPGMN` |
+| Vedant Pathak | vedantpathak002@gmail.com | `GBYW6GYZWPATOJDL7XYM4WPUFWQWHHI6D6XOAITGZS4DKU26UF5LJDYL` |
+| Sagar Shinde | Sagar.shinde@techbeansystems.com | `GDYH4ZTTH3ISXY254KYGNHOXCMID2Y6WDIYNVTOWY7N7EXOTVZFCDQBE`  |
+| Pralhad Naik | Naik.Pralhad@gmail.com | `GBTD3RMD5U2PLGY7KFFXYQP7V5JU5DXHUCSYTL5A5J7ZU2TUBVWKPQ7W` |
+| Amit Suryawanshi | amitsurya2411@gmail.com | `GC46W2ZJLS5BVTAD2JIJYGX43ZDORWEKMBJVFON7Y53VVPOJXDKRCAC`  |
 
 ### Key Improvements Based on Feedback
 
-*   **Wallet Connection Reliability:** Addressed Freighter "Signing not possible" errors and improved extension detection logic for a smoother onboarding experience.
-*   **Accurate Data Display:** Removed default mock contracts, ensuring users only see their actual escrow data upon connection.
-*   **Enhanced Input Validation:** Implemented robust sanitization to prevent `InvalidInput` errors caused by special characters in milestone titles.
-*   **Role-Based UI:** Refined the user interface to ensure action buttons (approve/reject) are only visible to the appropriate roles (client vs. freelancer).
+During testing, users reported multiple issues related to wallet connection, contract visibility, input validation, and role-based actions. Based on this feedback, the following critical improvements were implemented:
 
-These iterations have significantly enhanced the reliability, usability, and overall production readiness of TrustWork.
+#### 1. Freighter "Signing not possible" error
+
+**Feedback:** Users were consistently unable to approve transactions due to a persistent signing error returned by Freighter.
+**Fix:**
+*   ✅ Updated Freighter wallet integration flow to ensure proper transaction signing request handling before submission.
+*   ✅ Improved wallet permission checks to prevent signing failures.
+
+#### 2. Freighter installed but still shows "Install Freighter"
+
+**Feedback:** Users who already had the Freighter extension installed were incorrectly prompted to install it again, leading to confusion.
+**Fix:**
+*   ✅ Fixed Freighter extension detection logic to accurately identify installed wallets.
+*   ✅ Added wallet availability re-check after page load to ensure correct connection state is displayed.
+
+#### 3. Fake demo contracts appearing on first wallet connect
+
+**Feedback:** New users encountered sample/demo contracts instead of their actual escrow data upon initial wallet connection.
+**Fix:**
+*   ✅ Removed default mock contract loading to ensure data integrity.
+*   ✅ The dashboard now exclusively loads wallet-specific data, providing a personalized view.
+*   ✅ Implemented an empty state for new users, guiding them to create their first contract.
+
+#### 4. `InvalidInput` error with special characters in milestone titles
+
+**Feedback:** Creating milestones with special characters resulted in `InvalidInput` errors during contract submission.
+**Fix:**
+*   ✅ Added robust input sanitization before contract submission to handle special characters gracefully.
+*   ✅ Improved milestone title validation to prevent unsupported character errors.
+
+#### 5. Both client & freelancer seeing approve/reject buttons
+
+**Feedback:** Action buttons were visible to incorrect user roles, leading to potential misuse and confusion.
+**Fix:**
+*   ✅ Implemented role-based UI rendering to display actions only to the authorized party.
+*   ✅ Client-only actions are now hidden from freelancers, and vice-versa, ensuring a clear and secure workflow.
+
+#### Final Result of Iteration
+
+These iterative updates, directly informed by tester feedback, have resulted in:
+
+*   A more reliable wallet connection flow.
+*   Accurate and personalized escrow contract display.
+*   Improved smart contract input handling.
+*   Clearer user role separation within the interface.
+*   A cleaner and more intuitive overall user experience.
+
+These enhancements are crucial steps towards making TrustWork production-ready and user-friendly.
+
+---
+
+## 🚢 Deployment & CI/CD
+
+TrustWork is deployed with a robust CI/CD pipeline to ensure continuous delivery and high availability.
+
+### Live Deployment
+
+The application is live and accessible at **[stellar-xblue-belt.vercel.app](https://stellar-xblue-belt.vercel.app/)**, hosted on Vercel.
+
+### CI/CD Pipeline
+
+Automated via **GitHub Actions** (`.github/workflows/deploy.yml`), our CI/CD pipeline ensures code quality, automated testing, and seamless deployment.
+
+| Step | Description |
+| :--- | :--- |
+| **Trigger** | Initiates on every push to the `main` branch. |
+| **Lint** | Checks code quality and style consistency using ESLint. |
+| **Build** | Executes `npm run build` with production environment variables to create optimized frontend assets. |
+| **Artifact** | Uploads the built `dist/` folder as a deployable artifact (retained for 7 days). |
+| **Deploy** | Automatically deploys the application to Vercel production environment upon successful build. |
+
+```mermaid
+graph TD
+    A[Push to main branch] --> B{GitHub Actions Workflow}
+    B --> C[Lint & Build]
+    C --> D[Deploy to Vercel Production]
+```
+
+### Manual Deployment
+
+For manual deployment, follow these steps:
+
+```bash
+cd trustwork-ui
+npm run build
+vercel --prod
+```
+
+### Smart Contract Deployment
+
+To deploy the smart contract, execute the provided script from the project root:
+
+```bash
+./deploy-contract.sh
+```
+
+---
+
+## ✅ Submission Checklist
+
+This checklist outlines the key requirements and their status for the project submission:
+
+| Requirement | Status | Where to find it |
+| :--- | :--- | :--- |
+| Public GitHub repository | ✅ | [github.com/krit-k7/StellarXblue-Belt](https://github.com/krit-k7/StellarXblue-Belt) |
+| Minimum 20+ meaningful commits | ✅ | [Commit history](https://github.com/krit-k7/StellarXblue-Belt/commits/main/) |
+| Live deployed application | ✅ | [stellar-xblue-belt.vercel.app](https://stellar-xblue-belt.vercel.app/) |
+| PPT / Pitch deck link | ✅ | [Pitch deck](https://docs.google.com/presentation/d/1Yu_DkhZf2RZBOToWg-lb9sQEd4B2GXMb/edit?slide=id.p1#slide=id.p1) |
+| Demo video link | ✅ | [Demo video](https://github.com/krit-k7/StellarXblue-Belt/raw/main/ScreenRecording/demo.mp4) |
+| Proof of 50+ users | ✅ | [Full feedback spreadsheet](https://docs.google.com/spreadsheets/d/1zOhuFVbrQZlJ1NcUoBrmZxb7JP9WRP9J/edit?gid=1132381471#gid=1132381471) |
+| Screenshots of analytics or transaction activity | ✅ | Attached in this README under [Monitoring & Metrics](#-monitoring--metrics) |
+| Updated README and documentation | ✅ | This file |
+| User feedback iteration summary | ✅ | See [User Feedback & Iteration](#-user-feedback--iteration) |
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details. Free to use, modify, and distribute.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details. It is free to use, modify, and distribute.
 
 ---
 
