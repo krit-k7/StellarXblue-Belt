@@ -14,15 +14,19 @@
 
 **[StellarXblue-TRUSTWORK-LINK](https://stellar-xblue-belt.vercel.app/)**
 
-## 📹 Demo Video
-
-[Download Demo Video](https://github.com/krit-k7/StellarXblue-Belt/raw/main/ScreenRecording/demo.mp4)
-
-
-
 ## 🔗 PPT/Pitch deck link
 
 [![Pitch Deck Link](https://img.shields.io/badge/Pitch_Deck-View_Presentation-orange?style=flat-square)](https://docs.google.com/presentation/d/1Yu_DkhZf2RZBOToWg-lb9sQEd4B2GXMb/edit?slide=id.p1#slide=id.p1)
+
+## 📊 User Feedback — 50+ Real Responses
+
+We collected feedback from **50+ real users** who tested TrustWork on Stellar Testnet.
+
+**→ [View Full Feedback Spreadsheet ~TRUSTWORK](https://docs.google.com/spreadsheets/d/1zOhuFVbrQZlJ1NcUoBrmZxb7JP9WRP9J/edit?gid=1132381471#gid=1132381471)**
+
+## 📹 Demo Video
+
+[Download Demo Video](https://github.com/krit-k7/StellarXblue-Belt/raw/main/ScreenRecording/demo.mp4)
 
 ---
 
@@ -344,7 +348,7 @@ Display on personalized dashboard
 | `stellar.js → simulateTransaction()` | Preview transaction before signing | Gas estimate + result preview |
 | `contract.js → getAllContracts()` | Load user's contract list from cache | Array of contract metadata |
 
-**Dashboard Access:** Connect wallet at [https://trust-work26.vercel.app](https://trust-work26.vercel.app) to view your indexed contracts
+**Dashboard Access:** Connect wallet at [TrustWork-Link](https://stellar-xblue-belt.vercel.app/) to view your indexed contracts
 
 ---
 
@@ -489,7 +493,7 @@ src/
 ## 🚢 Deployment & CI/CD
 
 ### Live Deployment
-The app is live at **[https://trust-work26.vercel.app](https://trust-work26.vercel.app)** — deployed on Vercel.
+The app is live at **[TrustWork-Link](https://stellar-xblue-belt.vercel.app/)** — deployed on Vercel.
 
 ### CI/CD Pipeline
 Automated via **GitHub Actions** (`.github/workflows/deploy.yml`):
