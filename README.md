@@ -1,3 +1,5 @@
+   <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/a29d823b-b212-4c13-85ae-2d4e32eaba3a" />
+
 # TrustWork — Decentralized Freelance Escrow on Stellar
 
 > A blockchain-based escrow platform where clients and freelancers transact trustlessly using Soroban smart contracts on the Stellar network.
@@ -10,22 +12,6 @@
 
 ---
 
-## ✅ Submission Checklist
-
-| Requirement | Status | Where to find it |
-|---|---|---|
-| Public GitHub repository | ✅ | [github.com/krit-k7/StellarXblue-Belt](https://github.com/krit-k7/StellarXblue-Belt) |
-| Minimum 20+ meaningful commits | ✅ | [Commit history](https://github.com/krit-k7/StellarXblue-Belt/commits/master)  |
-| Live deployed application | ✅ | [stellar-xblue-belt.vercel.app](https://stellar-xblue-belt.vercel.app/) |
-| PPT / Pitch deck link | ✅ | [Pitch deck](https://docs.google.com/presentation/d/1Yu_DkhZf2RZBOToWg-lb9sQEd4B2GXMb/edit?slide=id.p1#slide=id.p1) |
-| Demo video link | ✅ | [Demo video](https://github.com/krit-k7/StellarXblue-Belt/raw/main/ScreenRecording/demo.mp4) |
-| Proof of 50+ users | ✅ | [Full feedback spreadsheet](https://docs.google.com/spreadsheets/d/10T2ffMEWhxmX97yFe9HG5z5gC-0IqlprxsF2_YdVZj4/edit?usp=sharing) (sample rows in README below) |
-| Screenshots of analytics or transaction activity | ⚠️ **Needs a real screenshot** | See [Monitoring](#-monitoring-dashboard) — replace placeholder image |
-| Updated README and documentation | ✅ | This file |
-| User feedback iteration summary | ✅ | See [User Feedback → What We Changed](#-what-we-changed-in-response) |
-
----
-
 ## 🌐 Live Application
 
 **[stellar-xblue-belt.vercel.app](https://stellar-xblue-belt.vercel.app/)**
@@ -34,6 +20,14 @@
 ## 🔗 Pitch Deck
 
 [![Pitch Deck Link](https://img.shields.io/badge/Pitch_Deck-View_Presentation-orange?style=flat-square)](https://docs.google.com/presentation/d/1Yu_DkhZf2RZBOToWg-lb9sQEd4B2GXMb/edit?slide=id.p1#slide=id.p1)
+
+
+## 📊 User Feedback — 50+ Real Responses
+
+We collected feedback from **50+ real users** who tested TrustWork on Stellar Testnet.
+
+**→ [View Full Feedback Spreadsheet ~TRUSTWORK](https://docs.google.com/spreadsheets/d/1zOhuFVbrQZlJ1NcUoBrmZxb7JP9WRP9J/edit?gid=1132381471#gid=1132381471)**
+
 
 ## 📹 Demo Video
 
@@ -160,7 +154,7 @@ TrustWork26/
 
 We collected feedback from **50+ real users** who tested TrustWork on Stellar Testnet.
 
-**→ [View Full Feedback Spreadsheet](https://docs.google.com/spreadsheets/d/10T2ffMEWhxmX97yFe9HG5z5gC-0IqlprxsF2_YdVZj4/edit?usp=sharing)**
+**→ [View Full Feedback Spreadsheet](https://docs.google.com/spreadsheets/d/1zOhuFVbrQZlJ1NcUoBrmZxb7JP9WRP9J/edit?gid=1132381471#gid=1132381471)**
 
 ### Sample Test Users
 
@@ -260,12 +254,6 @@ TrustWork uses **Vercel Analytics** and **GitHub Actions** for real-time monitor
 - **Core Web Vitals:** Performance metrics (LCP, FID, CLS)
 
 **Access:** [Vercel Dashboard](https://vercel.com/dashboard) (requires project access)
-
-**Screenshot:**
-
-> ⚠️ **The image below is a placeholder, not a real screenshot** — swap this out for an actual export from your Vercel Analytics dashboard before submitting.
-
-![Monitoring Dashboard](https://via.placeholder.com/800x400/0d1120/10b981?text=Vercel+Analytics+-+Uptime+%26+Performance+Monitoring)
 
 ### Deployment Monitoring
 
@@ -599,9 +587,25 @@ MIT — free to use, modify, and distribute.
 
 ---
 
+## ✅ Submission Checklist
+
+| Requirement | Status | Where to find it |
+|---|---|---|
+| Public GitHub repository | ✅ | [github.com/krit-k7/StellarXblue-Belt](https://github.com/krit-k7/StellarXblue-Belt) |
+| Minimum 20+ meaningful commits | ✅ | [Commit history](https://github.com/krit-k7/StellarXblue-Belt/commits/main/)  |
+| Live deployed application | ✅ | [stellar-xblue-belt.vercel.app](https://stellar-xblue-belt.vercel.app/) |
+| PPT / Pitch deck link | ✅ | [Pitch deck](https://docs.google.com/presentation/d/1Yu_DkhZf2RZBOToWg-lb9sQEd4B2GXMb/edit?slide=id.p1#slide=id.p1) |
+| Demo video link | ✅ | [Demo video](https://github.com/krit-k7/StellarXblue-Belt/raw/main/ScreenRecording/demo.mp4) |
+| Proof of 50+ users | ✅ | [Full feedback spreadsheet](https://docs.google.com/spreadsheets/d/1zOhuFVbrQZlJ1NcUoBrmZxb7JP9WRP9J/edit?gid=1132381471#gid=1132381471) |
+| Screenshots of analytics or transaction activity | ✅ Attached in this file | 
+| Updated README and documentation | ✅ | This file |
+| User feedback iteration summary | ✅ | See [User Feedback → What We Changed](#-what-we-changed-in-response) |
+
+---
+
 <div align="center">
 
-[🌐 Live App](https://stellar-xblue-belt.vercel.app/) &nbsp;•&nbsp; [📹 Demo Video](https://github.com/krit-k7/StellarXblue-Belt/raw/main/ScreenRecording/demo.mp4) &nbsp;•&nbsp; [📊 User Feedback](https://docs.google.com/spreadsheets/d/10T2ffMEWhxmX97yFe9HG5z5gC-0IqlprxsF2_YdVZj4/edit?usp=sharing) &nbsp;•&nbsp; [🐛 Issues](https://github.com/krit-k7/StellarXblue-Belt/issues)
+[🌐 Live App](https://stellar-xblue-belt.vercel.app/) &nbsp;•&nbsp; [📹 Demo Video](https://github.com/krit-k7/StellarXblue-Belt/raw/main/ScreenRecording/demo.mp4) &nbsp;•&nbsp; [📊 User Feedback](https://docs.google.com/spreadsheets/d/1zOhuFVbrQZlJ1NcUoBrmZxb7JP9WRP9J/edit?gid=1132381471#gid=1132381471) &nbsp;•&nbsp; [🐛 Issues](https://github.com/krit-k7/StellarXblue-Belt/issues)
 
 Built with ❤️ on Stellar
 
