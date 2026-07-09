@@ -143,7 +143,7 @@ TrustWork provides a **personalized metrics dashboard** for each user upon walle
 - **Completed Contracts** — Successfully closed escrow transactions
 - **Role-based Stats** — Separate metrics for client vs. freelancer activities
 
-**Access:** Connect your wallet at [https://trust-work26.vercel.app](https://stellar-xblue-belt.vercel.app/) → Navigate to Dashboard
+**Access:** Connect your wallet at [https://stellar-xblue-belt.vercel.app/](https://stellar-xblue-belt.vercel.app/) → Navigate to Dashboard
 
 **Screenshot:**
 
