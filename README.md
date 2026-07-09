@@ -17,6 +17,7 @@
 
 ## 🔗 PPT/Pitch deck link
 
+
 [![Pitch Deck Link](https://img.shields.io/badge/Pitch_Deck-View_Presentation-orange?style=flat-square)](https://docs.google.com/presentation/d/1Yu_DkhZf2RZBOToWg-lb9sQEd4B2GXMb/edit?slide=id.p1#slide=id.p1)
 
 
@@ -71,6 +72,15 @@ TrustWork eliminates payment disputes in freelancing by locking funds in a Sorob
 - **Zero-Error UX** — All blockchain errors translated to user-friendly messages
 
 ---
+
+## 📸 Screenshots
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b5e92004-0e24-47e2-8443-e66827165f26" />
+
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/0360b9be-b9bd-4af6-9d37-f9d3a23bef9a" />
+
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/13ccd109-0899-43a3-bf51-01b8c2d6b966" />
+
 
 ## 🚀 Getting Started
 
