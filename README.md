@@ -1,4 +1,10 @@
-   <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/a29d823b-b212-4c13-85ae-2d4e32eaba3a" />
+  <p align="center">
+  <img 
+    src="https://github.com/user-attachments/assets/a29d823b-b212-4c13-85ae-2d4e32eaba3a" 
+    alt="TrustWork Logo" 
+    width="450"
+  />
+</p>
 
 # TrustWork — Decentralized Freelance Escrow on Stellar
 
