@@ -1,7 +1,3 @@
-  <p align="center">
-  <img src="assets/logo.png" alt="TrustWork Logo" width="300">
-</p>
-
 # TrustWork — Decentralized Freelance Escrow on Stellar
 
 > A blockchain-based escrow platform where clients and freelancers transact trustlessly using Soroban smart contracts on the Stellar network.
