@@ -68,8 +68,8 @@ TrustWork eliminates payment disputes in freelancing by locking funds in a Sorob
 
 ```bash
 # Clone the repository
-git clone https://github.com/Vedang24-hash/TrustWork26.git
-cd TrustWork26/trustwork-ui
+git clone https://github.com/krit-k7/StellarXblue-Belt.git
+   cd StellarXblue-Belt/trustwork-ui
 
 # Install dependencies
 npm install
