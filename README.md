@@ -1,12 +1,30 @@
-# TrustWork — Decentralized Freelance Escrow on Stellar
+<div align="center">
 
-> A blockchain-based escrow platform where clients and freelancers transact trustlessly using Soroban smart contracts on the Stellar network. No middlemen. No chargebacks. No "the client ghosted me after I delivered the work."
+<img src="https://cdn.simpleicons.org/stellar/7D00FF" width="64" alt="Stellar logo" />
+
+# TrustWork
+### Decentralized Freelance Escrow on Stellar
+
+*A blockchain-based escrow platform where clients and freelancers transact trustlessly using Soroban smart contracts on the Stellar network. No middlemen. No chargebacks. No "the client ghosted me after I delivered the work."*
 
 [![Live App](https://img.shields.io/badge/Live_App-stellar--xblue--belt.vercel.app-success?style=flat-square)](https://stellar-xblue-belt.vercel.app/)
 [![Network](https://img.shields.io/badge/Network-Stellar_Testnet-blue?style=flat-square)](https://stellar.org)
 [![Contract](https://img.shields.io/badge/Soroban-Deployed-purple?style=flat-square)](https://soroban.stellar.org)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 [![CI / CD — TrustWork](https://github.com/krit-k7/StellarXblue-Belt/actions/workflows/deploy.yml/badge.svg)](https://github.com/krit-k7/StellarXblue-Belt/actions/workflows/deploy.yml)
+
+<br/>
+
+![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
+![Stellar](https://img.shields.io/badge/Stellar-7D00FF?style=for-the-badge&logo=stellar&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+
+</div>
 
 ---
 
@@ -36,7 +54,7 @@
 
 ---
 
-## Live Links & Resources
+## <img src="https://cdn.simpleicons.org/googlechrome/4285F4" width="26" valign="middle"/> Live Links & Resources
 
 | Resource | Link |
 |---|---|
@@ -50,7 +68,7 @@
 
 ---
 
-## Overview
+## 📌 Overview
 
 Freelance work runs on trust that usually isn't there. Clients worry about paying upfront for work that never arrives; freelancers worry about delivering work and never getting paid. Traditional platforms solve this with centralized escrow — but that means fees, opaque dispute processes, chargebacks, and a middleman who can freeze funds at will.
 
@@ -60,7 +78,7 @@ The project is built as a full end-to-end product rather than just a contract de
 
 ---
 
-## How It Works
+## ⚙️ How It Works
 
 TrustWork models a freelance engagement as a state machine that lives entirely on-chain. Here's the full lifecycle of a contract, from creation to payout:
 
@@ -82,7 +100,7 @@ Every one of these transitions emits an on-chain event, so the frontend (and any
 
 ---
 
-## Screenshots
+## 🖼️ Screenshots
 
 <img width="1920" height="1080" alt="TrustWork app screenshot" src="https://github.com/user-attachments/assets/b5e92004-0e24-47e2-8443-e66827165f26" />
 
@@ -92,38 +110,31 @@ Every one of these transitions emits an on-chain event, so the frontend (and any
 
 ---
 
-## Architecture
-
-### System Overview
+## <img src="https://cdn.simpleicons.org/stellar/7D00FF" width="26" valign="middle"/> Architecture
 
 TrustWork has three moving parts that never trust each other implicitly — the frontend, the wallet, and the contract each independently enforce their own piece of the rules.
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                      User Browser                       │
-│                                                           │
-│   ┌──────────────┐        ┌─────────────────────────┐   │
-│   │   React SPA  │◀──────▶│  Freighter Wallet Ext.  │   │
-│   │   (Vercel)   │        │  (Signs transactions)   │   │
-│   └──────┬───────┘        └─────────────────────────┘   │
-└──────────┼────────────────────────────────────────────────┘
-           │
-           │  HTTPS / Soroban RPC
-           ▼
-┌─────────────────────────┐      ┌──────────────────────┐
-│   Stellar Testnet RPC   │      │   Supabase           │
-│   soroban-testnet.      │      │   (Real-time chat,   │
-│   stellar.org           │      │    message storage)  │
-└──────────┬──────────────┘      └──────────────────────┘
-           │
-           ▼
-┌─────────────────────────────────────────────────────────┐
-│              Soroban Smart Contract (Rust)               │
-│         CBEUUVKJD2FM5CL57COXJV55HXYSEDW7VXR...           │
-│                                                           │
-│   create_escrow → deposit → submit_work →                │
-│   approve_and_release / refund / raise_dispute            │
-└─────────────────────────────────────────────────────────┘
+### System Overview
+
+```mermaid
+flowchart TB
+    subgraph Browser["🖥️ User Browser"]
+        UI["React SPA<br/>(Vercel)"]
+        Wallet["Freighter Wallet<br/>Extension"]
+        UI <-->|"sign / approve"| Wallet
+    end
+
+    UI -->|"HTTPS / Soroban RPC"| RPC["Stellar Testnet RPC<br/>soroban-testnet.stellar.org"]
+    UI -->|"realtime subscribe"| SB["Supabase<br/>(Chat + Messages)"]
+    RPC --> SC["Soroban Smart Contract (Rust)<br/>CBEUUV...UNQS"]
+    SC --> Ledger["Stellar Ledger"]
+
+    style SC fill:#7D00FF,stroke:#5b00c2,color:#ffffff
+    style RPC fill:#1b1f27,stroke:#000000,color:#ffffff
+    style SB fill:#3ECF8E,stroke:#2ea36e,color:#08301f
+    style UI fill:#61DAFB,stroke:#2ab8d9,color:#062b33
+    style Wallet fill:#f5a623,stroke:#c9840e,color:#3a2400
+    style Ledger fill:#0b0e14,stroke:#000000,color:#ffffff
 ```
 
 ### Component Responsibilities
@@ -142,35 +153,19 @@ TrustWork has three moving parts that never trust each other implicitly — the 
 
 Every escrow instance moves through a strict set of states. There is no way to skip a step or move backward outside of the transitions below — the contract simply rejects any call that doesn't match the current state.
 
-```
-  create_escrow()
-        │
-        ▼
- AwaitingDeposit
-        │
-   deposit()
-        │
-        ▼
-    Funded ──────────────────────────────────┐
-        │                                    │
-  submit_work()                          refund()
-        │                                    │
-        ▼                                    ▼
- WorkSubmitted                           Refunded
-        │
-   ┌────┴────┐
-   │         │
-approve()  raise_dispute()
-   │         │
-   ▼         ▼
-Completed  Disputed
-               │
-         resolve_dispute()
-               │
-        ┌──────┴──────┐
-        ▼             ▼
-   Completed       Refunded
-  (to seller)    (to buyer)
+```mermaid
+stateDiagram-v2
+    [*] --> AwaitingDeposit: create_escrow()
+    AwaitingDeposit --> Funded: deposit()
+    Funded --> WorkSubmitted: submit_work()
+    Funded --> Refunded: refund()
+    WorkSubmitted --> Completed: approve_and_release()
+    WorkSubmitted --> Completed: claim_after_deadline()
+    WorkSubmitted --> Disputed: raise_dispute()
+    Disputed --> Completed: resolve_dispute - release or split
+    Disputed --> Refunded: resolve_dispute - refund
+    Completed --> [*]
+    Refunded --> [*]
 ```
 
 ### Frontend Structure
@@ -200,7 +195,7 @@ src/
 
 ---
 
-## Smart Contract Deep Dive
+## <img src="https://cdn.simpleicons.org/rust/000000" width="26" valign="middle"/> Smart Contract Deep Dive
 
 The escrow logic lives in `democontract/escrow.rs`, with shared types (`EscrowState`, `EscrowError`, `Resolution`) in `types.rs`, on-chain persistence helpers in `storage.rs`, and multi-instance creation in `factory.rs`. Every state-changing function follows the same pattern: load the escrow's config from storage, check who's calling and what state it's in, move tokens if needed, save the new state, and emit an event.
 
@@ -249,7 +244,7 @@ Every outcome emits a `resolved` event.
 
 ---
 
-## Tech Stack
+## <img src="https://cdn.simpleicons.org/react/61DAFB" width="26" valign="middle"/> Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -264,7 +259,7 @@ Every outcome emits a `resolved` event.
 
 ---
 
-## Features
+## ✨ Features
 
 - **Escrow Contract** — Funds are locked on-chain the moment a contract is funded and can only move according to the rules encoded in the contract, not according to any single party's discretion.
 - **Milestone Payments** — Larger engagements can be split into multiple escrow instances, so payment is tied to discrete chunks of work rather than an all-or-nothing release at the end.
@@ -276,7 +271,7 @@ Every outcome emits a `resolved` event.
 
 ---
 
-## Data Indexing & Query Strategy
+## 📊 Data Indexing & Query Strategy
 
 ### Approach
 
@@ -288,23 +283,13 @@ TrustWork uses a **hybrid indexing strategy** that combines direct on-chain quer
 
 ### Data Flow
 
-```
-User connects wallet
-       │
-       ▼
-Fetch all contract IDs from localStorage
-       │
-       ▼
-For each contract: call get_escrow(id) via RPC
-       │
-       ▼
-Filter contracts where user is participant
-       │
-       ▼
-Calculate metrics (total value, active count, etc.)
-       │
-       ▼
-Display on personalized dashboard
+```mermaid
+flowchart TD
+    A["User connects wallet"] --> B["Fetch contract IDs<br/>from localStorage"]
+    B --> C["For each contract:<br/>get_escrow(id) via RPC"]
+    C --> D["Filter contracts where<br/>user is participant"]
+    D --> E["Calculate metrics<br/>(value, active count, etc.)"]
+    E --> F["Display personalized<br/>dashboard"]
 ```
 
 ### Endpoints
@@ -319,7 +304,7 @@ Display on personalized dashboard
 
 ---
 
-## Getting Started
+## <img src="https://cdn.simpleicons.org/nodedotjs/339933" width="26" valign="middle"/> Getting Started
 
 ### Prerequisites
 
@@ -366,7 +351,7 @@ This compiles the Soroban contract, deploys it to Stellar Testnet, and prints th
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 StellarXblue-Belt/
@@ -394,7 +379,7 @@ StellarXblue-Belt/
 
 ---
 
-## Security
+## 🔒 Security
 
 TrustWork follows a client-side-signing, non-custodial security model — the app itself never has access to funds or private keys.
 
@@ -414,7 +399,7 @@ TrustWork follows a client-side-signing, non-custodial security model — the ap
 
 ---
 
-## Metrics Dashboard
+## 📊 Metrics Dashboard
 
 TrustWork gives every connected wallet a **personalized metrics dashboard**, computed in real time from on-chain data:
 
@@ -432,7 +417,7 @@ TrustWork gives every connected wallet a **personalized metrics dashboard**, com
 
 ---
 
-## Monitoring
+## <img src="https://cdn.simpleicons.org/vercel/000000" width="26" valign="middle"/> Monitoring
 
 TrustWork tracks application, deployment, and on-chain health through three separate lenses:
 
@@ -450,7 +435,7 @@ TrustWork tracks application, deployment, and on-chain health through three sepa
 
 ---
 
-## Testing & User Feedback
+## <img src="https://cdn.simpleicons.org/googlesheets/34A853" width="26" valign="middle"/> Testing & User Feedback
 
 TrustWork was tested on Stellar Testnet by **50+ real users**, whose wallet addresses and feedback are recorded in the linked spreadsheet.
 
@@ -491,7 +476,7 @@ Action buttons weren't respecting user roles. Fixed by adding role-based UI rend
 
 ---
 
-## Community Contribution
+## <img src="https://cdn.simpleicons.org/x/000000" width="24" valign="middle"/> Community Contribution
 
 TrustWork was shared with the wider Stellar community to gather feedback and drive adoption:
 
@@ -501,7 +486,7 @@ The post includes the live Vercel deployment link, responsive design screenshots
 
 ---
 
-## Deployment & CI/CD
+## <img src="https://cdn.simpleicons.org/vercel/000000" width="26" valign="middle"/> Deployment & CI/CD
 
 ### Live Deployment
 
@@ -519,14 +504,15 @@ Automated via **GitHub Actions** (`.github/workflows/deploy.yml`):
 | **Artifact** | Uploads the built `dist/` folder (retained 7 days) |
 | **Deploy** | Auto-deploys to Vercel production on a successful build |
 
-```
-Push to master
-     │
-     ▼
-┌─────────────┐     ┌──────────────┐
-│  Lint &     │────▶│  Deploy to   │
-│  Build      │     │  Vercel Prod │
-└─────────────┘     └──────────────┘
+```mermaid
+flowchart LR
+    A["Push to master"] --> B["Lint<br/>ESLint"]
+    B --> C["Build<br/>npm run build"]
+    C --> D["Upload dist/ artifact<br/>(retained 7 days)"]
+    D --> E["Deploy to<br/>Vercel Production"]
+
+    style A fill:#24292e,stroke:#000000,color:#ffffff
+    style E fill:#000000,stroke:#333333,color:#ffffff
 ```
 
 ### Manual Deploy
@@ -546,7 +532,7 @@ vercel --prod
 
 ---
 
-## Roadmap
+## 🗺️ Roadmap
 
 Ideas being considered for the next iteration, not yet built:
 
@@ -559,7 +545,7 @@ Ideas being considered for the next iteration, not yet built:
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome. To propose a change:
 
@@ -572,13 +558,13 @@ For smart contract changes, please test against Stellar Testnet before opening a
 
 ---
 
-## License
+## 📄 License
 
 MIT — free to use, modify, and distribute.
 
 ---
 
-## Submission Checklist
+## ✅ Submission Checklist
 
 | Requirement | Status | Where to find it |
 |---|---|---|
@@ -598,6 +584,8 @@ MIT — free to use, modify, and distribute.
 
 [🌐 Live App](https://stellar-xblue-belt.vercel.app/) &nbsp;•&nbsp; [📹 Demo Video](https://github.com/krit-k7/StellarXblue-Belt/raw/main/ScreenRecording/demo.mp4) &nbsp;•&nbsp; [📊 User Feedback](https://docs.google.com/spreadsheets/d/1zOhuFVbrQZlJ1NcUoBrmZxb7JP9WRP9J/edit?gid=1132381471#gid=1132381471) &nbsp;•&nbsp; [🐛 Issues](https://github.com/krit-k7/StellarXblue-Belt/issues)
 
-Built with ❤️ on Stellar
+**Built with ❤️ on Stellar**
+
+<img src="https://cdn.simpleicons.org/stellar/7D00FF" width="20" valign="middle"/>
 
 </div>
