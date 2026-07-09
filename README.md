@@ -12,9 +12,9 @@
 
 ## Table of Contents
 
+- [Live Links & Resources](#live-links--resources)
 - [Overview](#overview)
 - [How It Works](#how-it-works)
-- [Live Links & Resources](#live-links--resources)
 - [Screenshots](#screenshots)
 - [Architecture](#architecture)
 - [Smart Contract Deep Dive](#smart-contract-deep-dive)
@@ -33,6 +33,20 @@
 - [Contributing](#contributing)
 - [License](#license)
 - [Submission Checklist](#submission-checklist)
+
+---
+
+## Live Links & Resources
+
+| Resource | Link |
+|---|---|
+| 🌐 Live Application | [stellar-xblue-belt.vercel.app](https://stellar-xblue-belt.vercel.app/) |
+| 🔗 Pitch Deck | [View Presentation](https://docs.google.com/presentation/d/1Yu_DkhZf2RZBOToWg-lb9sQEd4B2GXMb/edit?slide=id.p1#slide=id.p1) |
+| 📹 Demo Video | [Download Demo Video](https://github.com/krit-k7/StellarXblue-Belt/raw/main/ScreenRecording/demo.mp4) |
+| 📊 User Feedback (50+ responses) | [Full Feedback Spreadsheet](https://docs.google.com/spreadsheets/d/1zOhuFVbrQZlJ1NcUoBrmZxb7JP9WRP9J/edit?gid=1132381471#gid=1132381471) |
+| 🧾 Repository | [github.com/krit-k7/StellarXblue-Belt](https://github.com/krit-k7/StellarXblue-Belt) |
+| 🐦 Community Post | [View Twitter/X Post](https://x.com/krit_giri/status/2050516673879527867) |
+| 🔎 Contract Explorer | [Stellar Expert](https://stellar.expert/explorer/testnet/contract/CBEUUVKJD2FM5CL57COXJV55HXYSEDW7VXRBJFWKDNZZRSHBMWQZUNQS) |
 
 ---
 
@@ -65,20 +79,6 @@ TrustWork models a freelance engagement as a state machine that lives entirely o
 6. **Disputes.** If the client and freelancer disagree about whether the work meets the agreed terms, either party can escalate by calling `raise_dispute()` (only available if an arbitrator was configured at contract creation). The arbitrator reviews the situation off-chain and calls `resolve_dispute()` with a binding decision — full release to the freelancer, full refund to the client, or a percentage split between the two. The contract enforces whatever the arbitrator decides automatically.
 
 Every one of these transitions emits an on-chain event, so the frontend (and any block explorer) can track a contract's history in real time without needing a centralized backend.
-
----
-
-## Live Links & Resources
-
-| Resource | Link |
-|---|---|
-| 🌐 Live Application | [stellar-xblue-belt.vercel.app](https://stellar-xblue-belt.vercel.app/) |
-| 🔗 Pitch Deck | [View Presentation](https://docs.google.com/presentation/d/1Yu_DkhZf2RZBOToWg-lb9sQEd4B2GXMb/edit?slide=id.p1#slide=id.p1) |
-| 📹 Demo Video | [Download Demo Video](https://github.com/krit-k7/StellarXblue-Belt/raw/main/ScreenRecording/demo.mp4) |
-| 📊 User Feedback (50+ responses) | [Full Feedback Spreadsheet](https://docs.google.com/spreadsheets/d/1zOhuFVbrQZlJ1NcUoBrmZxb7JP9WRP9J/edit?gid=1132381471#gid=1132381471) |
-| 🧾 Repository | [github.com/krit-k7/StellarXblue-Belt](https://github.com/krit-k7/StellarXblue-Belt) |
-| 🐦 Community Post | [View Twitter/X Post](https://x.com/krit_giri/status/2050516673879527867) |
-| 🔎 Contract Explorer | [Stellar Expert](https://stellar.expert/explorer/testnet/contract/CBEUUVKJD2FM5CL57COXJV55HXYSEDW7VXRBJFWKDNZZRSHBMWQZUNQS) |
 
 ---
 
