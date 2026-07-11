@@ -54,6 +54,7 @@
 
 ---
 
+<a name="live-links--resources"></a>
 ## <img src="https://cdn.simpleicons.org/googlechrome/4285F4" width="26" valign="middle"/> Live Links & Resources
 
 | Resource | Link |
@@ -68,6 +69,7 @@
 
 ---
 
+<a name="overview"></a>
 ## 📌 Overview
 
 Freelance work runs on trust that usually isn't there. Clients worry about paying upfront for work that never arrives; freelancers worry about delivering work and never getting paid. Traditional platforms solve this with centralized escrow — but that means fees, opaque dispute processes, chargebacks, and a middleman who can freeze funds at will.
@@ -78,6 +80,7 @@ The project is built as a full end-to-end product rather than just a contract de
 
 ---
 
+<a name="how-it-works"></a>
 ## ⚙️ How It Works
 
 TrustWork models a freelance engagement as a state machine that lives entirely on-chain. Here's the full lifecycle of a contract, from creation to payout:
@@ -100,6 +103,7 @@ Every one of these transitions emits an on-chain event, so the frontend (and any
 
 ---
 
+<a name="screenshots"></a>
 ## 🖼️ Screenshots
 
 <img width="1920" height="1080" alt="TrustWork app screenshot" src="https://github.com/user-attachments/assets/b5e92004-0e24-47e2-8443-e66827165f26" />
@@ -110,6 +114,7 @@ Every one of these transitions emits an on-chain event, so the frontend (and any
 
 ---
 
+<a name="architecture"></a>
 ## <img src="https://cdn.simpleicons.org/stellar/7D00FF" width="26" valign="middle"/> Architecture
 
 TrustWork has three moving parts that never trust each other implicitly — the frontend, the wallet, and the contract each independently enforce their own piece of the rules.
@@ -195,6 +200,7 @@ src/
 
 ---
 
+<a name="smart-contract-deep-dive"></a>
 ## <img src="https://cdn.simpleicons.org/rust/000000" width="26" valign="middle"/> Smart Contract Deep Dive
 
 The escrow logic lives in `democontract/escrow.rs`, with shared types (`EscrowState`, `EscrowError`, `Resolution`) in `types.rs`, on-chain persistence helpers in `storage.rs`, and multi-instance creation in `factory.rs`. Every state-changing function follows the same pattern: load the escrow's config from storage, check who's calling and what state it's in, move tokens if needed, save the new state, and emit an event.
@@ -244,6 +250,7 @@ Every outcome emits a `resolved` event.
 
 ---
 
+<a name="tech-stack"></a>
 ## <img src="https://cdn.simpleicons.org/react/61DAFB" width="26" valign="middle"/> Tech Stack
 
 | Layer | Technology |
@@ -259,6 +266,7 @@ Every outcome emits a `resolved` event.
 
 ---
 
+<a name="features"></a>
 ## ✨ Features
 
 - **Escrow Contract** — Funds are locked on-chain the moment a contract is funded and can only move according to the rules encoded in the contract, not according to any single party's discretion.
@@ -271,6 +279,7 @@ Every outcome emits a `resolved` event.
 
 ---
 
+<a name="data-indexing--query-strategy"></a>
 ## 📊 Data Indexing & Query Strategy
 
 ### Approach
@@ -304,6 +313,7 @@ flowchart TD
 
 ---
 
+<a name="getting-started"></a>
 ## <img src="https://cdn.simpleicons.org/nodedotjs/339933" width="26" valign="middle"/> Getting Started
 
 ### Prerequisites
@@ -351,6 +361,7 @@ This compiles the Soroban contract, deploys it to Stellar Testnet, and prints th
 
 ---
 
+<a name="project-structure"></a>
 ## 📁 Project Structure
 
 ```
@@ -379,6 +390,7 @@ StellarXblue-Belt/
 
 ---
 
+<a name="security"></a>
 ## 🔒 Security
 
 TrustWork follows a client-side-signing, non-custodial security model — the app itself never has access to funds or private keys.
@@ -399,6 +411,7 @@ TrustWork follows a client-side-signing, non-custodial security model — the ap
 
 ---
 
+<a name="metrics-dashboard"></a>
 ## 📊 Metrics Dashboard
 
 TrustWork gives every connected wallet a **personalized metrics dashboard**, computed in real time from on-chain data:
@@ -417,6 +430,7 @@ TrustWork gives every connected wallet a **personalized metrics dashboard**, com
 
 ---
 
+<a name="monitoring"></a>
 ## <img src="https://cdn.simpleicons.org/vercel/000000" width="26" valign="middle"/> Monitoring
 
 TrustWork tracks application, deployment, and on-chain health through three separate lenses:
@@ -435,6 +449,7 @@ TrustWork tracks application, deployment, and on-chain health through three sepa
 
 ---
 
+<a name="testing--user-feedback"></a>
 ## <img src="https://cdn.simpleicons.org/googlesheets/34A853" width="26" valign="middle"/> Testing & User Feedback
 
 TrustWork was tested on Stellar Testnet by **50+ real users**, whose wallet addresses and feedback are recorded in the linked spreadsheet.
@@ -476,6 +491,7 @@ Action buttons weren't respecting user roles. Fixed by adding role-based UI rend
 
 ---
 
+<a name="community-contribution"></a>
 ## <img src="https://cdn.simpleicons.org/x/000000" width="24" valign="middle"/> Community Contribution
 
 TrustWork was shared with the wider Stellar community to gather feedback and drive adoption:
@@ -486,6 +502,7 @@ The post includes the live Vercel deployment link, responsive design screenshots
 
 ---
 
+<a name="deployment--cicd"></a>
 ## <img src="https://cdn.simpleicons.org/vercel/000000" width="26" valign="middle"/> Deployment & CI/CD
 
 ### Live Deployment
@@ -532,6 +549,7 @@ vercel --prod
 
 ---
 
+<a name="roadmap"></a>
 ## 🗺️ Roadmap
 
 Ideas being considered for the next iteration, not yet built:
@@ -545,6 +563,7 @@ Ideas being considered for the next iteration, not yet built:
 
 ---
 
+<a name="contributing"></a>
 ## 🤝 Contributing
 
 Contributions are welcome. To propose a change:
@@ -558,12 +577,14 @@ For smart contract changes, please test against Stellar Testnet before opening a
 
 ---
 
+<a name="license"></a>
 ## 📄 License
 
 MIT — free to use, modify, and distribute.
 
 ---
 
+<a name="submission-checklist"></a>
 ## ✅ Submission Checklist
 
 | Requirement | Status | Where to find it |
