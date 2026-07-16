@@ -9,6 +9,7 @@
 import { useState } from 'react'
 import { CONTRACT_TEMPLATES, REFUND_POLICY_LABELS, reviewPeriodLabel } from '../utils/contractTemplates'
 import { truncateAddr, formatXLM, validateContractForm } from '../utils/contract'
+import { TEMPLATE_ICONS } from './icons'
 
 const STEPS = ['Template', 'Parties & Payment', 'Terms', 'Review & Deploy']
 
@@ -205,22 +206,22 @@ export default function ContractForm({ onSubmit, loading, wallet }) {
             Choose a starting template or build from scratch. You can customize everything in the next steps.
           </p>
           <div className="template-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 12 }}>
-            {CONTRACT_TEMPLATES.map(tpl => (
-              <div
-                key={tpl.id}
-                className="card card-clickable"
-                style={{
-                  border: form.template === tpl.id ? '1px solid var(--accent)' : undefined,
-                  boxShadow: form.template === tpl.id ? '0 0 0 1px var(--accent-glow)' : undefined,
-                  padding: 18,
-                }}
-                onClick={() => applyTemplate(tpl)}
-              >
-                <div style={{ fontSize: '1.8rem', marginBottom: 10 }}>{tpl.icon}</div>
-                <div style={{ fontWeight: 600, color: 'var(--text-heading)', fontSize: '0.9rem', marginBottom: 6 }}>{tpl.label}</div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>{tpl.desc}</div>
-              </div>
-            ))}
+            {CONTRACT_TEMPLATES.map(tpl => {
+              const Icon = TEMPLATE_ICONS[tpl.icon]
+              return (
+                <div
+                  key={tpl.id}
+                  className={`template-card ${form.template === tpl.id ? 'active' : ''}`}
+                  onClick={() => applyTemplate(tpl)}
+                >
+                  <div className="template-icon-wrap">
+                    <Icon width={22} height={22} />
+                  </div>
+                  <div style={{ fontWeight: 600, color: 'var(--text-heading)', fontSize: '0.9rem', marginBottom: 6 }}>{tpl.label}</div>
+                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>{tpl.desc}</div>
+                </div>
+              )
+            })}
           </div>
         </div>
       )}
@@ -478,7 +479,7 @@ function ContractPreview({ form, wallet, onDeploy, loading, errors }) {
       <div className="card" style={{ marginBottom: 16 }}>
         <div className="detail-section-title">Contract Details</div>
 
-        <PreviewRow label="Template" value={tpl ? `${tpl.icon} ${tpl.label}` : '—'} />
+        <PreviewRow label="Template" value={tpl ? tpl.label : '—'} />
         <PreviewRow label="Title" value={form.title} />
         <PreviewRow label="Client (You)" value={truncateAddr(wallet)} mono />
         <PreviewRow label="Freelancer" value={truncateAddr(form.freelancer)} mono />
