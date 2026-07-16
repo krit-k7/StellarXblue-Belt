@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { truncateAddr } from '../utils/contract'
+import { LogoMark } from './icons'
 
 export default function Navbar({ page, setPage, wallet, onOpenWallet, onDisconnect }) {
   const [dropdownOpen, setDropdownOpen] = useState(false)
@@ -25,17 +26,7 @@ export default function Navbar({ page, setPage, wallet, onOpenWallet, onDisconne
     <nav className="navbar">
       <div className="navbar-brand" onClick={() => setPage('home')}>
         <div className="navbar-logo">
-          <div style={{ 
-            width: '32px', 
-            height: '32px', 
-            background: 'var(--accent)', 
-            borderRadius: '8px', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            fontSize: '16px',
-            color: 'var(--accent-ink)'
-          }}>⚡</div>
+          <LogoMark size={32} />
         </div>
         <span className="navbar-title">Trust<span>Work</span></span>
       </div>
