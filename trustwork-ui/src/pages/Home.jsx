@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import ParticleField from '../components/ParticleField'
+import { LockIcon, BoltIcon, ScaleIcon, AutoReleaseIcon } from '../components/icons'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -13,22 +14,22 @@ const stagger = {
 export default function Home({ wallet, onOpenWallet, setPage }) {
   const features = [
     { 
-      icon: '🔒', 
+      icon: LockIcon, 
       title: 'Escrow Protection', 
       desc: 'Funds are locked in a Soroban smart contract before work begins. No trust required.' 
     },
     { 
-      icon: '⚡', 
+      icon: BoltIcon, 
       title: 'Stellar Speed', 
       desc: 'Payments settle in seconds on the Stellar network with near-zero fees.' 
     },
     { 
-      icon: '⚖️', 
+      icon: ScaleIcon, 
       title: 'Dispute Resolution', 
       desc: 'Human arbitrators resolve disagreements fairly when parties can\'t agree.' 
     },
     { 
-      icon: '🤖', 
+      icon: AutoReleaseIcon, 
       title: 'Auto-Release', 
       desc: 'If the client is inactive past the review period, the freelancer can claim automatically.' 
     }
@@ -143,7 +144,9 @@ export default function Home({ wallet, onOpenWallet, setPage }) {
         >
           {features.map((f, i) => (
             <motion.div className="feature-card" key={i} variants={fadeUp}>
-              <span className="feature-icon">{f.icon}</span>
+              <div className="feature-icon-wrap">
+                <f.icon width={24} height={24} />
+              </div>
               <h3 style={{ marginBottom: 12 }}>{f.title}</h3>
               <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)' }}>{f.desc}</p>
             </motion.div>
