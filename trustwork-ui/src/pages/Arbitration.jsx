@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { truncateAddr, formatXLM, formatDate, CONTRACT_STATES, applyResolve } from '../utils/contract'
 import { sorobanResolveDispute, NETWORK } from '../utils/stellar'
+import { ScaleIcon, ClipboardIcon } from '../components/icons'
 
 export default function Arbitration({ contracts, onUpdate, wallet, openTx, txSubmitting, txSuccess, txError }) {
   const disputed = contracts.filter(c => c.status === CONTRACT_STATES.DISPUTED)
@@ -30,7 +31,9 @@ export default function Arbitration({ contracts, onUpdate, wallet, openTx, txSub
   const ResolutionModal = ({ contract }) => (
     <div className="modal-overlay" onClick={() => setSelected(null)}>
       <div className="modal" onClick={e => e.stopPropagation()}>
-        <div className="modal-title">⚖️ Resolve Dispute</div>
+        <div className="modal-title" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <ScaleIcon width={20} height={20} style={{ color: 'var(--accent)' }} /> Resolve Dispute
+        </div>
         <div className="modal-desc">
           Review the case and choose a resolution for contract <strong>{contract.id}</strong>.
         </div>
@@ -102,7 +105,7 @@ export default function Arbitration({ contracts, onUpdate, wallet, openTx, txSub
         <>
           {disputed.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-icon">⚖️</div>
+              <div className="empty-icon"><ScaleIcon width={26} height={26} /></div>
               <div className="empty-title">No pending disputes</div>
               <div className="empty-desc">All contracts are running smoothly.</div>
             </div>
@@ -158,7 +161,7 @@ export default function Arbitration({ contracts, onUpdate, wallet, openTx, txSub
         <>
           {resolved.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-icon">📋</div>
+              <div className="empty-icon"><ClipboardIcon width={26} height={26} /></div>
               <div className="empty-title">No resolved disputes yet</div>
             </div>
           ) : (
