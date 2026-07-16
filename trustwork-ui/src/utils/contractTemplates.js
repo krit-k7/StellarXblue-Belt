@@ -8,7 +8,7 @@ export const CONTRACT_TEMPLATES = [
   {
     id: 'freelance',
     label: 'Freelance Project',
-    icon: '💻',
+    icon: 'laptop',
     desc: 'Standard client-freelancer escrow with review period and dispute option.',
     defaults: {
       contractType: 'freelance',
@@ -23,7 +23,7 @@ export const CONTRACT_TEMPLATES = [
   {
     id: 'milestone',
     label: 'Milestone-Based',
-    icon: '🏁',
+    icon: 'flag',
     desc: 'Break payment into milestones. Each milestone is its own escrow instance.',
     defaults: {
       contractType: 'milestone',
@@ -38,7 +38,7 @@ export const CONTRACT_TEMPLATES = [
   {
     id: 'audit',
     label: 'Security Audit',
-    icon: '🔍',
+    icon: 'search',
     desc: 'Longer review period, mandatory arbitrator, strict refund policy.',
     defaults: {
       contractType: 'audit',
@@ -53,7 +53,7 @@ export const CONTRACT_TEMPLATES = [
   {
     id: 'quick',
     label: 'Quick Task',
-    icon: '⚡',
+    icon: 'bolt',
     desc: 'Small task, short deadline, no arbitrator needed.',
     defaults: {
       contractType: 'quick',
@@ -68,7 +68,7 @@ export const CONTRACT_TEMPLATES = [
   {
     id: 'custom',
     label: 'Custom',
-    icon: '⚙️',
+    icon: 'settings',
     desc: 'Start from scratch and configure every option yourself.',
     defaults: {
       contractType: 'custom',
