@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import ContractCard from '../components/ContractCard'
 import { CONTRACT_STATES, formatXLM } from '../utils/contract'
+import { PackageIcon } from '../components/icons'
 
 const TABS = ['All', 'Active', 'Submitted', 'Completed', 'Disputed']
 
@@ -50,7 +51,7 @@ export default function Dashboard({ contracts, onView, setPage, wallet }) {
           marginBottom: 24,
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-            <span style={{ fontSize: '1.2rem' }}>📦</span>
+            <span style={{ color: 'var(--accent)', display: 'flex' }}><PackageIcon width={20} height={20} /></span>
             <div>
               <div style={{ fontWeight: 700, color: 'var(--text-heading)', fontSize: '0.95rem' }}>
                 {pendingReview.length} contract{pendingReview.length > 1 ? 's' : ''} awaiting your review
@@ -147,7 +148,7 @@ export default function Dashboard({ contracts, onView, setPage, wallet }) {
       {/* Contract Grid */}
       {filtered.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-icon">📋</div>
+          <div className="empty-icon"><PackageIcon width={28} height={28} /></div>
           <div className="empty-title">
             {!wallet ? 'Connect your wallet' : tab === 'All' ? 'No contracts yet' : `No ${tab.toLowerCase()} contracts`}
           </div>
