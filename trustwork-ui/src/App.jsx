@@ -8,6 +8,7 @@ import CreateContract from './pages/CreateContract'
 import ContractDetail from './pages/ContractDetail'
 import Arbitration from './pages/Arbitration'
 import { useWallet } from './hooks/useWallet'
+import { useTheme } from './hooks/useTheme'
 import { loadContracts, addContract, updateContract } from './utils/contract'
 import { NETWORK, sorobanGetEscrow, stroopsToXlm } from './utils/stellar'
 
@@ -35,6 +36,7 @@ export default function App() {
 
   const walletState = useWallet()
   const { address: wallet, disconnect } = walletState
+  const { theme, toggleTheme } = useTheme()
 
   // ── One-time cleanup: remove any seeded demo contracts from localStorage ──
   useEffect(() => {
@@ -180,6 +182,8 @@ export default function App() {
         wallet={wallet}
         onOpenWallet={() => setWalletOpen(true)}
         onDisconnect={handleDisconnect}
+        theme={theme}
+        toggleTheme={toggleTheme}
       />
 
       {page === 'home' && (
