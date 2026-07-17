@@ -139,6 +139,24 @@ export function ClipboardIcon(props) {
   )
 }
 
+// ── Theme toggle icons ───────────────────────────────────────────────────
+export function SunIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="12" r="4.2" />
+      <path d="M12 2.5v3M12 18.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2.5 12h3M18.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" />
+    </svg>
+  )
+}
+
+export function MoonIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" />
+    </svg>
+  )
+}
+
 // Maps CONTRACT_TEMPLATES `icon` keys (see utils/contractTemplates.js) to
 // their corresponding component.
 export const TEMPLATE_ICONS = {
