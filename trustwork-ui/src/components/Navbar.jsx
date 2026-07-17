@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import { truncateAddr } from '../utils/contract'
-import { LogoMark } from './icons'
+import { LogoMark, SunIcon, MoonIcon } from './icons'
 
-export default function Navbar({ page, setPage, wallet, onOpenWallet, onDisconnect }) {
+export default function Navbar({ page, setPage, wallet, onOpenWallet, onDisconnect, theme, toggleTheme }) {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const menuRef = useRef(null)
 
@@ -44,6 +44,20 @@ export default function Navbar({ page, setPage, wallet, onOpenWallet, onDisconne
       </div>
 
       <div className="navbar-right">
+        <button
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+          title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          style={{
+            width: 38, height: 38, borderRadius: 'var(--radius-sm)',
+            border: '1px solid var(--border-strong)', background: 'var(--overlay-1)',
+            color: 'var(--text-heading)', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s',
+          }}
+        >
+          {theme === 'dark' ? <SunIcon width={18} height={18} /> : <MoonIcon width={18} height={18} />}
+        </button>
+
         {wallet ? (
           <div className="wallet-menu" ref={menuRef}>
             <div
