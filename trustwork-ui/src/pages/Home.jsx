@@ -11,7 +11,7 @@ const stagger = {
   show: { transition: { staggerChildren: 0.1 } }
 }
 
-export default function Home({ wallet, onOpenWallet, setPage }) {
+export default function Home({ wallet, onOpenWallet, setPage, theme }) {
   const features = [
     { 
       icon: LockIcon, 
@@ -46,7 +46,7 @@ export default function Home({ wallet, onOpenWallet, setPage }) {
     <div className="home-root">
       {/* Hero Section */}
       <section className="hero-container">
-        <ParticleField density={100} color="255, 255, 255" />
+        <ParticleField density={100} color={theme === 'light' ? '15, 23, 42' : '255, 255, 255'} />
         
         <motion.div 
           className="hero-content"
