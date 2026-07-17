@@ -46,7 +46,7 @@ export default function Home({ wallet, onOpenWallet, setPage, theme }) {
     <div className="home-root">
       {/* Hero Section */}
       <section className="hero-container">
-        <ParticleField density={100} color={theme === 'light' ? '15, 23, 42' : '255, 255, 255'} />
+        <ParticleField density={130} color={theme === 'light' ? '13, 148, 136' : '79, 216, 206'} />
         
         <motion.div 
           className="hero-content"
