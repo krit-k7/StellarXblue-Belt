@@ -110,7 +110,7 @@ export default function Home({ wallet, onOpenWallet, setPage }) {
       >
         {['Stellar Network', 'Soroban Contracts', '✓ Open Source'].map((text, i) => (
           <span key={i} style={{
-            background: 'rgba(255,255,255,0.03)',
+            background: 'var(--overlay-1)',
             border: '1px solid var(--border)',
             borderRadius: '20px',
             padding: '6px 16px',
@@ -122,7 +122,7 @@ export default function Home({ wallet, onOpenWallet, setPage }) {
       </motion.div>
 
       {/* Features Section */}
-      <section style={{ padding: '80px 0', background: '#05070a' }}>
+      <section style={{ padding: '80px 0', background: 'var(--bg)' }}>
         <div className="section-title">
           <motion.h2 
             initial={{ opacity: 0 }} 
