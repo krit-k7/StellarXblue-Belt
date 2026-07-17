@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://cdn.simpleicons.org/stellar/7D00FF" width="64" alt="Stellar logo" />
+<img src="https://cdn.simpleicons.org/springsecurity/6DB33F" width="64" alt="Spring Security logo" />
 
 # TrustWork
 ### Decentralized Freelance Escrow on Stellar
