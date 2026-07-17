@@ -155,39 +155,31 @@ export default function Home({ wallet, onOpenWallet, setPage, theme }) {
       </section>
 
       {/* How It Works Section */}
-      <section style={{ padding: '100px 24px', borderTop: '1px solid var(--border)' }}>
-        <div className="section-title">
-          <h2>How it works</h2>
-          <p style={{ color: 'var(--text-muted)' }}>Four steps to secure, trustless freelance collaboration.</p>
-        </div>
-        
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
-          gap: '32px', 
-          maxWidth: '1100px', 
-          margin: '48px auto 0' 
-        }}>
-          {steps.map(s => (
-            <div key={s.num} style={{ textAlign: 'center' }}>
-              <div style={{ 
-                width: '40px', 
-                height: '40px', 
-                borderRadius: '50%', 
-                background: 'var(--accent)', 
-                color: 'var(--accent-ink)', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center', 
-                fontWeight: '800', 
-                margin: '0 auto 16px' 
-              }}>{s.num}</div>
-              <h3 style={{ marginBottom: 8 }}>{s.title}</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{s.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+<section style={{ padding: '100px 24px', borderTop: '1px solid var(--border)' }}>
+  <div className="section-title">
+    <h2>How it works</h2>
+    <p style={{ color: 'var(--text-muted)' }}>Four steps to secure, trustless freelance collaboration.</p>
+  </div>
+
+  <div className="steps-track">
+    <div className="steps-line" />
+    <motion.div
+      className="steps-grid"
+      variants={stagger}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.3 }}
+    >
+      {steps.map(s => (
+        <motion.div className="step-card" key={s.num} variants={fadeUp}>
+          <div className="step-number">{s.num}</div>
+          <h3 style={{ marginBottom: 8 }}>{s.title}</h3>
+          <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{s.desc}</p>
+        </motion.div>
+      ))}
+    </motion.div>
+  </div>
+</section>
 
       {/* Bottom CTA */}
       <section style={{ padding: '100px 24px', textAlign: 'center', borderTop: '1px solid var(--border)', background: 'radial-gradient(circle at center, rgba(79,216,206,0.05) 0%, transparent 70%)' }}>
