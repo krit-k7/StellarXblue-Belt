@@ -106,7 +106,7 @@ Every one of these transitions emits an on-chain event, so the frontend (and any
 <a name="screenshots"></a>
 ## 🖼️ Screenshots
 
-<img width="1920" height="1080" alt="TrustWork app screenshot" src="https://github.com/user-attachments/assets/b5e92004-0e24-47e2-8443-e66827165f26" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1592d9cb-e47e-47de-a091-5a84972fc915" />
 
 <img width="1536" height="1024" alt="TrustWork app screenshot" src="https://github.com/user-attachments/assets/0360b9be-b9bd-4af6-9d37-f9d3a23bef9a" />
 
