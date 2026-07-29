@@ -401,7 +401,7 @@ StellarXblue-Belt/
 <a name="security"></a>
 ## 🔒 Security
 
-TrustWork follows a client-side-signing, non-custodial security model — the app itself never has access to funds or private keys.
+TrustWork follows a non-custodial, client-side signing architecture, ensuring that private keys and funds always remain under the user's control. The platform never stores or accesses sensitive wallet credentials.
 
 **→ [View Complete Security Checklist](./SECURITY_CHECKLIST.md)**
 
