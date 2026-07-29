@@ -112,6 +112,11 @@ Every one of these transitions emits an on-chain event, so the frontend (and any
 
 <img width="1536" height="1024" alt="TrustWork app screenshot" src="https://github.com/user-attachments/assets/13ccd109-0899-43a3-bf51-01b8c2d6b966" />
 
+## Mobile Responsive View
+
+<img width="852" height="1846" alt="image" src="https://github.com/user-attachments/assets/f6b936e0-1aac-4faa-a3ba-6a5e00e7e3e0" />
+
+
 ---
 
 <a name="architecture"></a>
@@ -276,6 +281,14 @@ Every outcome emits a `resolved` event.
 - **Real-time Chat** — Each contract gets its own private workspace with file sharing, so deliverables and discussion stay attached to the exact engagement they belong to.
 - **Freighter Wallet Integration** — Wallet connection, session persistence, and transaction signing are all handled through Freighter, so private keys never touch the TrustWork frontend or servers.
 - **Zero-Error UX** — Raw Soroban/RPC error codes are translated into plain-language messages so users aren't staring at a stack trace when a transaction fails.
+
+| Feature | Status |
+|---------|--------|
+| 🌙 Dark Mode | ✅ |
+| ☀️ Light Mode | ✅ |
+| 📱 Responsive | ✅ |
+| ⚡ Fast Performance | ✅ | 
+
 
 ---
 
