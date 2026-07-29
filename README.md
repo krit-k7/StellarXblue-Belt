@@ -112,11 +112,6 @@ Every one of these transitions emits an on-chain event, so the frontend (and any
 
 <img width="1536" height="1024" alt="TrustWork app screenshot" src="https://github.com/user-attachments/assets/13ccd109-0899-43a3-bf51-01b8c2d6b966" />
 
-## Mobile Responsive View
-
-<img width="852" height="1846" alt="image" src="https://github.com/user-attachments/assets/f6b936e0-1aac-4faa-a3ba-6a5e00e7e3e0" />
-
-
 ---
 
 <a name="architecture"></a>
