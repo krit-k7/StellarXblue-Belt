@@ -1,23 +1,11 @@
 import { useState, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { fetchPlatformMetrics, getLocalMetrics } from '../utils/analytics'
 import { runSecurityChecklist, getSecurityScore } from '../utils/security'
 import { generateMonitoringReport, getPerformanceStats, getUptime } from '../utils/monitoring'
 import { RPC_URL, CONTRACT_ID } from '../utils/stellar'
 import { formatXLM } from '../utils/contract'
-import { BoltIcon, ShieldCheckIcon, HistoryIcon, PackageIcon } from '../components/icons'
 
 const REFRESH_INTERVAL = 30000
-
-const container = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.05 } }
-}
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 }
-}
 
 export default function MetricsDashboard({ contracts, wallet }) {
   const [platformMetrics, setPlatformMetrics] = useState(null)
@@ -25,6 +13,7 @@ export default function MetricsDashboard({ contracts, wallet }) {
   const [healthReport, setHealthReport]       = useState(null)
   const [securityResults, setSecurityResults] = useState([])
   const [securityScore, setSecurityScore]     = useState(0)
+  const [perfStats, setPerfStats]             = useState(null)
   const [uptime, setUptime]                   = useState(null)
   const [loading, setLoading]                 = useState(true)
   const [lastRefresh, setLastRefresh]         = useState(null)
@@ -42,6 +31,7 @@ export default function MetricsDashboard({ contracts, wallet }) {
       setLocalMetrics(getLocalMetrics(contracts, wallet))
       setSecurityResults(runSecurityChecklist())
       setSecurityScore(getSecurityScore())
+      setPerfStats(getPerformanceStats())
       setUptime(getUptime())
       setLastRefresh(new Date())
     } catch (err) {
@@ -74,148 +64,178 @@ export default function MetricsDashboard({ contracts, wallet }) {
   }
 
   return (
-    <motion.div 
-      className="page"
-      initial="hidden"
-      animate="show"
-      variants={container}
-    >
-      {/* Header */}
-      <motion.div className="flex-between mb-32" variants={item}>
+    <div className="page">
+      <div className="flex-between mb-48">
         <div>
-          <h2 className="page-title" style={{ fontSize: '2.5rem', fontWeight: 800 }}>Platform Metrics</h2>
-          <p className="page-subtitle">
-            Real-time analytics and system health monitoring
-            {lastRefresh && (
-              <span style={{ marginLeft: 12, fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                Updated: {lastRefresh.toLocaleTimeString()}
-              </span>
-            )}
-          </p>
+          <h2 className="page-title italic-serif">Network Metrics</h2>
+          <p className="page-subtitle">Real-time Soroban platform analytics.</p>
         </div>
-        <motion.button 
-          className="btn btn-outline btn-sm" 
-          onClick={refresh} 
-          disabled={loading}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          style={{ borderRadius: '10px' }}
-        >
-          {loading ? 'Refreshing...' : 'Refresh Data'}
-        </motion.button>
-      </motion.div>
-
-      {/* System Status */}
-      <motion.div 
-        variants={item}
-        style={{
-          background: 'var(--bg-card)',
-          border: `1px solid ${statusColor[overall]}33`,
-          borderRadius: 'var(--radius)',
-          padding: '24px',
-          marginBottom: 32,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          backdropFilter: 'blur(10px)'
-        }}
-      >
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          {lastRefresh && (
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '600' }}>
+              Updated {lastRefresh.toLocaleTimeString()}
+            </span>
+          )}
+          <button className="btn btn-secondary btn-sm" onClick={refresh} disabled={loading}>
+            {loading ? 'Refreshing...' : '🔄 Sync'}
+          </button>
+        </div>
+      </div>
+
+      {/* System Status Banner */}
+      <div className="card" style={{
+        background: 'var(--bg-sunken)',
+        border: `1px solid ${statusColor[overall]}44`,
+        padding: '24px 32px',
+        marginBottom: 48,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: 24,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
           <div style={{ 
-            width: 48, height: 48, borderRadius: '50%', 
-            background: `${statusColor[overall]}22`, 
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: statusColor[overall], fontSize: '1.5rem'
+            width: 64, height: 64, borderRadius: 'var(--radius)', 
+            background: `${statusColor[overall]}11`, border: `1px solid ${statusColor[overall]}44`,
+            display: 'flex', alignItems: 'center', justify_content: 'center',
+            fontSize: '2rem'
           }}>
-            {overall === 'healthy' ? '✓' : '!'}
+            {overall === 'healthy' ? '✅' : overall === 'degraded' ? '⚠️' : '❌'}
           </div>
           <div>
-            <div style={{ fontWeight: 800, color: statusColor[overall], fontSize: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <div style={{ fontWeight: 800, color: statusColor[overall], fontSize: '1.25rem', textTransform: 'capitalize' }}>
               System {overall}
             </div>
-            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-              Uptime: {uptime?.formatted || '—'} · Health Score: {healthReport?.score ?? '—'}%
+            <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: 4 }}>
+              Score: {healthReport?.score ?? '—'}% · Uptime: {uptime?.formatted || '—'}
             </div>
           </div>
         </div>
-        <div style={{ display: 'flex', gap: 12 }}>
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
           <ServiceBadge label="Stellar RPC" status={health.rpc?.healthy} />
-          <ServiceBadge label="Smart Contract" status={!!CONTRACT_ID} />
+          <ServiceBadge label="Database" status={health.supabase?.healthy !== false} />
+          <ServiceBadge label="Contract" status={!!CONTRACT_ID} />
         </div>
-      </motion.div>
+      </div>
 
       {/* Tabs */}
-      <motion.div className="tabs" variants={item} style={{ marginBottom: 32, padding: '6px', borderRadius: '14px' }}>
-        {['overview', 'contracts', 'security'].map(tab => (
+      <div className="tabs mb-32">
+        {['overview', 'users', 'contracts', 'security'].map(tab => (
           <button
             key={tab}
             className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
             onClick={() => setActiveTab(tab)}
-            style={{ borderRadius: '10px', textTransform: 'capitalize', padding: '10px 24px' }}
           >
-            {tab}
+            {tab.charAt(0).toUpperCase() + tab.slice(1)}
           </button>
         ))}
-      </motion.div>
+      </div>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeTab}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.2 }}
-        >
-          {activeTab === 'overview' && (
-            <div className="stats-grid">
-              <MetricCard label="Total Users" value={platformMetrics?.totalUsers ?? '—'} icon={<BoltIcon />} color="var(--accent)" />
-              <MetricCard label="Total Volume" value={local.totalVolume?.toLocaleString() ?? '—'} sub="XLM Escrowed" icon={<PackageIcon />} color="var(--green)" />
-              <MetricCard label="Contracts" value={local.totalContracts ?? '—'} icon={<HistoryIcon />} color="var(--purple)" />
-              <MetricCard label="Success Rate" value={`${local.successRate ?? 0}%`} icon={<ShieldCheckIcon />} color="var(--green)" />
+      {activeTab === 'overview' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <div className="stats-grid">
+            <MetricCard label="Total Wallets" value={platformMetrics?.totalUsers ?? '—'} sub="Unique users" color="var(--accent)" icon="👥" />
+            <MetricCard label="Active (7d)" value={platformMetrics?.activeUsers ?? '—'} sub="Last 7 days" color="var(--green)" icon="🟢" />
+            <MetricCard label="Contracts" value={platformMetrics?.contractsCreated ?? local.totalContracts ?? '—'} sub="Total deployed" color="var(--purple)" icon="📋" />
+            <MetricCard label="Volume" value={platformMetrics?.totalVolume ? `${Number(platformMetrics.totalVolume).toLocaleString()}` : '—'} sub="XLM Locked" color="var(--yellow)" icon="💰" />
+          </div>
+
+          <div className="card">
+            <h3 className="mb-24">Network Performance</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 24 }}>
+              <MiniStat label="RPC Latency" value={health.rpc?.latency ? `${health.rpc.latency}ms` : '—'} />
+              <MiniStat label="DB Latency" value={health.supabase?.latency ? `${health.supabase.latency}ms` : '—'} />
+              <MiniStat label="Uptime" value={uptime?.formatted || '—'} />
+              <MiniStat label="Health Score" value={`${healthReport?.score ?? 0}%`} />
             </div>
-          )}
+          </div>
+        </div>
+      )}
 
-          {activeTab === 'security' && (
-            <div className="card" style={{ padding: '32px' }}>
-              <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-                <div style={{ fontSize: '4rem', fontWeight: 800, color: 'var(--green)' }}>{securityScore}%</div>
-                <div style={{ color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Security Score</div>
-              </div>
-              <div style={{ display: 'grid', gap: '12px' }}>
-                {securityResults.map(res => (
-                  <div key={res.id} style={{ display: 'flex', justifyContent: 'space-between', padding: '16px', background: 'var(--overlay-1)', borderRadius: '12px', border: '1px solid var(--border)' }}>
-                    <span style={{ fontWeight: 600 }}>{res.label}</span>
-                    <span style={{ color: res.passed ? 'var(--green)' : 'var(--red)' }}>{res.passed ? 'PASSED' : 'FAILED'}</span>
+      {activeTab === 'security' && (
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: 32 }}>
+          <div className="card" style={{ textAlign: 'center', padding: '60px 24px' }}>
+            <div style={{ 
+              fontSize: '4rem', fontWeight: 900, 
+              color: securityScore >= 80 ? 'var(--green)' : securityScore >= 60 ? 'var(--yellow)' : 'var(--red)' 
+            }}>
+              {securityScore}%
+            </div>
+            <div style={{ fontWeight: 800, color: 'var(--text-heading)', fontSize: '1.25rem', marginTop: 12 }}>
+              Security Index
+            </div>
+            <p style={{ color: 'var(--text-muted)', marginTop: 8 }}>
+              {securityScore >= 80 ? 'Platform is highly secure.' : 'Security improvements recommended.'}
+            </p>
+          </div>
+
+          <div className="card">
+            <h3 className="mb-24">Security Checklist</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {securityResults.map(item => (
+                <div key={item.id} style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  padding: '16px 20px', background: 'var(--bg-sunken)',
+                  borderRadius: 'var(--radius)', border: '1px solid var(--border-strong)',
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                    <span style={{ fontSize: '1.2rem' }}>{item.passed ? '✅' : '❌'}</span>
+                    <div>
+                      <div style={{ fontWeight: 700, color: 'var(--text-heading)', fontSize: '0.95rem' }}>{item.label}</div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: 2 }}>{item.severity}</div>
+                    </div>
                   </div>
-                ))}
-              </div>
+                  <span style={{
+                    fontSize: '0.75rem', fontWeight: 800, padding: '4px 12px',
+                    borderRadius: 'var(--radius-pill)',
+                    background: item.passed ? 'var(--green-bg)' : 'var(--red-bg)',
+                    color: item.passed ? 'var(--green)' : 'var(--red)',
+                  }}>
+                    {item.passed ? 'PASSED' : 'FAILED'}
+                  </span>
+                </div>
+              ))}
             </div>
-          )}
-        </motion.div>
-      </AnimatePresence>
-    </motion.div>
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
 
 function ServiceBadge({ label, status }) {
   return (
     <div style={{ 
-      padding: '6px 12px', borderRadius: '8px', background: 'var(--overlay-1)', 
-      border: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 8 
+      display: 'flex', alignItems: 'center', gap: 8, 
+      background: 'var(--overlay-1)', border: '1px solid var(--border-strong)',
+      padding: '6px 14px', borderRadius: 'var(--radius-pill)',
+      fontSize: '0.8rem', fontWeight: '700'
     }}>
       <div style={{ width: 8, height: 8, borderRadius: '50%', background: status ? 'var(--green)' : 'var(--red)' }} />
-      <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-heading)' }}>{label}</span>
+      {label}
     </div>
   )
 }
 
-function MetricCard({ label, value, sub, icon, color }) {
+function MetricCard({ label, value, sub, color, icon }) {
   return (
-    <div className="card" style={{ padding: '32px', position: 'relative', overflow: 'hidden' }}>
-      <div style={{ position: 'absolute', top: '-10px', right: '-10px', opacity: 0.05, fontSize: '5rem', color }}>{icon}</div>
-      <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '12px' }}>{label}</div>
-      <div style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--text-heading)', marginBottom: '4px' }}>{value}</div>
-      {sub && <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{sub}</div>}
+    <div className="card stat-card">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
+        <div style={{ fontSize: '1.5rem' }}>{icon}</div>
+        <div style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase' }}>{label}</div>
+      </div>
+      <div style={{ fontSize: '2.2rem', fontWeight: 800, color: color || 'var(--text-heading)', letterSpacing: '-0.02em' }}>{value}</div>
+      <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: 4, fontWeight: '600' }}>{sub}</div>
+    </div>
+  )
+}
+
+function MiniStat({ label, value }) {
+  return (
+    <div style={{ padding: '16px', background: 'var(--overlay-1)', borderRadius: 'var(--radius)', border: '1px solid var(--border-strong)' }}>
+      <div style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: 4 }}>{label}</div>
+      <div style={{ fontSize: '1.1rem', fontWeight: '800', color: 'var(--text-heading)' }}>{value}</div>
     </div>
   )
 }
