@@ -1,18 +1,7 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { truncateAddr, formatXLM, formatDate, CONTRACT_STATES, applyResolve } from '../utils/contract'
-import { sorobanResolveDispute } from '../utils/stellar'
+import { sorobanResolveDispute, NETWORK } from '../utils/stellar'
 import { ScaleIcon, ClipboardIcon } from '../components/icons'
-
-const container = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.05 } }
-}
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 }
-}
 
 export default function Arbitration({ contracts, onUpdate, wallet, openTx, txSubmitting, txSuccess, txError }) {
   const disputed = contracts.filter(c => c.status === CONTRACT_STATES.DISPUTED)
@@ -39,120 +28,169 @@ export default function Arbitration({ contracts, onUpdate, wallet, openTx, txSub
     }
   }
 
-  return (
-    <motion.div 
-      className="page"
-      initial="hidden"
-      animate="show"
-      variants={container}
-    >
-      <motion.div className="mb-32" variants={item}>
-        <h2 className="page-title" style={{ fontSize: '2.5rem', fontWeight: 800 }}>Arbitration Center</h2>
-        <p className="page-subtitle">Fair resolution for disputed Stellar escrow contracts</p>
-      </motion.div>
-
-      <motion.div className="tabs mb-32" variants={item} style={{ padding: '6px', borderRadius: '14px' }}>
-        <button 
-          className={`tab-btn ${tab === 'pending' ? 'active' : ''}`} 
-          onClick={() => setTab('pending')}
-          style={{ borderRadius: '10px', padding: '10px 24px' }}
-        >
-          Pending Cases {disputed.length > 0 && <span style={{ marginLeft: 8, background: 'var(--red)', color: '#fff', borderRadius: '10px', padding: '2px 8px', fontSize: '0.7rem' }}>{disputed.length}</span>}
-        </button>
-        <button 
-          className={`tab-btn ${tab === 'resolved' ? 'active' : ''}`} 
-          onClick={() => setTab('resolved')}
-          style={{ borderRadius: '10px', padding: '10px 24px' }}
-        >
-          Resolution History
-        </button>
-      </motion.div>
-
-      <AnimatePresence mode="wait">
-        {tab === 'pending' && (
-          <motion.div 
-            key="pending"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
-            className="arb-grid"
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))', gap: '24px' }}
-          >
-            {disputed.length === 0 ? (
-              <div className="empty-state">
-                <div className="empty-icon" style={{ background: 'var(--overlay-1)', border: '1px solid var(--border-strong)', color: 'var(--accent)' }}>
-                  <ScaleIcon width={32} height={32} />
-                </div>
-                <div className="empty-title">System Healthy</div>
-                <p className="empty-desc">No active disputes require arbitration at this time.</p>
-              </div>
-            ) : (
-              disputed.map(c => (
-                <motion.div className="card" key={c.id} whileHover={{ y: -4 }}>
-                  <div className="flex-between mb-24">
-                    <div>
-                      <div style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--text-heading)' }}>{c.title}</div>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-muted)' }}>{c.id}</div>
-                    </div>
-                    <span className="badge badge-disputed">DISPUTED</span>
-                  </div>
-
-                  <div style={{ background: 'var(--overlay-1)', borderRadius: '12px', padding: '16px', marginBottom: '20px', border: '1px solid var(--border)' }}>
-                    <div style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '8px' }}>Case Summary</div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                      <span style={{ fontSize: '0.85rem' }}>Amount</span>
-                      <span style={{ fontWeight: 700, color: 'var(--accent)' }}>{formatXLM(c.amount)} XLM</span>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span style={{ fontSize: '0.85rem' }}>Reason</span>
-                      <span style={{ fontSize: '0.85rem', color: 'var(--text-heading)', textAlign: 'right', maxWidth: '60%' }}>{c.disputeReason}</span>
-                    </div>
-                  </div>
-
-                  <motion.button 
-                    className="btn btn-primary btn-full" 
-                    onClick={() => setSelected(c)}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    style={{ borderRadius: '12px' }}
-                  >
-                    ⚖️ Resolve Case
-                  </motion.button>
-                </motion.div>
-              ))
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {selected && (
-          <div className="modal-overlay" onClick={() => setSelected(null)}>
-            <motion.div 
-              className="modal" 
-              onClick={e => e.stopPropagation()}
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-            >
-              <h3 style={{ marginBottom: '16px' }}>Resolution for {selected.title}</h3>
-              <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>Choose the final allocation of the escrow funds.</p>
-              
-              <div style={{ display: 'grid', gap: '12px' }}>
-                <button className="btn btn-primary btn-full" onClick={() => handleResolve(selected, 'freelancer')} style={{ background: 'var(--green)', color: '#fff' }}>
-                  Release to Freelancer (100%)
-                </button>
-                <button className="btn btn-primary btn-full" onClick={() => handleResolve(selected, 'client')} style={{ background: 'var(--red)', color: '#fff' }}>
-                  Refund to Client (100%)
-                </button>
-                <button className="btn btn-outline btn-full" onClick={() => handleResolve(selected, 'split')}>
-                  Split 50/50
-                </button>
-                <button className="btn btn-secondary btn-full" onClick={() => setSelected(null)}>Cancel</button>
-              </div>
-            </motion.div>
+  const ResolutionModal = ({ contract }) => (
+    <div className="modal-overlay" onClick={() => setSelected(null)}>
+      <div className="modal" onClick={e => e.stopPropagation()} style={{ maxWidth: '600px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 32 }}>
+          <div style={{ width: 56, height: 56, borderRadius: '16px', background: 'var(--grad-primary)', display: 'flex', alignItems: 'center', justify_content: 'center', color: 'var(--accent-ink)' }}>
+            <ScaleIcon width={28} height={28} />
           </div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+          <div>
+            <h2 style={{ fontSize: '1.5rem' }}>Resolve Dispute</h2>
+            <p style={{ color: 'var(--text-muted)', marginTop: 4 }}>Contract ID: <span className="mono">{contract.id}</span></p>
+          </div>
+        </div>
+
+        <div className="card mb-24" style={{ background: 'var(--bg-sunken)', border: '1px solid var(--border-strong)' }}>
+          <div style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: 12 }}>Dispute Reason</div>
+          <p style={{ fontSize: '1rem', color: 'var(--text-heading)', lineHeight: 1.6 }}>{contract.disputeReason}</p>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', gap: 20, marginBottom: 32, textAlign: 'center' }}>
+          <div className="card" style={{ padding: '16px', background: 'var(--overlay-1)' }}>
+            <div style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--text-muted)', marginBottom: 4 }}>CLIENT</div>
+            <div className="mono" style={{ fontSize: '0.85rem', color: 'var(--text-heading)' }}>{truncateAddr(contract.client)}</div>
+          </div>
+          <div style={{ fontWeight: '800', color: 'var(--text-muted)', fontSize: '0.8rem' }}>VS</div>
+          <div className="card" style={{ padding: '16px', background: 'var(--overlay-1)' }}>
+            <div style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--text-muted)', marginBottom: 4 }}>FREELANCER</div>
+            <div className="mono" style={{ fontSize: '0.85rem', color: 'var(--text-heading)' }}>{truncateAddr(contract.freelancer)}</div>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <button
+            className="btn btn-primary btn-full btn-lg"
+            onClick={() => handleResolve(contract, 'freelancer')}
+            disabled={!!loading}
+            style={{ background: 'var(--green)', color: '#000' }}
+          >
+            {loading === contract.id + 'freelancer' ? 'Processing...' : `Release to Freelancer (${formatXLM(contract.amount)})`}
+          </button>
+          <button
+            className="btn btn-primary btn-full btn-lg"
+            onClick={() => handleResolve(contract, 'client')}
+            disabled={!!loading}
+            style={{ background: 'var(--red)', color: '#fff' }}
+          >
+            {loading === contract.id + 'client' ? 'Processing...' : `Refund to Client (${formatXLM(contract.amount)})`}
+          </button>
+          <button
+            className="btn btn-outline btn-full btn-lg"
+            onClick={() => handleResolve(contract, 'split')}
+            disabled={!!loading}
+          >
+            {loading === contract.id + 'split' ? 'Processing...' : `Split 50/50 Resolution`}
+          </button>
+          <button className="btn btn-secondary btn-full" onClick={() => setSelected(null)} style={{ marginTop: 8 }}>
+            Cancel & Close
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+
+  return (
+    <div className="page">
+      <div className="flex-between mb-48">
+        <div>
+          <h2 className="page-title italic-serif">Arbitration Court</h2>
+          <p className="page-subtitle">Fair resolution for trustless contracts.</p>
+        </div>
+        <div className="tabs">
+          <button className={`tab-btn ${tab === 'pending' ? 'active' : ''}`} onClick={() => setTab('pending')}>
+            Pending Cases
+            {disputed.length > 0 && <span style={{ marginLeft: 8, background: 'var(--red)', color: '#fff', borderRadius: 'var(--radius-pill)', padding: '2px 8px', fontSize: '0.75rem', fontWeight: '800' }}>{disputed.length}</span>}
+          </button>
+          <button className={`tab-btn ${tab === 'resolved' ? 'active' : ''}`} onClick={() => setTab('resolved')}>
+            Resolution History
+          </button>
+        </div>
+      </div>
+
+      {tab === 'pending' && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: 24 }}>
+          {disputed.length === 0 ? (
+            <div className="card" style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '100px 24px' }}>
+              <div style={{ fontSize: '3.5rem', marginBottom: 20 }}>⚖️</div>
+              <h3>Clear Docket</h3>
+              <p style={{ color: 'var(--text-muted)', marginTop: 8 }}>All contracts are running smoothly across the network.</p>
+            </div>
+          ) : (
+            disputed.map(c => (
+              <div className="card" key={c.id} style={{ display: 'flex', flexDirection: 'column' }}>
+                <div className="flex-between mb-24">
+                  <div>
+                    <div style={{ fontWeight: 800, color: 'var(--text-heading)', fontSize: '1.1rem' }}>{c.title}</div>
+                    <div className="mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: 4 }}>{c.id}</div>
+                  </div>
+                  <span className="badge badge-disputed">DISPUTED</span>
+                </div>
+
+                <div className="card mb-24" style={{ background: 'var(--bg-sunken)', border: '1px solid var(--border-strong)', padding: '16px' }}>
+                  <div style={{ fontSize: '0.7rem', fontWeight: '800', color: 'var(--red)', textTransform: 'uppercase', marginBottom: 8 }}>Case Reason</div>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--text)', lineHeight: 1.6 }}>{c.disputeReason}</p>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 24 }}>
+                  <div className="flex-between">
+                    <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: '600' }}>At Stake</span>
+                    <span style={{ color: 'var(--accent)', fontWeight: '800' }}>{formatXLM(c.amount)}</span>
+                  </div>
+                  <div className="flex-between">
+                    <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: '600' }}>Disputed On</span>
+                    <span style={{ color: 'var(--text-heading)', fontWeight: '700' }}>{formatDate(c.disputedAt)}</span>
+                  </div>
+                </div>
+
+                <button className="btn btn-primary btn-full" onClick={() => setSelected(c)} style={{ marginTop: 'auto' }}>
+                  ⚖️ Open Case for Resolution
+                </button>
+              </div>
+            ))
+          )}
+        </div>
+      )}
+
+      {tab === 'resolved' && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: 24 }}>
+          {resolved.length === 0 ? (
+            <div className="card" style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '100px 24px' }}>
+              <div style={{ fontSize: '3.5rem', marginBottom: 20 }}>📜</div>
+              <h3>No History</h3>
+              <p style={{ color: 'var(--text-muted)', marginTop: 8 }}>No disputes have been resolved yet.</p>
+            </div>
+          ) : (
+            resolved.map(c => (
+              <div className="card" key={c.id}>
+                <div className="flex-between mb-24">
+                  <div>
+                    <div style={{ fontWeight: 800, color: 'var(--text-heading)', fontSize: '1.1rem' }}>{c.title}</div>
+                    <div className="mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: 4 }}>{c.id}</div>
+                  </div>
+                  <span className={`badge badge-${c.status.toLowerCase()}`}>{c.status}</span>
+                </div>
+                
+                <div className="card mb-24" style={{ background: 'var(--bg-sunken)', border: '1px solid var(--border-strong)', padding: '16px' }}>
+                  <div style={{ fontSize: '0.7rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: 8 }}>Resolution</div>
+                  <div style={{ fontWeight: '700', color: 'var(--text-heading)', fontSize: '1rem' }}>
+                    {c.resolution === 'freelancer' ? '✅ Released to Freelancer'
+                      : c.resolution === 'client' ? '↩️ Refunded to Client'
+                      : '⚡ Split 50/50'}
+                  </div>
+                </div>
+
+                <div className="flex-between" style={{ fontSize: '0.85rem' }}>
+                  <span style={{ color: 'var(--text-muted)', fontWeight: '600' }}>Resolved On</span>
+                  <span style={{ color: 'var(--text-heading)', fontWeight: '700' }}>{formatDate(c.resolvedAt)}</span>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      )}
+
+      {selected && <ResolutionModal contract={selected} />}
+    </div>
   )
 }
