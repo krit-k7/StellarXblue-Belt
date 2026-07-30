@@ -1,6 +1,8 @@
 // =============================================================================
-// icons.jsx — Redesigned Premium Icon Set
-// Consistent 2.0 stroke weight, currentColor-based.
+// icons.jsx
+// Hand-drawn line icon set for TrustWork — replaces emoji throughout the UI.
+// Consistent 1.75 stroke weight, currentColor-based so icons inherit theme
+// colors (accent teal, violet, etc). No external icon library dependency.
 // =============================================================================
 
 const base = {
@@ -9,35 +11,40 @@ const base = {
   viewBox: '0 0 24 24',
   fill: 'none',
   stroke: 'currentColor',
-  strokeWidth: 2,
+  strokeWidth: 1.75,
   strokeLinecap: 'round',
   strokeLinejoin: 'round',
 }
 
+// ── Brand mark ───────────────────────────────────────────────────────────
+// Shield + check: reads instantly as "verified / secured" — fits an escrow
+// product far better than a generic lightning bolt.
 export function LogoMark({ size = 32, ...props }) {
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" {...props}>
       <defs>
-        <linearGradient id="tw-logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#4fd8ce" />
-          <stop offset="100%" stopColor="#9b9ff0" />
+        <linearGradient id="tw-logo-grad" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#4fd8ce" />
+          <stop offset="1" stopColor="#9b9ff0" />
         </linearGradient>
       </defs>
-      <rect x="0" y="0" width="32" height="32" rx="10" fill="url(#tw-logo-grad)" />
+      <rect x="1" y="1" width="30" height="30" rx="9" fill="url(#tw-logo-grad)" />
       <path
-        d="M16 8 L22 11 V17 C22 21 19 24 16 25 C13 24 10 21 10 17 V11 L16 8 Z"
-        fill="none" stroke="#020617" strokeWidth="2" strokeLinejoin="round"
+        d="M16 6.5 24 9.5v6.2c0 5-3.4 8.9-8 10.3-4.6-1.4-8-5.3-8-10.3V9.5l8-3Z"
+        fill="none" stroke="#020617" strokeWidth="1.8" strokeLinejoin="round"
       />
-      <path d="M13 16 L15 18 L19 13" fill="none" stroke="#020617" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12.3 16.2l2.6 2.6 5-5.6" fill="none" stroke="#020617" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
 
+// ── Feature icons (Home page) ───────────────────────────────────────────
 export function LockIcon(props) {
   return (
     <svg {...base} {...props}>
-      <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      <rect x="5" y="11" width="14" height="9" rx="2" />
+      <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+      <circle cx="12" cy="15.5" r="1.3" fill="currentColor" stroke="none" />
     </svg>
   )
 }
@@ -45,7 +52,7 @@ export function LockIcon(props) {
 export function BoltIcon(props) {
   return (
     <svg {...base} {...props}>
-      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+      <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" />
     </svg>
   )
 }
@@ -53,31 +60,33 @@ export function BoltIcon(props) {
 export function ScaleIcon(props) {
   return (
     <svg {...base} {...props}>
-      <path d="M12 3v3" />
-      <path d="M19 6.6L22 9" />
-      <path d="M5 6.6L2 9" />
-      <path d="M2 21h20" />
-      <path d="M12 21V6" />
-      <path d="M7 12l-3-3 3-3" />
-      <path d="M17 12l3-3-3-3" />
+      <path d="M12 3v18" />
+      <path d="M7 7h10" />
+      <path d="M5 7l-3 6a3.5 3.5 0 0 0 7 0L5 7Z" />
+      <path d="M19 7l-3 6a3.5 3.5 0 0 0 7 0l-4-6Z" />
+      <path d="M8 21h8" />
     </svg>
   )
 }
 
+// Auto-release: a clock face reads cleaner than a robot emoji and still
+// communicates "this happens automatically, on a timer".
 export function AutoReleaseIcon(props) {
   return (
     <svg {...base} {...props}>
-      <circle cx="12" cy="12" r="10" />
-      <polyline points="12 6 12 12 16 14" />
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 7.5V12l3 2" />
     </svg>
   )
 }
 
+// ── Contract template icons ─────────────────────────────────────────────
 export function LaptopIcon(props) {
   return (
     <svg {...base} {...props}>
-      <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-      <line x1="2" y1="20" x2="22" y2="20" />
+      <rect x="3" y="4" width="18" height="12" rx="1.5" />
+      <path d="M2 20h20" />
+      <path d="M8.5 20l0.8-4h5.4l0.8 4" />
     </svg>
   )
 }
@@ -85,8 +94,8 @@ export function LaptopIcon(props) {
 export function FlagIcon(props) {
   return (
     <svg {...base} {...props}>
-      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
-      <line x1="4" y1="22" x2="4" y2="15" />
+      <path d="M5 3v18" />
+      <path d="M5 4.5h11l-2.5 3.75L16 12H5" />
     </svg>
   )
 }
@@ -94,8 +103,8 @@ export function FlagIcon(props) {
 export function SearchIcon(props) {
   return (
     <svg {...base} {...props}>
-      <circle cx="11" cy="11" r="8" />
-      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      <circle cx="11" cy="11" r="6.5" />
+      <path d="M20 20l-4.4-4.4" />
     </svg>
   )
 }
@@ -104,18 +113,18 @@ export function SettingsIcon(props) {
   return (
     <svg {...base} {...props}>
       <circle cx="12" cy="12" r="3" />
-      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+      <path d="M12 2.5v3M12 18.5v3M5.1 5.1l2.1 2.1M16.8 16.8l2.1 2.1M2.5 12h3M18.5 12h3M5.1 18.9l2.1-2.1M16.8 7.2l2.1-2.1" />
     </svg>
   )
 }
 
+// ── Empty state / misc icons ────────────────────────────────────────────
 export function PackageIcon(props) {
   return (
     <svg {...base} {...props}>
-      <line x1="16.5" y1="9.4" x2="7.5" y2="4.21" />
-      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-      <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-      <line x1="12" y1="22.08" x2="12" y2="12" />
+      <path d="M21 8l-9-5-9 5 9 5 9-5Z" />
+      <path d="M3 8v8l9 5 9-5V8" />
+      <path d="M12 13v8" />
     </svg>
   )
 }
@@ -123,24 +132,19 @@ export function PackageIcon(props) {
 export function ClipboardIcon(props) {
   return (
     <svg {...base} {...props}>
-      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-      <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+      <rect x="6" y="4" width="12" height="17" rx="1.5" />
+      <rect x="9" y="2.3" width="6" height="3" rx="1" />
+      <path d="M9 11h6M9 15h6" />
     </svg>
   )
 }
 
+// ── Theme toggle icons ───────────────────────────────────────────────────
 export function SunIcon(props) {
   return (
     <svg {...base} {...props}>
-      <circle cx="12" cy="12" r="5" />
-      <line x1="12" y1="1" x2="12" y2="3" />
-      <line x1="12" y1="21" x2="12" y2="23" />
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-      <line x1="1" y1="12" x2="3" y2="12" />
-      <line x1="21" y1="12" x2="23" y2="12" />
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+      <circle cx="12" cy="12" r="4.2" />
+      <path d="M12 2.5v3M12 18.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2.5 12h3M18.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" />
     </svg>
   )
 }
@@ -148,11 +152,13 @@ export function SunIcon(props) {
 export function MoonIcon(props) {
   return (
     <svg {...base} {...props}>
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+      <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" />
     </svg>
   )
 }
 
+// Maps CONTRACT_TEMPLATES `icon` keys (see utils/contractTemplates.js) to
+// their corresponding component.
 export const TEMPLATE_ICONS = {
   laptop: LaptopIcon,
   flag: FlagIcon,
