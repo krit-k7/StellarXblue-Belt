@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import ActionPanel from '../components/ActionPanel'
 import ContractChat from '../components/ContractChat'
 import { useChat } from '../hooks/useChat'
@@ -10,12 +9,12 @@ import {
 } from '../utils/contract'
 import {
   sorobanSubmitWork, sorobanApprove, sorobanRaiseDispute,
-  sorobanClaimAfterDeadline, sorobanRefund, sorobanDeposit, 
-  EXPLORER_BASE, NETWORK, syncContractFromChain,
+  sorobanClaimAfterDeadline, sorobanRefund, EXPLORER_BASE, NETWORK,
+  syncContractFromChain,
 } from '../utils/stellar'
-import { PackageIcon, HistoryIcon, ShieldCheckIcon, ScaleIcon } from '../components/icons'
 
 const STATUS_STEPS = [CONTRACT_STATES.ACTIVE, CONTRACT_STATES.SUBMITTED, CONTRACT_STATES.COMPLETED]
+const TYPE_ICONS = { link: '🔗', repo: '📦', doc: '📄', figma: '🎨', video: '🎥', ipfs: '🌐', other: '📎' }
 
 export default function ContractDetail({ contract, wallet, onUpdate, setPage, openTx, txSubmitting, txSuccess, txError, defaultTab }) {
   const [activeTab, setActiveTab] = useState(defaultTab || 'overview')
@@ -106,6 +105,7 @@ export default function ContractDetail({ contract, wallet, onUpdate, setPage, op
     }
 
     onUpdate(updated)
+
     const chatEvents = {
       submit:  '📤 Freelancer submitted work. Client review period has started.',
       approve: '✅ Client approved the work. Payment released to freelancer.',
@@ -122,127 +122,292 @@ export default function ContractDetail({ contract, wallet, onUpdate, setPage, op
   const freelancerExplorerUrl = `${explorerBase}/account/${contract.freelancer}`
 
   return (
-    <motion.div 
-      className="page"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      {/* Header */}
-      <div className="detail-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '40px' }}>
+    <div className="page">
+      {/* ── Header ─────────────────────────────────────────────────────────── */}
+      <div className="flex-between mb-48" style={{ alignItems: 'flex-start' }}>
         <div>
-          <motion.button 
-            className="btn btn-outline btn-sm mb-16" 
-            onClick={() => setPage('dashboard')}
-            whileHover={{ x: -4 }}
-            style={{ borderRadius: '8px' }}
-          >
+          <button className="btn btn-secondary btn-sm mb-24" onClick={() => setPage('dashboard')}>
             ← Back to Dashboard
-          </motion.button>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '8px' }}>{contract.title}</h2>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--text-muted)' }}>{contract.id}</span>
-            <button 
-              onClick={() => navigator.clipboard.writeText(contract.id)}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--accent)' }}
+          </button>
+          <h2 className="page-title">{contract.title || 'Contract Detail'}</h2>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 8 }}>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--text-muted)', background: 'var(--bg-sunken)', padding: '4px 10px', borderRadius: '8px', border: '1px solid var(--border)' }}>
+              {contract.id}
+            </span>
+            <button
+              style={{ background: 'var(--overlay-1)', border: '1px solid var(--border)', borderRadius: '8px', cursor: 'pointer', color: 'var(--text-muted)', fontSize: '0.8rem', padding: '4px 8px' }}
+              onClick={() => navigator.clipboard?.writeText(contract.id)}
             >
-              Copy ID
+              Copy
             </button>
           </div>
         </div>
-        <div className={`badge badge-${contract.status.toLowerCase()}`} style={{ fontSize: '0.9rem', padding: '8px 20px', borderRadius: '12px' }}>
+        <span className={`badge badge-${contract.status.toLowerCase()}`} style={{ fontSize: '0.9rem', padding: '8px 20px' }}>
           {contract.status}
+        </span>
+      </div>
+
+      {/* ── Progress Steps ──────────────────────────────────────────────────── */}
+      {contract.status !== CONTRACT_STATES.DISPUTED && contract.status !== CONTRACT_STATES.REFUNDED && (
+        <div className="card mb-48" style={{ padding: '24px 40px', background: 'var(--bg-sunken)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', position: 'relative' }}>
+            {/* Line background */}
+            <div style={{ position: 'absolute', top: '20px', left: '10%', right: '10%', height: '2px', background: 'var(--border-strong)', zIndex: 0 }} />
+            
+            {STATUS_STEPS.map((s, i) => {
+              const isDone = i < stepIndex
+              const isCurrent = i === stepIndex
+              return (
+                <div key={s} style={{ position: 'relative', zIndex: 1, textAlign: 'center', width: '80px' }}>
+                  <div style={{ 
+                    width: '40px', height: '40px', borderRadius: '50%', margin: '0 auto 12px',
+                    background: isDone || isCurrent ? 'var(--grad-primary)' : 'var(--bg-card)',
+                    border: `2px solid ${isDone || isCurrent ? 'transparent' : 'var(--border-strong)'}`,
+                    color: isDone || isCurrent ? 'var(--accent-ink)' : 'var(--text-muted)',
+                    display: 'flex', alignItems: 'center', justify_content: 'center', fontWeight: '800'
+                  }}>
+                    {isDone ? '✓' : i + 1}
+                  </div>
+                  <div style={{ 
+                    fontSize: '0.8rem', fontWeight: '700', 
+                    color: isCurrent ? 'var(--text-heading)' : 'var(--text-muted)',
+                    textTransform: 'uppercase', letterSpacing: '0.05em'
+                  }}>
+                    {s.toLowerCase()}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Progress */}
-      <div style={{ display: 'flex', gap: '8px', marginBottom: '40px' }}>
-        {STATUS_STEPS.map((s, i) => (
-          <div key={s} style={{ flex: 1, height: '4px', background: i <= stepIndex ? 'var(--accent)' : 'var(--border)', borderRadius: '2px', transition: 'all 0.5s' }} />
-        ))}
-      </div>
+      {contract.status === CONTRACT_STATES.DISPUTED && (
+        <div className="card mb-48" style={{ background: 'var(--red-bg)', border: '1px solid var(--red)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <span style={{ fontSize: '2rem' }}>⚖️</span>
+            <div>
+              <div style={{ fontWeight: 800, color: 'var(--text-heading)', fontSize: '1.1rem' }}>Dispute in Progress</div>
+              <div style={{ fontSize: '0.95rem', color: 'var(--text)', marginTop: 4 }}>
+                Raised on {formatDate(contract.disputedAt)}: "{contract.disputeReason}"
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
-      {/* Tabs */}
-      <div className="tabs" style={{ marginBottom: '32px', padding: '6px', borderRadius: '14px' }}>
-        {['overview', 'chat', 'verify'].map(t => (
-          <button 
-            key={t} 
-            className={`tab-btn ${activeTab === t ? 'active' : ''}`} 
-            onClick={() => setActiveTab(t)}
-            style={{ borderRadius: '10px', textTransform: 'capitalize' }}
-          >
-            {t}
+      {/* ── Tabs ────────────────────────────────────────────────────────────── */}
+      <div className="tabs mb-32">
+        <button className={`tab-btn ${activeTab === 'overview' ? 'active' : ''}`} onClick={() => setActiveTab('overview')}>
+          Overview
+        </button>
+        {showDeliverables && (
+          <button className={`tab-btn ${activeTab === 'deliverables' ? 'active' : ''}`} onClick={() => setActiveTab('deliverables')}>
+            📦 Deliverables
+            {contract.deliverables?.length > 0 && (
+              <span style={{ marginLeft: 8, background: 'rgba(0,0,0,0.2)', borderRadius: 'var(--radius-pill)', padding: '2px 8px', fontSize: '0.75rem', fontWeight: '800' }}>
+                {(contract.deliverables?.length || 0) + (contract.uploadedFiles?.length || 0)}
+              </span>
+            )}
           </button>
-        ))}
+        )}
+        <button className={`tab-btn ${activeTab === 'chat' ? 'active' : ''}`} onClick={() => setActiveTab('chat')}>
+          💬 Workspace
+        </button>
+        <button className={`tab-btn ${activeTab === 'verify' ? 'active' : ''}`} onClick={() => setActiveTab('verify')}>
+          🔍 Verification
+        </button>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '32px' }}>
-        <div className="detail-content">
-          <AnimatePresence mode="wait">
-            {activeTab === 'overview' && (
-              <motion.div 
-                key="overview"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-              >
-                <div className="card" style={{ padding: '32px', marginBottom: '24px', background: 'rgba(59, 130, 246, 0.05)', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
-                  <div style={{ fontSize: '0.85rem', color: 'var(--accent)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px' }}>
-                    Escrow Amount
-                  </div>
-                  <div style={{ fontSize: '3.5rem', fontWeight: 800, color: 'var(--text-heading)', marginBottom: '4px' }}>
-                    {formatXLM(contract.amount)} <span style={{ fontSize: '1.5rem', color: 'var(--text-muted)' }}>XLM</span>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-                    <ShieldCheckIcon width={16} height={16} /> Secured by Soroban Smart Contract
-                  </div>
-                </div>
+      {/* ── TAB: Overview ───────────────────────────────────────────────────── */}
+      {activeTab === 'overview' && (
+        <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: 32 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+            <div className="escrow-visual">
+              <div className="escrow-amount">{formatXLM(contract.amount)}</div>
+              <div className="escrow-label">Funds Secured in Escrow</div>
+              <div className="escrow-locked">🔒 Verified Soroban Smart Contract</div>
+            </div>
 
-                <div className="card" style={{ padding: '32px' }}>
-                  <h3 style={{ marginBottom: '24px' }}>Contract Parameters</h3>
-                  <div style={{ display: 'grid', gap: '20px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span style={{ color: 'var(--text-muted)' }}>Client</span>
-                      <a href={clientExplorerUrl} target="_blank" className="mono" style={{ color: 'var(--accent)' }}>{truncateAddr(contract.client)}</a>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span style={{ color: 'var(--text-muted)' }}>Freelancer</span>
-                      <a href={freelancerExplorerUrl} target="_blank" className="mono" style={{ color: 'var(--accent)' }}>{truncateAddr(contract.freelancer)}</a>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span style={{ color: 'var(--text-muted)' }}>Deadline</span>
-                      <span style={{ color: isOverdue ? 'var(--red)' : 'var(--text-heading)', fontWeight: 600 }}>
-                        {formatDate(contract.deadline)} ({days}d remaining)
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
+            <div className="card">
+              <h3 className="mb-24">Contract Details</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                <DetailRow label="Client" value={truncateAddr(contract.client)} mono isUser={isClientSafe} url={clientExplorerUrl} />
+                <DetailRow label="Freelancer" value={truncateAddr(contract.freelancer)} mono isUser={isFreelancerSafe} url={freelancerExplorerUrl} />
+                <DetailRow label="Deadline" value={formatDate(contract.deadline)} warn={isOverdue} />
+                <DetailRow label="Review Period" value={`${contract.reviewPeriod || 7} Days`} />
+                <DetailRow label="Network" value={NETWORK.toUpperCase()} />
+              </div>
+            </div>
 
-            {activeTab === 'chat' && (
-              <motion.div 
-                key="chat"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                style={{ height: '600px' }}
-              >
-                <ContractChat contractId={contract.id} wallet={wallet} isFreelancer={isFreelancerSafe} />
-              </motion.div>
-            )}
-          </AnimatePresence>
+            <div className="card">
+              <h3 className="mb-16">Description</h3>
+              <p style={{ fontSize: '1rem', lineHeight: 1.8, color: 'var(--text)', whiteSpace: 'pre-wrap' }}>
+                {contract.desc || 'No description provided.'}
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="mb-24">Actions</h3>
+            <ActionPanel 
+              contract={contract} 
+              wallet={wallet} 
+              role={isClientSafe ? 'client' : isFreelancerSafe ? 'freelancer' : 'observer'} 
+              onAction={handleAction} 
+            />
+          </div>
         </div>
+      )}
 
-        <div className="detail-sidebar">
-          <ActionPanel 
-            contract={contract} 
-            wallet={wallet} 
-            onAction={handleAction} 
-            isClient={isClientSafe} 
-            isFreelancer={isFreelancerSafe} 
+      {/* ── TAB: Deliverables ───────────────────────────────────────────────── */}
+      {activeTab === 'deliverables' && (
+        <div style={{ maxWidth: 800 }}>
+          {!contract.submittedAt ? (
+            <div className="card" style={{ textAlign: 'center', padding: '80px 24px' }}>
+              <div style={{ fontSize: '3rem', marginBottom: 20 }}>📦</div>
+              <h3>Awaiting Submission</h3>
+              <p style={{ color: 'var(--text-muted)', marginTop: 8 }}>The freelancer has not submitted any deliverables yet.</p>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+              <div className="card" style={{ background: 'var(--green-bg)', border: '1px solid var(--green)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                  <div style={{ fontSize: '2.5rem' }}>📤</div>
+                  <div>
+                    <div style={{ fontWeight: 800, color: 'var(--text-heading)', fontSize: '1.1rem' }}>Work Submitted</div>
+                    <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: 4 }}>
+                      Delivered on {formatDate(contract.submittedAt)}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {contract.uploadedFiles?.length > 0 && (
+                <div className="card">
+                  <h3 className="mb-24">Secure IPFS Files</h3>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                    {contract.uploadedFiles.map((f, i) => (
+                      <div key={i} className="card" style={{ background: 'var(--bg-sunken)', padding: '16px', border: '1px solid var(--border-strong)', display: 'flex', alignItems: 'center', gap: 16 }}>
+                        <span style={{ fontSize: '2rem' }}>{f.icon || '📄'}</span>
+                        <div style={{ flex: 1 }}>
+                          <div style={{ fontWeight: 700, color: 'var(--text-heading)' }}>{f.name}</div>
+                          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: 2 }}>
+                            {f.size ? `${(f.size / 1024).toFixed(1)} KB` : ''} · IPFS Secured
+                          </div>
+                        </div>
+                        <a href={f.ipfsUrl?.replace('ipfs://', 'https://ipfs.io/ipfs/')} target="_blank" rel="noreferrer" className="btn btn-secondary btn-sm">
+                          View
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {contract.deliverables?.length > 0 && (
+                <div className="card">
+                  <h3 className="mb-24">Project Links</h3>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 16 }}>
+                    {contract.deliverables.map((d, i) => (
+                      <a key={i} href={d.url} target="_blank" rel="noreferrer" className="card card-clickable" style={{ background: 'var(--bg-sunken)', padding: '20px', border: '1px solid var(--border-strong)' }}>
+                        <div style={{ fontSize: '1.5rem', marginBottom: 12 }}>{TYPE_ICONS[d.type] || '🔗'}</div>
+                        <div style={{ fontWeight: 700, color: 'var(--text-heading)' }}>{d.label || 'Resource'}</div>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--accent)', marginTop: 4, overflow: 'hidden', textOverflow: 'ellipsis' }}>{d.url}</div>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {contract.submissionNote && (
+                <div className="card">
+                  <h3 className="mb-16">Freelancer Note</h3>
+                  <p style={{ fontSize: '1rem', lineHeight: 1.8, color: 'var(--text)' }}>{contract.submissionNote}</p>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ── TAB: Chat ───────────────────────────────────────────────────────── */}
+      {activeTab === 'chat' && (
+        <div className="card" style={{ padding: 0, height: '700px', overflow: 'hidden' }}>
+          <ContractChat
+            contract={contract}
+            wallet={wallet}
+            role={isClientSafe ? 'client' : isFreelancerSafe ? 'freelancer' : 'observer'}
+            onSubmitWork={(payload) => handleAction('submit', payload)}
+            onApprove={() => handleAction('approve', {})}
+            onDispute={(reason) => handleAction('dispute', { reason })}
           />
         </div>
+      )}
+
+      {/* ── TAB: Verify ─────────────────────────────────────────────────────── */}
+      {activeTab === 'verify' && (
+        <div style={{ maxWidth: 800 }}>
+          <div className="card" style={{ background: 'var(--grad-primary)', color: 'var(--accent-ink)', padding: '60px 40px', textAlign: 'center', marginBottom: 32 }}>
+            <div style={{ fontSize: '4rem', marginBottom: 20 }}>🛡️</div>
+            <h2 style={{ color: 'inherit' }}>Immutable Verification</h2>
+            <p style={{ opacity: 0.8, fontSize: '1.1rem', marginTop: 12 }}>
+              This contract is a living piece of code on the Stellar network. 
+              Its terms cannot be altered, and funds can only be moved via cryptographic proof.
+            </p>
+          </div>
+
+          <div className="card">
+            <h3 className="mb-24">On-Chain Evidence</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <VerifyRow label="Contract Address" value={contract.id} mono url={`${explorerBase}/contract/${contract.id}`} />
+              <VerifyRow label="Creation Transaction" value={contract.createTxHash} mono url={`${explorerBase}/tx/${contract.createTxHash}`} />
+              {contract.depositTxHash && <VerifyRow label="Funding Transaction" value={contract.depositTxHash} mono url={`${explorerBase}/tx/${contract.depositTxHash}`} />}
+              <VerifyRow label="Factory Version" value="TrustWork Soroban v6.0" />
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function DetailRow({ label, value, mono, isUser, warn, url }) {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 16, borderBottom: '1px solid var(--border)' }}>
+      <span style={{ color: 'var(--text-muted)', fontWeight: '600', fontSize: '0.9rem' }}>{label}</span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <span style={{ 
+          fontFamily: mono ? 'var(--font-mono)' : 'inherit',
+          color: warn ? 'var(--red)' : 'var(--text-heading)',
+          fontWeight: '700',
+          fontSize: '0.95rem'
+        }}>
+          {value}
+        </span>
+        {isUser && <span style={{ fontSize: '0.7rem', color: 'var(--accent)', background: 'var(--accent-glow)', padding: '2px 8px', borderRadius: 'var(--radius-pill)', fontWeight: '800' }}>YOU</span>}
+        {url && <a href={url} target="_blank" rel="noreferrer" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>↗</a>}
       </div>
-    </motion.div>
+    </div>
+  )
+}
+
+function VerifyRow({ label, value, mono, url }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 6, padding: '16px', background: 'var(--bg-sunken)', borderRadius: 'var(--radius)', border: '1px solid var(--border-strong)' }}>
+      <span style={{ color: 'var(--text-muted)', fontWeight: '700', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</span>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span style={{ 
+          fontFamily: mono ? 'var(--font-mono)' : 'inherit',
+          color: 'var(--text-heading)',
+          fontSize: '0.9rem',
+          wordBreak: 'break-all',
+          paddingRight: '20px'
+        }}>
+          {value}
+        </span>
+        {url && <a href={url} target="_blank" rel="noreferrer" className="btn btn-secondary btn-sm" style={{ flexShrink: 0 }}>Verify ↗</a>}
+      </div>
+    </div>
   )
 }
