@@ -23,17 +23,28 @@ export function LogoMark({ size = 32, ...props }) {
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" {...props}>
       <defs>
-        <linearGradient id="tw-logo-grad" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#4fd8ce" />
-          <stop offset="1" stopColor="#9b9ff0" />
+        <linearGradient id="w-gem-highlight" x1="8" y1="4" x2="16" y2="10" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#e4f7f2" />
+          <stop offset="1" stopColor="#bfeee3" />
         </linearGradient>
       </defs>
-      <rect x="1" y="1" width="30" height="30" rx="9" fill="url(#tw-logo-grad)" />
+
+      {/* facets */}
+      <polygon points="10,4 16,8 4,14" fill="#8fded0" />
+      <polygon points="4,14 16,8 16,29" fill="#3fae9c" />
+      <polygon points="22,4 16,8 28,14" fill="#2c8f82" />
+      <polygon points="28,14 16,8 16,29" fill="#1c655d" />
+      <polygon points="10,4 13,6.4 16,8" fill="url(#w-gem-highlight)" />
+
+      {/* W woven in */}
       <path
-        d="M16 6.5 24 9.5v6.2c0 5-3.4 8.9-8 10.3-4.6-1.4-8-5.3-8-10.3V9.5l8-3Z"
-        fill="none" stroke="#020617" strokeWidth="1.8" strokeLinejoin="round"
+        d="M9 14 L12 21 L16 15 L20 21 L23 14"
+        fill="none"
+        stroke="#0b201d"
+        strokeWidth="2.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
-      <path d="M12.3 16.2l2.6 2.6 5-5.6" fill="none" stroke="#020617" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
