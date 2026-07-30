@@ -298,16 +298,63 @@ a:hover { color: var(--accent-hover); }
   .page, .page-narrow { padding: 24px 16px; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .contract-grid { grid-template-columns: 1fr; }
+  .hero-visual { width: 140px; height: 140px; }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 /* ===== HOME PAGE STYLES ===== */
 .home-root { position: relative; }
 .hero-container { position: relative; min-height: calc(100vh - 80px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 24px; overflow: hidden; }
 .hero-content { position: relative; z-index: 2; max-width: 900px; }
-.hero-title { margin-bottom: 24px; background: var(--hero-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* Bigger, bolder hero typography — matches reference designs */
+.hero-title {
+  margin-bottom: 28px;
+  font-size: clamp(2.75rem, 9vw, 6.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  background: var(--hero-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
 .hero-title span { background: var(--grad-primary); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .hero-description { font-size: 1.25rem; color: var(--text-muted); max-width: 640px; margin: 0 auto 40px; line-height: 1.6; }
 .hero-actions { display: flex; gap: 16px; justify-content: center; }
+
+/* Live status dot inside hero badge */
+.hero-badge-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  display: inline-block;
+  margin-right: 8px;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Centered glowing ring visual — the hero centerpiece */
+.hero-visual {
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 12px auto 32px;
+  position: relative;
+  background: radial-gradient(circle at 50% 40%, var(--overlay-2), transparent 70%);
+  border: 1px solid var(--border-glow);
+  box-shadow: 0 0 60px var(--accent-glow), inset 0 0 40px rgba(255,255,255,0.04);
+}
+.hero-visual::before {
+  content: '';
+  position: absolute; inset: -1px;
+  border-radius: 50%;
+  border: 1px dashed var(--border-strong);
+  animation: spin-slow 14s linear infinite;
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .particle-field { position: absolute; inset: 0; z-index: 1; opacity: 0.6; pointer-events: none; }
 .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1200px; margin: 48px auto; }
 .feature-card {
