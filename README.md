@@ -1,17 +1,6 @@
 <div align="center">
 
-<img src="trustwork-ui/public/favicon.svg" width="90" />
-
-# 🛡️ TrustWork
-### **Decentralized Freelance Escrow on Stellar**
-
-> *Trustless payments between clients and freelancers — funds locked in a Soroban smart contract, released only when work is approved.*
-
-[![Live App](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://trust-work26.vercel.app)
-[![Network](https://img.shields.io/badge/Network-Stellar%20Testnet-blue?style=for-the-badge)](https://stellar.org)
-[![Contract](https://img.shields.io/badge/Soroban-Deployed-purple?style=for-the-badge)](https://soroban.stellar.org)
-
-</div>
+<img src="https://cdn.simpleicons.org/springsecurity/6DB33F" width="64" alt="Spring Security logo" />
 
 ---
 
