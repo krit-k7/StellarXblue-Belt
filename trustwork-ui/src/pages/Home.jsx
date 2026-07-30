@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion'
 import ParticleField from '../components/ParticleField'
-import { LockIcon, BoltIcon, ScaleIcon, AutoReleaseIcon } from '../components/icons'
+import { LockIcon, BoltIcon, ScaleIcon, AutoReleaseIcon, LogoMark } from '../components/icons'
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
 }
 
 const stagger = {
-  show: { transition: { staggerChildren: 0.1 } }
+  show: { transition: { staggerChildren: 0.15 } }
 }
 
 export default function Home({ wallet, onOpenWallet, setPage, theme }) {
@@ -44,9 +44,10 @@ export default function Home({ wallet, onOpenWallet, setPage, theme }) {
 
   return (
     <div className="home-root">
-      {/* Hero Section */}
-      <section className="hero-container">
-        <ParticleField density={130} color={theme === 'light' ? '13, 148, 136' : '79, 216, 206'} />
+      {/* Hero Section - Inspired by the requested design */}
+      <section className="hero-container" style={{ paddingTop: '80px', paddingBottom: '120px' }}>
+        <div className="glow-bg" />
+        <ParticleField density={100} color={theme === 'light' ? '37, 99, 235' : '59, 130, 246'} />
         
         <motion.div 
           className="hero-content"
@@ -54,79 +55,101 @@ export default function Home({ wallet, onOpenWallet, setPage, theme }) {
           animate="show"
           variants={stagger}
         >
-          <motion.div className="hero-badge" variants={fadeUp} style={{ 
-            background: 'var(--accent-glow)', 
-            color: 'var(--accent)', 
-            padding: '6px 16px', 
-            borderRadius: '20px',
-            fontSize: '0.75rem',
-            fontWeight: '700',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            marginBottom: '24px',
-            display: 'inline-block',
-            border: '1px solid var(--border-glow)'
-          }}>
-            Built on Stellar · Powered by Soroban
-          </motion.div>
-          
-          <motion.h1 className="hero-title" variants={fadeUp}>
-            Freelance contracts,<br /><span>sealed before work starts.</span>
+          <motion.h1 
+            className="hero-title" 
+            variants={fadeUp}
+            style={{ 
+              fontSize: 'clamp(3.5rem, 8vw, 6.5rem)',
+              fontWeight: 800,
+              letterSpacing: '-0.04em',
+              marginBottom: '16px'
+            }}
+          >
+            Trustless Escrow<br />For Everyone.
           </motion.h1>
           
-          <motion.p className="hero-description" variants={fadeUp}>
-            TrustWork locks project funds in a smart contract before work begins.
-            Clients and freelancers collaborate with confidence — no middlemen,
-            no disputes left unresolved.
+          <motion.h2 
+            variants={fadeUp}
+            style={{ 
+              fontSize: 'clamp(1.8rem, 4vw, 3.2rem)',
+              fontWeight: 600,
+              fontStyle: 'italic',
+              marginBottom: '32px',
+              color: 'rgba(255,255,255,0.9)'
+            }}
+          >
+            Seamlessly On Stellar.
+          </motion.h2>
+          
+          <motion.p 
+            className="hero-description" 
+            variants={fadeUp}
+            style={{ 
+              fontSize: '1.25rem',
+              color: 'var(--text-muted)',
+              marginBottom: '48px',
+              maxWidth: '600px',
+              margin: '0 auto 48px'
+            }}
+          >
+            No Banks. No delays. Just instant,<br />
+            on-chain transaction protection.
           </motion.p>
           
           <motion.div className="hero-actions" variants={fadeUp}>
-            <button className="btn btn-primary" onClick={() => wallet ? setPage('create') : onOpenWallet()}>
-              {wallet ? 'Create a Contract' : 'Connect Wallet to Start'}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginLeft: 8 }}>
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </button>
-            <button className="btn btn-outline" onClick={() => setPage('dashboard')}>
-              View Dashboard
-            </button>
+            <motion.button 
+              className="btn btn-primary" 
+              onClick={() => wallet ? setPage('create') : onOpenWallet()}
+              whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(59, 130, 246, 0.5)' }}
+              whileTap={{ scale: 0.95 }}
+              style={{ 
+                padding: '16px 40px', 
+                fontSize: '1rem', 
+                borderRadius: '40px',
+                background: '#fff',
+                color: '#000',
+                fontWeight: 700
+              }}
+            >
+              🚀 Get Started
+            </motion.button>
+          </motion.div>
+
+          <motion.div 
+            variants={fadeUp}
+            style={{ marginTop: '80px' }}
+          >
+            <p style={{ 
+              fontSize: '0.75rem', 
+              fontWeight: 700, 
+              textTransform: 'uppercase', 
+              letterSpacing: '0.2em', 
+              color: 'var(--text-muted)',
+              marginBottom: '24px'
+            }}>
+              Trusted by leading communities
+            </p>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '32px', opacity: 0.7 }}>
+              <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'var(--overlay-2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <LogoMark size={24} />
+              </div>
+              <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'var(--overlay-2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: '20px', height: '20px', background: '#fff', borderRadius: '4px' }} />
+              </div>
+              <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'var(--overlay-2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: '24px', height: '24px', border: '2px solid #fff', borderRadius: '50%' }} />
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* Trust Row */}
-      <motion.div 
-        className="trust-row"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        style={{ 
-          display: 'flex', 
-          justifyContent: 'center', 
-          gap: '12px', 
-          padding: '20px 0 60px',
-          flexWrap: 'wrap'
-        }}
-      >
-        {['Stellar Network', 'Soroban Contracts', '✓ Open Source'].map((text, i) => (
-          <span key={i} style={{
-            background: 'var(--overlay-1)',
-            border: '1px solid var(--border)',
-            borderRadius: '20px',
-            padding: '6px 16px',
-            fontSize: '0.8rem',
-            color: text.includes('✓') ? 'var(--green)' : 'var(--text-muted)',
-            fontWeight: '600'
-          }}>{text}</span>
-        ))}
-      </motion.div>
-
       {/* Features Section */}
-      <section style={{ padding: '80px 0', background: 'var(--bg)' }}>
+      <section style={{ padding: '120px 24px', background: 'var(--bg-sunken)' }}>
         <div className="section-title">
           <motion.h2 
-            initial={{ opacity: 0 }} 
-            whileInView={{ opacity: 1 }} 
+            initial={{ opacity: 0, y: 20 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
             viewport={{ once: true }}
             style={{ marginBottom: 16 }}
           >
@@ -143,8 +166,8 @@ export default function Home({ wallet, onOpenWallet, setPage, theme }) {
           viewport={{ once: true, amount: 0.2 }}
         >
           {features.map((f, i) => (
-            <motion.div className="feature-card" key={i} variants={fadeUp}>
-              <div className="feature-icon-wrap">
+            <motion.div className="feature-card" key={i} variants={fadeUp} whileHover={{ y: -8 }}>
+              <div className="feature-icon-wrap" style={{ background: 'var(--grad-primary)', color: '#fff' }}>
                 <f.icon width={24} height={24} />
               </div>
               <h3 style={{ marginBottom: 12 }}>{f.title}</h3>
@@ -155,43 +178,58 @@ export default function Home({ wallet, onOpenWallet, setPage, theme }) {
       </section>
 
       {/* How It Works Section */}
-<section style={{ padding: '100px 24px', borderTop: '1px solid var(--border)' }}>
-  <div className="section-title">
-    <h2>How it works</h2>
-    <p style={{ color: 'var(--text-muted)' }}>Four steps to secure, trustless freelance collaboration.</p>
-  </div>
+      <section style={{ padding: '120px 24px', background: 'var(--bg)' }}>
+        <div className="section-title">
+          <h2>Professional Workflow</h2>
+          <p style={{ color: 'var(--text-muted)' }}>Four steps to secure, trustless freelance collaboration.</p>
+        </div>
 
-  <div className="steps-track">
-    <div className="steps-line" />
-    <motion.div
-      className="steps-grid"
-      variants={stagger}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.3 }}
-    >
-      {steps.map(s => (
-        <motion.div className="step-card" key={s.num} variants={fadeUp}>
-          <div className="step-number">{s.num}</div>
-          <h3 style={{ marginBottom: 8 }}>{s.title}</h3>
-          <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{s.desc}</p>
+        <motion.div
+          className="steps-grid"
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          style={{ maxWidth: '1100px', margin: '0 auto' }}
+        >
+          {steps.map(s => (
+            <motion.div className="step-card" key={s.num} variants={fadeUp} whileHover={{ borderColor: 'var(--accent)' }}>
+              <div className="step-number" style={{ background: 'var(--grad-primary)', color: '#fff' }}>{s.num}</div>
+              <h3 style={{ marginBottom: 8 }}>{s.title}</h3>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{s.desc}</p>
+            </motion.div>
+          ))}
         </motion.div>
-      ))}
-    </motion.div>
-  </div>
-</section>
+      </section>
 
       {/* Bottom CTA */}
-      <section style={{ padding: '100px 24px', textAlign: 'center', borderTop: '1px solid var(--border)', background: 'radial-gradient(circle at center, rgba(79,216,206,0.05) 0%, transparent 70%)' }}>
+      <section style={{ padding: '140px 24px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ 
+          position: 'absolute', 
+          top: '50%', 
+          left: '50%', 
+          transform: 'translate(-50%, -50%)', 
+          width: '400px', 
+          height: '400px', 
+          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%)',
+          zIndex: 0
+        }} />
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
+          style={{ position: 'relative', zIndex: 1 }}
         >
-          <h2 style={{ marginBottom: 24 }}>Ready to secure your work?</h2>
-          <button className="btn btn-primary" onClick={() => wallet ? setPage('create') : onOpenWallet()}>
+          <h2 style={{ marginBottom: 24, fontSize: '3rem' }}>Ready to secure your work?</h2>
+          <motion.button 
+            className="btn btn-primary" 
+            onClick={() => wallet ? setPage('create') : onOpenWallet()}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            style={{ padding: '16px 48px', borderRadius: '40px' }}
+          >
             Create Your First Contract
-          </button>
+          </motion.button>
         </motion.div>
       </section>
     </div>
