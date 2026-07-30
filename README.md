@@ -1,7 +1,6 @@
-<div align="center">
-
-<img src="https://cdn.simpleicons.org/springsecurity/6DB33F" width="64" alt="Spring Security logo" />
-
+<p align="center">
+  <img src="./trustwork-logo.svg" width="90" height="90" alt="TrustWork logo" />
+</p>
 
 
 # TrustWork
