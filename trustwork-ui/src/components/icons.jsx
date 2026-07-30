@@ -166,3 +166,22 @@ export const TEMPLATE_ICONS = {
   bolt: BoltIcon,
   settings: SettingsIcon,
 }
+
+export function ShieldCheckIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <path d="M9 12l2 2 4-4" />
+    </svg>
+  )
+}
+
+export function HistoryIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+      <path d="M3 3v5h5" />
+      <path d="M12 7v5l4 2" />
+    </svg>
+  )
+}
