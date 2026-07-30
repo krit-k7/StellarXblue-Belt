@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
 import WalletModal from './components/WalletModal'
 import TxModal from './components/TxModal'
@@ -7,6 +8,7 @@ import Dashboard from './pages/Dashboard'
 import CreateContract from './pages/CreateContract'
 import ContractDetail from './pages/ContractDetail'
 import Arbitration from './pages/Arbitration'
+import MetricsDashboard from './pages/MetricsDashboard'
 import { useWallet } from './hooks/useWallet'
 import { useTheme } from './hooks/useTheme'
 import { loadContracts, addContract, updateContract } from './utils/contract'
@@ -186,72 +188,87 @@ export default function App() {
         toggleTheme={toggleTheme}
       />
 
-      {page === 'home' && (
-  <Home onConnect={() => setWalletOpen(true)} wallet={wallet} setPage={setPage} theme={theme} />
-)}
-      {page === 'dashboard' && (
-        <Dashboard
-          contracts={contracts}
-          onView={handleView}
-          setPage={setPage}
-          wallet={wallet}
-        />
-      )}
-      {page === 'create' && (
-        <CreateContract
-          onCreate={handleCreate}
-          wallet={wallet}
-          setPage={setPage}
-          onConnect={() => setWalletOpen(true)}
-          openTx={openTx}
-          txSubmitting={txSubmitting}
-          txSuccess={txSuccess}
-          txError={txError}
-        />
-      )}
-      {page === 'detail' && selected && (
-        <ContractDetail
-          contract={selected}
-          wallet={wallet}
-          onUpdate={handleUpdate}
-          setPage={setPage}
-          openTx={openTx}
-          txSubmitting={txSubmitting}
-          txSuccess={txSuccess}
-          txError={txError}
-          defaultTab="chat"
-        />
-      )}
+      <main style={{ position: 'relative', overflow: 'hidden' }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={page}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {page === 'home' && (
+              <Home onConnect={() => setWalletOpen(true)} wallet={wallet} setPage={setPage} theme={theme} />
+            )}
+            {page === 'dashboard' && (
+              <Dashboard
+                contracts={contracts}
+                onView={handleView}
+                setPage={setPage}
+                wallet={wallet}
+              />
+            )}
+            {page === 'create' && (
+              <CreateContract
+                onCreate={handleCreate}
+                wallet={wallet}
+                setPage={setPage}
+                onConnect={() => setWalletOpen(true)}
+                openTx={openTx}
+                txSubmitting={txSubmitting}
+                txSuccess={txSuccess}
+                txError={txError}
+              />
+            )}
+            {page === 'detail' && selected && (
+              <ContractDetail
+                contract={selected}
+                wallet={wallet}
+                onUpdate={handleUpdate}
+                setPage={setPage}
+                openTx={openTx}
+                txSubmitting={txSubmitting}
+                txSuccess={txSuccess}
+                txError={txError}
+                defaultTab="chat"
+              />
+            )}
 
-      {/* ── Chat invite landing page ─────────────────────────────────────── */}
-      {page === 'chat-invite' && (
-        <ChatInviteLanding
-          contractId={chatContractId}
-          wallet={wallet}
-          contracts={contracts}
-          onConnect={() => setWalletOpen(true)}
-          onAddContract={(contract) => {
-            addContract(wallet, contract)
-            setContracts(prev => [contract, ...prev.filter(c => c.id !== contract.id)])
-          }}
-          onOpen={(contract) => {
-            setSelected(contract)
-            setPage('detail')
-            window.history.replaceState(null, '', window.location.pathname)
-          }}
-        />
-      )}
-      {page === 'arbitration' && (
-        <Arbitration
-          contracts={contracts}
-          onUpdate={handleUpdate}
-          wallet={wallet}
-          openTx={openTx}
-          txSubmitting={txSubmitting}
-          txSuccess={txSuccess}
-          txError={txError}
-        />
-      )}
+            {/* ── Chat invite landing page ─────────────────────────────────────── */}
+            {page === 'chat-invite' && (
+              <ChatInviteLanding
+                contractId={chatContractId}
+                wallet={wallet}
+                contracts={contracts}
+                onConnect={() => setWalletOpen(true)}
+                onAddContract={(contract) => {
+                  addContract(wallet, contract)
+                  setContracts(prev => [contract, ...prev.filter(c => c.id !== contract.id)])
+                }}
+                onOpen={(contract) => {
+                  setSelected(contract)
+                  setPage('detail')
+                  window.history.replaceState(null, '', window.location.pathname)
+                }}
+              />
+            )}
+            {page === 'arbitration' && (
+              <Arbitration
+                contracts={contracts}
+                onUpdate={handleUpdate}
+                wallet={wallet}
+                openTx={openTx}
+                txSubmitting={txSubmitting}
+                txSuccess={txSuccess}
+                txError={txError}
+              />
+            )}
+            {page === 'metrics' && (
+              <MetricsDashboard contracts={contracts} wallet={wallet} />
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </main>
       {walletOpen && (
         <WalletModal walletState={walletState} onClose={() => setWalletOpen(false)} />
       )}
