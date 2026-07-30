@@ -1,6 +1,6 @@
 <p align="center">
   <img src="./trustwork-logo.svg" width="90" height="90" alt="TrustWork logo" />
-</p>
+</p> 
 
 
 # TrustWork
