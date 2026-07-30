@@ -23,95 +23,85 @@ export default function Navbar({ page, setPage, wallet, onOpenWallet, onDisconne
   }, [])
 
   return (
-    <div className="navbar-wrapper">
-      <nav className="navbar">
-        <div className="navbar-brand" onClick={() => setPage('home')}>
-          <div className="navbar-logo">
-            <LogoMark size={32} />
-          </div>
-          <span className="navbar-title">Trust<span>Work</span></span>
+    <nav className="navbar">
+      <div className="navbar-brand" onClick={() => setPage('home')}>
+        <div className="navbar-logo">
+          <LogoMark size={32} />
         </div>
+        <span className="navbar-title">Trust<span>Work</span></span>
+      </div>
 
-        <div className="navbar-nav">
-          {navItems.map(item => (
-            <div
-              key={item.id}
-              className={`nav-link ${page === item.id ? 'active' : ''}`}
-              onClick={() => setPage(item.id)}
-            >
-              {item.label}
-            </div>
-          ))}
-        </div>
-
-        <div className="navbar-right">
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            style={{
-              width: 40, height: 40, borderRadius: 'var(--radius-pill)',
-              border: '1px solid var(--border-strong)', background: 'var(--overlay-1)',
-              color: 'var(--text-heading)', display: 'flex', alignItems: 'center',
-              justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s',
-            }}
+      <div className="navbar-nav">
+        {navItems.map(item => (
+          <div
+            key={item.id}
+            className={`nav-link ${page === item.id ? 'active' : ''}`}
+            onClick={() => setPage(item.id)}
           >
-            {theme === 'dark' ? <SunIcon width={18} height={18} /> : <MoonIcon width={18} height={18} />}
-          </button>
+            {item.label}
+          </div>
+        ))}
+      </div>
 
-          {wallet ? (
-            <div className="wallet-menu" ref={menuRef} style={{ position: 'relative' }}>
-              <div
-                className="wallet-badge"
-                style={{ 
-                  cursor: 'pointer', 
-                  background: 'var(--grad-primary)', 
-                  color: 'var(--accent-ink)',
-                  border: 'none',
-                  padding: '10px 20px',
-                  borderRadius: 'var(--radius-pill)',
-                  fontWeight: '700',
-                  fontSize: '0.85rem'
-                }}
-                onClick={() => setDropdownOpen(o => !o)}
-              >
-                {truncateAddr(wallet)}
-              </div>
+      <div className="navbar-right">
+        <button
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+          title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          style={{
+            width: 38, height: 38, borderRadius: 'var(--radius-sm)',
+            border: '1px solid var(--border-strong)', background: 'var(--overlay-1)',
+            color: 'var(--text-heading)', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s',
+          }}
+        >
+          {theme === 'dark' ? <SunIcon width={18} height={18} /> : <MoonIcon width={18} height={18} />}
+        </button>
 
-              {dropdownOpen && (
-                <div className="wallet-dropdown" style={{
-                  position: 'absolute',
-                  top: 'calc(100% + 12px)',
-                  right: 0,
-                  background: 'var(--bg-card)',
-                  border: '1px solid var(--border-strong)',
-                  borderRadius: 'var(--radius)',
-                  padding: '12px',
-                  minWidth: '220px',
-                  boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
-                  zIndex: 100
-                }}>
-                  <div style={{ padding: '8px 12px', fontSize: '0.75rem', color: 'var(--text-muted)', borderBottom: '1px solid var(--border)', marginBottom: '8px', wordBreak: 'break-all', fontFamily: 'var(--font-mono)' }}>{wallet}</div>
-                  <button className="wallet-dropdown-item" onClick={() => { navigator.clipboard?.writeText(wallet); setDropdownOpen(false) }} style={{
-                    width: '100%', background: 'none', border: 'none', color: 'var(--text)', padding: '10px 12px', textAlign: 'left', cursor: 'pointer', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '600'
-                  }}>
-                    Copy Address
-                  </button>
-                  <button className="wallet-dropdown-item danger" onClick={() => { onDisconnect(); setDropdownOpen(false) }} style={{
-                    width: '100%', background: 'none', border: 'none', color: 'var(--red)', padding: '10px 12px', textAlign: 'left', cursor: 'pointer', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '600'
-                  }}>
-                    Disconnect
-                  </button>
-                </div>
-              )}
+        {wallet ? (
+          <div className="wallet-menu" ref={menuRef}>
+            <div
+              className="wallet-badge"
+              style={{ cursor: 'pointer' }}
+              onClick={() => setDropdownOpen(o => !o)}
+            >
+              <span className="wallet-dot" />
+              {truncateAddr(wallet)}
             </div>
-          ) : (
-            <button className="btn btn-primary" onClick={onOpenWallet} style={{ padding: '10px 24px' }}>
-              Connect Wallet
-            </button>
-          )}
-        </div>
-      </nav>
-    </div>
+
+            {dropdownOpen && (
+              <div className="wallet-dropdown" style={{
+                position: 'absolute',
+                top: 'calc(100% + 12px)',
+                right: 0,
+                background: 'var(--bg-card)',
+                border: '1px solid var(--border-strong)',
+                borderRadius: 'var(--radius-sm)',
+                padding: '8px',
+                minWidth: '200px',
+                boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
+                zIndex: 100
+              }}>
+                <div style={{ padding: '8px 12px', fontSize: '0.75rem', color: 'var(--text-muted)', borderBottom: '1px solid var(--border)', marginBottom: '8px', wordBreak: 'break-all' }}>{wallet}</div>
+                <button className="wallet-dropdown-item" onClick={() => { navigator.clipboard?.writeText(wallet); setDropdownOpen(false) }} style={{
+                  width: '100%', background: 'none', border: 'none', color: 'var(--text)', padding: '8px 12px', textAlign: 'left', cursor: 'pointer', borderRadius: '4px', fontSize: '0.875rem'
+                }}>
+                  Copy Address
+                </button>
+                <button className="wallet-dropdown-item danger" onClick={() => { onDisconnect(); setDropdownOpen(false) }} style={{
+                  width: '100%', background: 'none', border: 'none', color: 'var(--red)', padding: '8px 12px', textAlign: 'left', cursor: 'pointer', borderRadius: '4px', fontSize: '0.875rem'
+                }}>
+                  Disconnect
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <button className="btn btn-primary" onClick={onOpenWallet}>
+            Connect Wallet
+          </button>
+        )}
+      </div>
+    </nav>
   )
 }
