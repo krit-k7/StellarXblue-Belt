@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import ParticleField from '../components/ParticleField'
-import { LockIcon, BoltIcon, ScaleIcon, AutoReleaseIcon } from '../components/icons'
+import { LockIcon, BoltIcon, ScaleIcon, AutoReleaseIcon, LogoMark } from '../components/icons'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -64,10 +64,16 @@ export default function Home({ wallet, onOpenWallet, setPage, theme }) {
             textTransform: 'uppercase',
             letterSpacing: '0.1em',
             marginBottom: '24px',
-            display: 'inline-block',
+            display: 'inline-flex',
+            alignItems: 'center',
             border: '1px solid var(--border-glow)'
           }}>
-            Built on Stellar · Powered by Soroban
+            <span className="hero-badge-dot" />
+            Testnet · Live on Stellar
+          </motion.div>
+
+          <motion.div className="hero-visual" variants={fadeUp}>
+            <LogoMark size={90} />
           </motion.div>
           
           <motion.h1 className="hero-title" variants={fadeUp}>
