@@ -30,60 +30,55 @@ export default function Arbitration({ contracts, onUpdate, wallet, openTx, txSub
 
   const ResolutionModal = ({ contract }) => (
     <div className="modal-overlay" onClick={() => setSelected(null)}>
-      <div className="modal" onClick={e => e.stopPropagation()} style={{ maxWidth: '600px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 32 }}>
-          <div style={{ width: 56, height: 56, borderRadius: '16px', background: 'var(--grad-primary)', display: 'flex', alignItems: 'center', justify_content: 'center', color: 'var(--accent-ink)' }}>
-            <ScaleIcon width={28} height={28} />
+      <div className="modal" onClick={e => e.stopPropagation()}>
+        <div className="modal-title" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <ScaleIcon width={20} height={20} style={{ color: 'var(--accent)' }} /> Resolve Dispute
+        </div>
+        <div className="modal-desc">
+          Review the case and choose a resolution for contract <strong>{contract.id}</strong>.
+        </div>
+
+        <div className="card mb-16" style={{ padding: 16 }}>
+          <div className="detail-section-title">Dispute Reason</div>
+          <p style={{ fontSize: '0.875rem', color: 'var(--text)' }}>{contract.disputeReason}</p>
+        </div>
+
+        <div className="arb-card-parties">
+          <div className="arb-party">
+            <div className="arb-party-role">Client</div>
+            <div className="arb-party-addr">{truncateAddr(contract.client)}</div>
           </div>
-          <div>
-            <h2 style={{ fontSize: '1.5rem' }}>Resolve Dispute</h2>
-            <p style={{ color: 'var(--text-muted)', marginTop: 4 }}>Contract ID: <span className="mono">{contract.id}</span></p>
+          <div className="arb-vs">VS</div>
+          <div className="arb-party">
+            <div className="arb-party-role">Freelancer</div>
+            <div className="arb-party-addr">{truncateAddr(contract.freelancer)}</div>
           </div>
         </div>
 
-        <div className="card mb-24" style={{ background: 'var(--bg-sunken)', border: '1px solid var(--border-strong)' }}>
-          <div style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: 12 }}>Dispute Reason</div>
-          <p style={{ fontSize: '1rem', color: 'var(--text-heading)', lineHeight: 1.6 }}>{contract.disputeReason}</p>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', gap: 20, marginBottom: 32, textAlign: 'center' }}>
-          <div className="card" style={{ padding: '16px', background: 'var(--overlay-1)' }}>
-            <div style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--text-muted)', marginBottom: 4 }}>CLIENT</div>
-            <div className="mono" style={{ fontSize: '0.85rem', color: 'var(--text-heading)' }}>{truncateAddr(contract.client)}</div>
-          </div>
-          <div style={{ fontWeight: '800', color: 'var(--text-muted)', fontSize: '0.8rem' }}>VS</div>
-          <div className="card" style={{ padding: '16px', background: 'var(--overlay-1)' }}>
-            <div style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--text-muted)', marginBottom: 4 }}>FREELANCER</div>
-            <div className="mono" style={{ fontSize: '0.85rem', color: 'var(--text-heading)' }}>{truncateAddr(contract.freelancer)}</div>
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <div className="modal-actions" style={{ flexDirection: 'column', gap: 8 }}>
           <button
-            className="btn btn-primary btn-full btn-lg"
+            className="btn btn-success btn-full"
             onClick={() => handleResolve(contract, 'freelancer')}
             disabled={!!loading}
-            style={{ background: 'var(--green)', color: '#000' }}
           >
-            {loading === contract.id + 'freelancer' ? 'Processing...' : `Release to Freelancer (${formatXLM(contract.amount)})`}
+            {loading === contract.id + 'freelancer' ? '⏳...' : `✅ Release to Freelancer (${formatXLM(contract.amount)})`}
           </button>
           <button
-            className="btn btn-primary btn-full btn-lg"
+            className="btn btn-danger btn-full"
             onClick={() => handleResolve(contract, 'client')}
             disabled={!!loading}
-            style={{ background: 'var(--red)', color: '#fff' }}
           >
-            {loading === contract.id + 'client' ? 'Processing...' : `Refund to Client (${formatXLM(contract.amount)})`}
+            {loading === contract.id + 'client' ? '⏳...' : `↩️ Refund Client (${formatXLM(contract.amount)})`}
           </button>
           <button
-            className="btn btn-outline btn-full btn-lg"
+            className="btn btn-warning btn-full"
             onClick={() => handleResolve(contract, 'split')}
             disabled={!!loading}
           >
-            {loading === contract.id + 'split' ? 'Processing...' : `Split 50/50 Resolution`}
+            {loading === contract.id + 'split' ? '⏳...' : `⚡ Split 50/50 (${formatXLM(contract.amount / 2)} each)`}
           </button>
-          <button className="btn btn-secondary btn-full" onClick={() => setSelected(null)} style={{ marginTop: 8 }}>
-            Cancel & Close
+          <button className="btn btn-secondary btn-full" onClick={() => setSelected(null)}>
+            Cancel
           </button>
         </div>
       </div>
@@ -92,102 +87,115 @@ export default function Arbitration({ contracts, onUpdate, wallet, openTx, txSub
 
   return (
     <div className="page">
-      <div className="flex-between mb-48">
-        <div>
-          <h2 className="page-title italic-serif">Arbitration Court</h2>
-          <p className="page-subtitle">Fair resolution for trustless contracts.</p>
-        </div>
-        <div className="tabs">
-          <button className={`tab-btn ${tab === 'pending' ? 'active' : ''}`} onClick={() => setTab('pending')}>
-            Pending Cases
-            {disputed.length > 0 && <span style={{ marginLeft: 8, background: 'var(--red)', color: '#fff', borderRadius: 'var(--radius-pill)', padding: '2px 8px', fontSize: '0.75rem', fontWeight: '800' }}>{disputed.length}</span>}
-          </button>
-          <button className={`tab-btn ${tab === 'resolved' ? 'active' : ''}`} onClick={() => setTab('resolved')}>
-            Resolution History
-          </button>
-        </div>
+      <div className="mb-32">
+        <h2 className="page-title">Arbitration</h2>
+        <p className="page-subtitle">Review and resolve disputed contracts</p>
+      </div>
+
+      <div className="tabs mb-24">
+        <button className={`tab-btn ${tab === 'pending' ? 'active' : ''}`} onClick={() => setTab('pending')}>
+          Pending {disputed.length > 0 && <span style={{ marginLeft: 6, color: 'var(--red)', fontSize: '0.75rem' }}>{disputed.length}</span>}
+        </button>
+        <button className={`tab-btn ${tab === 'resolved' ? 'active' : ''}`} onClick={() => setTab('resolved')}>
+          Resolved
+        </button>
       </div>
 
       {tab === 'pending' && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: 24 }}>
+        <>
           {disputed.length === 0 ? (
-            <div className="card" style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '100px 24px' }}>
-              <div style={{ fontSize: '3.5rem', marginBottom: 20 }}>⚖️</div>
-              <h3>Clear Docket</h3>
-              <p style={{ color: 'var(--text-muted)', marginTop: 8 }}>All contracts are running smoothly across the network.</p>
+            <div className="empty-state">
+              <div className="empty-icon"><ScaleIcon width={26} height={26} /></div>
+              <div className="empty-title">No pending disputes</div>
+              <div className="empty-desc">All contracts are running smoothly.</div>
             </div>
           ) : (
-            disputed.map(c => (
-              <div className="card" key={c.id} style={{ display: 'flex', flexDirection: 'column' }}>
-                <div className="flex-between mb-24">
-                  <div>
-                    <div style={{ fontWeight: 800, color: 'var(--text-heading)', fontSize: '1.1rem' }}>{c.title}</div>
-                    <div className="mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: 4 }}>{c.id}</div>
+            <div className="arb-grid">
+              {disputed.map(c => (
+                <div className="card" key={c.id}>
+                  <div className="flex-between mb-16">
+                    <div>
+                      <div className="contract-card-title">{c.title}</div>
+                      <div className="contract-card-addr">{c.id}</div>
+                    </div>
+                    <span className="badge badge-disputed">DISPUTED</span>
                   </div>
-                  <span className="badge badge-disputed">DISPUTED</span>
-                </div>
 
-                <div className="card mb-24" style={{ background: 'var(--bg-sunken)', border: '1px solid var(--border-strong)', padding: '16px' }}>
-                  <div style={{ fontSize: '0.7rem', fontWeight: '800', color: 'var(--red)', textTransform: 'uppercase', marginBottom: 8 }}>Case Reason</div>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--text)', lineHeight: 1.6 }}>{c.disputeReason}</p>
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 24 }}>
-                  <div className="flex-between">
-                    <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: '600' }}>At Stake</span>
-                    <span style={{ color: 'var(--accent)', fontWeight: '800' }}>{formatXLM(c.amount)}</span>
+                  <div className="arb-card-parties">
+                    <div className="arb-party">
+                      <div className="arb-party-role">Client</div>
+                      <div className="arb-party-addr">{truncateAddr(c.client)}</div>
+                    </div>
+                    <div className="arb-vs">VS</div>
+                    <div className="arb-party">
+                      <div className="arb-party-role">Freelancer</div>
+                      <div className="arb-party-addr">{truncateAddr(c.freelancer)}</div>
+                    </div>
                   </div>
-                  <div className="flex-between">
-                    <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: '600' }}>Disputed On</span>
-                    <span style={{ color: 'var(--text-heading)', fontWeight: '700' }}>{formatDate(c.disputedAt)}</span>
-                  </div>
-                </div>
 
-                <button className="btn btn-primary btn-full" onClick={() => setSelected(c)} style={{ marginTop: 'auto' }}>
-                  ⚖️ Open Case for Resolution
-                </button>
-              </div>
-            ))
+                  <div className="detail-row">
+                    <span className="detail-row-label">Amount at Stake</span>
+                    <span className="detail-row-value" style={{ color: 'var(--accent)' }}>{formatXLM(c.amount)}</span>
+                  </div>
+                  <div className="detail-row">
+                    <span className="detail-row-label">Disputed On</span>
+                    <span className="detail-row-value">{formatDate(c.disputedAt)}</span>
+                  </div>
+
+                  <div className="card" style={{ background: 'var(--red-bg)', border: '1px solid rgba(239,68,68,0.2)', padding: 12, margin: '12px 0' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: 4 }}>DISPUTE REASON</div>
+                    <p style={{ fontSize: '0.875rem', color: 'var(--text)' }}>{c.disputeReason}</p>
+                  </div>
+
+                  <button className="btn btn-primary btn-full" onClick={() => setSelected(c)}>
+                    ⚖️ Resolve Dispute
+                  </button>
+                </div>
+              ))}
+            </div>
           )}
-        </div>
+        </>
       )}
 
       {tab === 'resolved' && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: 24 }}>
+        <>
           {resolved.length === 0 ? (
-            <div className="card" style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '100px 24px' }}>
-              <div style={{ fontSize: '3.5rem', marginBottom: 20 }}>📜</div>
-              <h3>No History</h3>
-              <p style={{ color: 'var(--text-muted)', marginTop: 8 }}>No disputes have been resolved yet.</p>
+            <div className="empty-state">
+              <div className="empty-icon"><ClipboardIcon width={26} height={26} /></div>
+              <div className="empty-title">No resolved disputes yet</div>
             </div>
           ) : (
-            resolved.map(c => (
-              <div className="card" key={c.id}>
-                <div className="flex-between mb-24">
-                  <div>
-                    <div style={{ fontWeight: 800, color: 'var(--text-heading)', fontSize: '1.1rem' }}>{c.title}</div>
-                    <div className="mono" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: 4 }}>{c.id}</div>
+            <div className="arb-grid">
+              {resolved.map(c => (
+                <div className="card" key={c.id}>
+                  <div className="flex-between mb-16">
+                    <div>
+                      <div className="contract-card-title">{c.title}</div>
+                      <div className="contract-card-addr">{c.id}</div>
+                    </div>
+                    <span className={`badge badge-${c.status.toLowerCase()}`}>{c.status}</span>
                   </div>
-                  <span className={`badge badge-${c.status.toLowerCase()}`}>{c.status}</span>
-                </div>
-                
-                <div className="card mb-24" style={{ background: 'var(--bg-sunken)', border: '1px solid var(--border-strong)', padding: '16px' }}>
-                  <div style={{ fontSize: '0.7rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: 8 }}>Resolution</div>
-                  <div style={{ fontWeight: '700', color: 'var(--text-heading)', fontSize: '1rem' }}>
-                    {c.resolution === 'freelancer' ? '✅ Released to Freelancer'
-                      : c.resolution === 'client' ? '↩️ Refunded to Client'
-                      : '⚡ Split 50/50'}
+                  <div className="detail-row">
+                    <span className="detail-row-label">Resolution</span>
+                    <span className="detail-row-value" style={{ textTransform: 'capitalize' }}>
+                      {c.resolution === 'freelancer' ? '✅ Released to Freelancer'
+                        : c.resolution === 'client' ? '↩️ Refunded to Client'
+                        : '⚡ Split 50/50'}
+                    </span>
+                  </div>
+                  <div className="detail-row">
+                    <span className="detail-row-label">Amount</span>
+                    <span className="detail-row-value">{formatXLM(c.amount)}</span>
+                  </div>
+                  <div className="detail-row">
+                    <span className="detail-row-label">Resolved On</span>
+                    <span className="detail-row-value">{formatDate(c.resolvedAt)}</span>
                   </div>
                 </div>
-
-                <div className="flex-between" style={{ fontSize: '0.85rem' }}>
-                  <span style={{ color: 'var(--text-muted)', fontWeight: '600' }}>Resolved On</span>
-                  <span style={{ color: 'var(--text-heading)', fontWeight: '700' }}>{formatDate(c.resolvedAt)}</span>
-                </div>
-              </div>
-            ))
+              ))}
+            </div>
           )}
-        </div>
+        </>
       )}
 
       {selected && <ResolutionModal contract={selected} />}
