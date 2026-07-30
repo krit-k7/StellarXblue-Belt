@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/StellarXblue-Belt/trustwork-ui/main/src/assets/trustwork-logo.svg" width="90" height="90" alt="TrustWork logo" />
+  <img src="src/assets/trustwork-logo.svg" width="90" height="90" alt="TrustWork logo" />
 </p>
 
 
