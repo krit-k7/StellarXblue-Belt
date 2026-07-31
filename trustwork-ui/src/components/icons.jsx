@@ -28,12 +28,12 @@ export function LogoMark({ size = 32, ...props }) {
           <stop offset="1" stopColor="#0b5f57" />
         </linearGradient>
       </defs>
-      <circle cx="100" cy="104" r="86" fill="none" stroke="url(#tw-ring-grad)" strokeWidth="9" />
+      <circle cx="100" cy="104" r="86" fill="none" stroke="url(#tw-ring-grad)" strokeWidth="13" />
       <path
         d="M40,54 L64,74 L136,74 L160,54"
         fill="none"
         stroke="#0e7d70"
-        strokeWidth="8"
+        strokeWidth="12"
         strokeLinejoin="miter"
         strokeLinecap="square"
       />
@@ -41,20 +41,20 @@ export function LogoMark({ size = 32, ...props }) {
         d="M100,74 L100,116"
         fill="none"
         stroke="#0e7d70"
-        strokeWidth="8"
+        strokeWidth="12"
         strokeLinecap="square"
       />
       <path
         d="M54,92 L72,148 L100,116 L128,148 L146,92"
         fill="none"
         stroke="#0e7d70"
-        strokeWidth="8"
+        strokeWidth="12"
         strokeLinejoin="miter"
         strokeLinecap="square"
       />
-      <polygon points="72,76 92,76 84,94" fill="#8fe6da" />
-      <polygon points="108,76 128,76 116,94" fill="#8fe6da" />
-      <polygon points="88,150 112,150 100,172" fill="#8fe6da" />
+      <polygon points="70,76 94,76 82,96" fill="#8fe6da" />
+      <polygon points="106,76 130,76 118,96" fill="#8fe6da" />
+      <polygon points="86,150 114,150 100,176" fill="#8fe6da" />
     </svg>
   )
 }
