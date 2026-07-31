@@ -42,56 +42,74 @@ export default function Home({ wallet, onOpenWallet, setPage, theme }) {
     { num: '4', title: 'Approve & Pay', desc: 'Client approves the work and funds are instantly released.' },
   ]
 
+  const escrowSteps = [
+    { state: 'done',    title: 'Client deposits',     detail: 'Funds locked in the Soroban contract' },
+    { state: 'active',  title: 'Milestone approved',  detail: 'Freelancer delivers, client signs off' },
+    { state: 'pending', title: 'Funds released',      detail: 'Paid out instantly, on-chain' },
+  ]
+
   return (
     <div className="home-root">
       {/* Hero Section */}
       <section className="hero-container">
         <ParticleField density={130} color={theme === 'light' ? '13, 148, 136' : '79, 216, 206'} />
-        
-        <motion.div 
-          className="hero-content"
-          initial="hidden"
-          animate="show"
-          variants={stagger}
-        >
-          <motion.div className="hero-badge" variants={fadeUp} style={{ 
-            background: 'var(--accent-glow)', 
-            color: 'var(--accent)', 
-            padding: '6px 16px', 
-            borderRadius: '20px',
-            fontSize: '0.75rem',
-            fontWeight: '700',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            marginBottom: '24px',
-            display: 'inline-block',
-            border: '1px solid var(--border-glow)'
-          }}>
-            Built on Stellar · Powered by Soroban
+
+        <div className="hero-split">
+          {/* LEFT — copy */}
+          <motion.div
+            className="hero-content"
+            style={{ maxWidth: 'none' }}
+            initial="hidden"
+            animate="show"
+            variants={stagger}
+          >
+            <motion.span className="hero-eyebrow" variants={fadeUp}>
+              Built on Stellar · Powered by Soroban
+            </motion.span>
+
+            <motion.h1 className="hero-title-split" variants={fadeUp}>
+              Freelance contracts,<br />
+              <em>sealed before work starts.</em>
+            </motion.h1>
+
+            <motion.p className="hero-description-split" variants={fadeUp}>
+              TrustWork locks project funds in a smart contract before work begins.
+              Clients and freelancers collaborate with confidence — no middlemen,
+              no disputes left unresolved.
+            </motion.p>
+
+            <motion.div className="hero-actions" style={{ justifyContent: 'flex-start' }} variants={fadeUp}>
+              <button className="btn btn-primary" onClick={() => wallet ? setPage('create') : onOpenWallet()}>
+                {wallet ? 'Create a Contract' : 'Connect Wallet to Start'}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginLeft: 8 }}>
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+              <button className="btn btn-outline" onClick={() => setPage('dashboard')}>
+                View Dashboard
+              </button>
+            </motion.div>
           </motion.div>
-          
-          <motion.h1 className="hero-title" variants={fadeUp}>
-            Freelance contracts,<br /><span>sealed before work starts.</span>
-          </motion.h1>
-          
-          <motion.p className="hero-description" variants={fadeUp}>
-            TrustWork locks project funds in a smart contract before work begins.
-            Clients and freelancers collaborate with confidence — no middlemen,
-            no disputes left unresolved.
-          </motion.p>
-          
-          <motion.div className="hero-actions" variants={fadeUp}>
-            <button className="btn btn-primary" onClick={() => wallet ? setPage('create') : onOpenWallet()}>
-              {wallet ? 'Create a Contract' : 'Connect Wallet to Start'}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ marginLeft: 8 }}>
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </button>
-            <button className="btn btn-outline" onClick={() => setPage('dashboard')}>
-              View Dashboard
-            </button>
+
+          {/* RIGHT — signature visual: escrow ladder */}
+          <motion.div
+            className="escrow-ladder"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
+          >
+            {escrowSteps.map((s, i) => (
+              <div className="escrow-step" key={s.title}>
+                <div className={`escrow-step-dot ${s.state}`}>
+                  {s.state === 'done' ? '✓' : i + 1}
+                </div>
+                <div className="escrow-step-title">{s.title}</div>
+                <div className="escrow-step-detail">{s.detail}</div>
+              </div>
+            ))}
+            <p className="escrow-caption">the contract only ever moves funds when both sides agree.</p>
           </motion.div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Trust Row */}
@@ -155,31 +173,31 @@ export default function Home({ wallet, onOpenWallet, setPage, theme }) {
       </section>
 
       {/* How It Works Section */}
-<section style={{ padding: '100px 24px', borderTop: '1px solid var(--border)' }}>
-  <div className="section-title">
-    <h2>How it works</h2>
-    <p style={{ color: 'var(--text-muted)' }}>Four steps to secure, trustless freelance collaboration.</p>
-  </div>
+      <section style={{ padding: '100px 24px', borderTop: '1px solid var(--border)' }}>
+        <div className="section-title">
+          <h2>How it works</h2>
+          <p style={{ color: 'var(--text-muted)' }}>Four steps to secure, trustless freelance collaboration.</p>
+        </div>
 
-  <div className="steps-track">
-    <div className="steps-line" />
-    <motion.div
-      className="steps-grid"
-      variants={stagger}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.3 }}
-    >
-      {steps.map(s => (
-        <motion.div className="step-card" key={s.num} variants={fadeUp}>
-          <div className="step-number">{s.num}</div>
-          <h3 style={{ marginBottom: 8 }}>{s.title}</h3>
-          <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{s.desc}</p>
-        </motion.div>
-      ))}
-    </motion.div>
-  </div>
-</section>
+        <div className="steps-track">
+          <div className="steps-line" />
+          <motion.div
+            className="steps-grid"
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            {steps.map(s => (
+              <motion.div className="step-card" key={s.num} variants={fadeUp}>
+                <div className="step-number">{s.num}</div>
+                <h3 style={{ marginBottom: 8 }}>{s.title}</h3>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{s.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
       {/* Bottom CTA */}
       <section style={{ padding: '100px 24px', textAlign: 'center', borderTop: '1px solid var(--border)', background: 'radial-gradient(circle at center, rgba(79,216,206,0.05) 0%, transparent 70%)' }}>
