@@ -1,7 +1,7 @@
 /* =============================================================================
    STELLARX — Professional Dark Design System
    ============================================================================= */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 /* ===== RESET & BASE ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { overflow-x: clip; scroll-behavior: smooth; }
@@ -50,6 +50,7 @@ body { overflow-x: clip; max-width: 100%; background: #05070a; color: #94a3b8; }
   /* -- type -- */
   --font: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Instrument Serif', serif;
   /* -- glass overlays (theme-aware) -- */
   --overlay-1: rgba(255, 255, 255, 0.03);
   --overlay-2: rgba(255, 255, 255, 0.05);
@@ -359,4 +360,136 @@ a:hover { color: var(--accent-hover); }
   margin: 0 auto 20px;
   box-shadow: 0 0 0 6px var(--bg), 0 0 24px var(--accent-glow);
   position: relative;
+}
+
+/* ===== SPLIT HERO (credport-style: copy left, visual right) ===== */
+.hero-split {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  text-align: left;
+  max-width: 1180px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-glow);
+  border: 1px solid var(--border-glow);
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+
+.hero-title-split {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 800;
+  color: var(--text-heading);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+
+.hero-title-split em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-description-split {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 460px;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* ===== SIGNATURE VISUAL: escrow ladder ===== */
+.escrow-ladder {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.escrow-ladder::before {
+  content: '';
+  position: absolute;
+  left: 23px;
+  top: 24px;
+  bottom: 24px;
+  width: 2px;
+  background: var(--grad-primary);
+  opacity: 0.4;
+}
+
+.escrow-step {
+  position: relative;
+  background: var(--card-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 20px 20px 64px;
+}
+
+.escrow-step-dot {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.escrow-step-dot.done { background: var(--accent); color: var(--accent-ink); }
+.escrow-step-dot.active { background: var(--violet); color: var(--accent-ink); }
+.escrow-step-dot.pending {
+  background: var(--overlay-2);
+  color: var(--text-muted);
+  border: 1px solid var(--border-strong);
+}
+
+.escrow-step-title {
+  font-weight: 700;
+  color: var(--text-heading);
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+
+.escrow-step-detail {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.escrow-caption {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+  .hero-split { grid-template-columns: 1fr; text-align: center; }
+  .hero-description-split { margin-left: auto; margin-right: auto; }
 }
