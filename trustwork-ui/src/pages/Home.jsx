@@ -91,23 +91,60 @@ export default function Home({ wallet, onOpenWallet, setPage, theme }) {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT — signature visual: escrow ladder */}
+          {/* RIGHT — signature visual: floating seal + escrow ladder */}
           <motion.div
-            className="escrow-ladder"
+            className="escrow-visual"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
           >
-            {escrowSteps.map((s, i) => (
-              <div className="escrow-step" key={s.title}>
-                <div className={`escrow-step-dot ${s.state}`}>
-                  {s.state === 'done' ? '✓' : i + 1}
+            {/* Signature floating seal — sealed contract + orbiting network nodes */}
+            <div className="seal-orbit">
+              <div className="seal-glow" />
+              <motion.div
+                className="seal-ring"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 24, repeat: Infinity, ease: 'linear' }}
+              >
+                <span className="seal-node node-a" />
+                <span className="seal-node node-b" />
+                <span className="seal-node node-c" />
+              </motion.div>
+              <motion.div
+                className="seal-badge"
+                animate={{ y: [0, -14, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <LockIcon width={28} height={28} />
+                <span className="seal-badge-label">Sealed</span>
+              </motion.div>
+            </div>
+
+            {/* Flow pulse — fund moving from seal into the steps */}
+            <div className="flow-line">
+              <motion.span
+                className="flow-pulse"
+                animate={{ top: ['0%', '100%'], opacity: [0, 1, 0] }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+              />
+            </div>
+
+            <motion.div
+              className="escrow-ladder"
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              {escrowSteps.map((s, i) => (
+                <div className="escrow-step" key={s.title}>
+                  <div className={`escrow-step-dot ${s.state}`}>
+                    {s.state === 'done' ? '✓' : i + 1}
+                  </div>
+                  <div className="escrow-step-title">{s.title}</div>
+                  <div className="escrow-step-detail">{s.detail}</div>
                 </div>
-                <div className="escrow-step-title">{s.title}</div>
-                <div className="escrow-step-detail">{s.detail}</div>
-              </div>
-            ))}
-            <p className="escrow-caption">the contract only ever moves funds when both sides agree.</p>
+              ))}
+              <p className="escrow-caption">the contract only ever moves funds when both sides agree.</p>
+            </motion.div>
           </motion.div>
         </div>
       </section>
