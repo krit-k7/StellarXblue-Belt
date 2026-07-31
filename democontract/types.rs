@@ -2,7 +2,7 @@
 // types.rs — Shared types, enums, and error codes
 // =============================================================================
 
-use soroban_sdk::{contracttype, Address, Symbol, contracterror};
+use soroban_sdk::{contracttype, Address, String, contracterror};
 
 // ── EscrowState ───────────────────────────────────────────────────────────────
 #[contracttype]
@@ -36,7 +36,7 @@ pub struct EscrowConfig {
     pub amount:       i128,
     pub token:        Address,
     pub deadline:     u64,
-    pub description:  Symbol,
+    pub description:  String,
     pub state:        EscrowState,
 }
 
