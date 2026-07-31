@@ -93,7 +93,7 @@ export default function Home({ wallet, onOpenWallet, setPage, theme }) {
 
           {/* RIGHT — signature visual: floating seal + escrow ladder */}
           <motion.div
-            className="escrow-visual"
+            className="hero-escrow-visual"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
