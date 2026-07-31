@@ -21,30 +21,40 @@ const base = {
 // product far better than a generic lightning bolt.
 export function LogoMark({ size = 32, ...props }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 32 32" {...props}>
+    <svg width={size} height={size} viewBox="0 0 200 210" {...props}>
       <defs>
-        <linearGradient id="w-gem-highlight" x1="8" y1="4" x2="16" y2="10" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#e4f7f2" />
-          <stop offset="1" stopColor="#bfeee3" />
+        <linearGradient id="tw-ring-grad" x1="100" y1="18" x2="100" y2="190" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="#2dd4bf" />
+          <stop offset="1" stopColor="#0b5f57" />
         </linearGradient>
       </defs>
-
-      {/* facets */}
-      <polygon points="10,4 16,8 4,14" fill="#8fded0" />
-      <polygon points="4,14 16,8 16,29" fill="#3fae9c" />
-      <polygon points="22,4 16,8 28,14" fill="#2c8f82" />
-      <polygon points="28,14 16,8 16,29" fill="#1c655d" />
-      <polygon points="10,4 13,6.4 16,8" fill="url(#w-gem-highlight)" />
-
-      {/* W woven in */}
+      <circle cx="100" cy="104" r="86" fill="none" stroke="url(#tw-ring-grad)" strokeWidth="9" />
       <path
-        d="M9 14 L12 21 L16 15 L20 21 L23 14"
+        d="M40,54 L64,74 L136,74 L160,54"
         fill="none"
-        stroke="#0b201d"
-        strokeWidth="2.3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke="#0e7d70"
+        strokeWidth="8"
+        strokeLinejoin="miter"
+        strokeLinecap="square"
       />
+      <path
+        d="M100,74 L100,116"
+        fill="none"
+        stroke="#0e7d70"
+        strokeWidth="8"
+        strokeLinecap="square"
+      />
+      <path
+        d="M54,92 L72,148 L100,116 L128,148 L146,92"
+        fill="none"
+        stroke="#0e7d70"
+        strokeWidth="8"
+        strokeLinejoin="miter"
+        strokeLinecap="square"
+      />
+      <polygon points="72,76 92,76 84,94" fill="#8fe6da" />
+      <polygon points="108,76 128,76 116,94" fill="#8fe6da" />
+      <polygon points="88,150 112,150 100,172" fill="#8fe6da" />
     </svg>
   )
 }
