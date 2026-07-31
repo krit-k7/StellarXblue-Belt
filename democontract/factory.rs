@@ -18,7 +18,7 @@
 //   Soroban   → this file as-is (instance-based storage simulation)
 // =============================================================================
 
-use soroban_sdk::{Env, Address, Symbol};
+use soroban_sdk::{Env, Address, String};
 use crate::types::{EscrowConfig, EscrowState, EscrowError};
 use crate::storage;
 
@@ -38,7 +38,7 @@ impl EscrowFactory {
         amount: i128,
         token: Address,
         deadline: u64,
-        description: Symbol,
+        description: String,
     ) -> Result<u64, EscrowError> {
 
         // ── Input validation ─────────────────────────────────────────────────
