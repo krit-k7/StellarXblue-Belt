@@ -19,7 +19,7 @@ const base = {
 // ── Brand mark ───────────────────────────────────────────────────────────
 // Shield + check: reads instantly as "verified / secured" — fits an escrow
 // product far better than a generic lightning bolt.
-export function LogoMark({ size = 32, ...props }) {
+export function LogoMark({ size = 40, ...props }) {
   return (
     <svg width={size} height={size} viewBox="0 0 200 210" {...props}>
       <defs>
