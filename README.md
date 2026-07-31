@@ -1,8 +1,9 @@
-<h1 align="center">TRUSTWORK 🛡️</h1>
+<div align="center">
 
-<h3 align="center">Decentralized Freelance Escrow on Stellar</h3>
+<h1>TRUSTWORK 🛡️</h1>
+<h3>Decentralized Freelance Escrow on Stellar</h3>
 
-<p align="center">
+<p>
   <em>
     A blockchain-based escrow platform where clients and freelancers transact trustlessly using Soroban smart contracts on the Stellar network.
     <br><br>
