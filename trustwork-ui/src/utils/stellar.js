@@ -346,9 +346,7 @@ export async function sorobanCreateEscrow(sourceAddress, {
       buyer, seller, arbitrator, amountXlm, tokenAddress, deadlineUnix, description
     })
     
-    // Sanitize description for Soroban Symbol type
-    const sanitizedDescription = sanitizeForSymbol(description)
-    console.log('🧹 Sanitized description:', { original: description, sanitized: sanitizedDescription })
+    // description now sent as-is — contract accepts full UTF-8 String, no sanitization needed
     
     const args = [
       addressVal(buyer),
@@ -359,7 +357,7 @@ export async function sorobanCreateEscrow(sourceAddress, {
       nativeToScVal(xlmToStroops(amountXlm), { type: 'i128' }),
       addressVal(tokenAddress),
       nativeToScVal(BigInt(deadlineUnix), { type: 'u64' }),
-      nativeToScVal(sanitizedDescription, { type: 'symbol' }),
+      nativeToScVal(description, { type: 'string' }),
     ]
     
     console.log('✅ Args prepared, calling invokeContract...')
@@ -527,6 +525,7 @@ export async function sorobanRaiseDispute(sourceAddress, escrowId) {
   return safeInvoke(async () => {
     return invokeContract(sourceAddress, 'raise_dispute', [
       nativeToScVal(BigInt(escrowId), { type: 'u64' }),
+      addressVal(sourceAddress),
     ])
   })
 }
