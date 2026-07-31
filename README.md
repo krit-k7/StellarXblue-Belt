@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/krit-k7/StellarXblue-Belt/main/trustwork-ui/src/assets/b0398866-2c8f-4f5d-b758-210b75235f76.png" width="120" height="120" alt="TrustWork Logo" />
+<img src="https://raw.githubusercontent.com/krit-k7/StellarXblue-Belt/main/trustwork-ui/src/assets/trustwork_logo_tw_emblem.png" width="120" height="120" alt="TrustWork Logo" />
 
 # TrustWork
 
