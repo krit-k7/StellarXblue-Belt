@@ -1,8 +1,14 @@
 <h1 align="center">TRUSTWORK 🛡️</h1>
 
-### Decentralized Freelance Escrow on Stellar
+<h3 align="center">Decentralized Freelance Escrow on Stellar</h3>
 
-*A blockchain-based escrow platform where clients and freelancers transact trustlessly using Soroban smart contracts on the Stellar network. No middlemen. No chargebacks. No "the client ghosted me after I delivered the work."*
+<p align="center">
+  <em>
+    A blockchain-based escrow platform where clients and freelancers transact trustlessly using Soroban smart contracts on the Stellar network.
+    <br><br>
+    No middlemen. No chargebacks. No "the client ghosted me after I delivered the work."
+  </em>
+</p>
 
 [![Live App](https://img.shields.io/badge/Live_App-stellar--xblue--belt.vercel.app-success?style=flat-square)](https://stellar-xblue-belt.vercel.app/)
 [![Network](https://img.shields.io/badge/Network-Stellar_Testnet-blue?style=flat-square)](https://stellar.org)
