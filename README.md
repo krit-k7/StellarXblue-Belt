@@ -1,8 +1,4 @@
-<div align="center">
-
-<img src="https://raw.githubusercontent.com/krit-k7/StellarXblue-Belt/main/trustwork-ui/src/assets/TW2.png" width="120" height="120" alt="TrustWork Logo" />
-
-# TrustWork
+# TrustWork🛡️
 
 ### Decentralized Freelance Escrow on Stellar
 
