@@ -187,8 +187,8 @@ export default function App() {
       />
 
       {page === 'home' && (
-  <Home onConnect={() => setWalletOpen(true)} wallet={wallet} setPage={setPage} theme={theme} />
-)}
+        <Home onOpenWallet={() => setWalletOpen(true)} wallet={wallet} setPage={setPage} theme={theme} />
+      )}
       {page === 'dashboard' && (
         <Dashboard
           contracts={contracts}
