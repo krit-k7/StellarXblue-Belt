@@ -1,4 +1,4 @@
-# TrustWork🛡️
+<h1 align="center">TRUSTWORK 🛡️</h1>
 
 ### Decentralized Freelance Escrow on Stellar
 
