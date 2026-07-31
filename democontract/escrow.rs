@@ -136,7 +136,7 @@ pub fn refund(env: &Env, escrow_id: u64) -> Result<(), EscrowError> {
 // ── raise_dispute ─────────────────────────────────────────────────────────────
 /// Either buyer or seller raises a dispute after work is submitted.
 /// Requires an arbitrator to be configured on this escrow.
-pub fn raise_dispute(env: &Env, escrow_id: u64) -> Result<(), EscrowError> {
+pub fn raise_dispute(env: &Env, escrow_id: u64, caller: Address) -> Result<(), EscrowError> {
     let mut cfg = storage::load_escrow(env, escrow_id)?;
 
     if cfg.state != EscrowState::WorkSubmitted {
@@ -148,7 +148,11 @@ pub fn raise_dispute(env: &Env, escrow_id: u64) -> Result<(), EscrowError> {
         return Err(EscrowError::NoArbitrator);
     }
 
-    cfg.seller.require_auth(); // or cfg.seller.require_auth() based on caller
+    // Either buyer or seller may raise a dispute
+    if caller != cfg.buyer && caller != cfg.seller {
+        return Err(EscrowError::Unauthorized);
+    }
+    caller.require_auth();
 
     cfg.state = EscrowState::Disputed;
     storage::update_escrow(env, &cfg);
