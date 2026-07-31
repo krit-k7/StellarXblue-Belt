@@ -1,6 +1,6 @@
 #![no_std]
 
-use soroban_sdk::{contract, contractimpl, Env, Address, Symbol};
+use soroban_sdk::{contract, contractimpl, Env, Address, String};
 
 pub mod types;
 pub mod storage;
@@ -24,7 +24,7 @@ impl TrustWorkEscrowContract {
         amount: i128,
         token: Address,
         deadline: u64,
-        description: Symbol,
+        description: String,
     ) -> Result<u64, EscrowError> {
         buyer.require_auth();
         EscrowFactory::create(&env, buyer, seller, arbitrator, amount, token, deadline, description)
@@ -46,8 +46,8 @@ impl TrustWorkEscrowContract {
         escrow::refund(&env, escrow_id)
     }
 
-    pub fn raise_dispute(env: Env, escrow_id: u64) -> Result<(), EscrowError> {
-        escrow::raise_dispute(&env, escrow_id)
+    pub fn raise_dispute(env: Env, escrow_id: u64, caller: Address) -> Result<(), EscrowError> {
+        escrow::raise_dispute(&env, escrow_id, caller)
     }
 
     pub fn resolve_dispute(env: Env, escrow_id: u64, resolution: Resolution) -> Result<(), EscrowError> {
