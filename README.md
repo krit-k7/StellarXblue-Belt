@@ -365,6 +365,9 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 
 ### Deploying the Smart Contract
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/17ec0c2e-2463-4259-b931-876c41aeba29" />
+
+
 ```bash
 # From project root
 ./deploy-contract.sh
