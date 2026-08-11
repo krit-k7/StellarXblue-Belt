@@ -69,7 +69,7 @@
 | 📊 User Feedback (50+ responses) | [Full Feedback Spreadsheet](https://docs.google.com/spreadsheets/d/1zOhuFVbrQZlJ1NcUoBrmZxb7JP9WRP9J/edit?gid=1132381471#gid=1132381471) |
 | 🧾 Repository | [github.com/krit-k7/StellarXblue-Belt](https://github.com/krit-k7/StellarXblue-Belt) |
 | 🐦 Community Post | [View Twitter/X Post](https://x.com/krit_giri/status/2050516673879527867) |
-| 🔎 Contract Explorer | [Stellar Expert](https://stellar.expert/explorer/testnet/contract/CCK3FVCZDFQBGG37BDDQRMONRI6DWTYC3MFN62FGKXWGSXXT7SCW7YMY) |
+| 🔎 Contract Explorer | [Stellar Expert](https://stellar.expert/explorer/testnet/contract/CCN4X76DLQGC5TWVVLZWSJZZGOPV2XTG3JQX35SJGH3LNW7OSC3TWB6Y) |
 
 ---
 
@@ -356,7 +356,7 @@ npm run dev
 ### Environment Variables
 
 ```env
-VITE_CONTRACT_ID=CCK3FVCZDFQBGG37BDDQRMONRI6DWTYC3MFN62FGKXWGSXXT7SCW7YMY
+VITE_CONTRACT_ID=CCN4X76DLQGC5TWVVLZWSJZZGOPV2XTG3JQX35SJGH3LNW7OSC3TWB6Y
 VITE_STELLAR_NETWORK=testnet
 VITE_RPC_URL=https://soroban-testnet.stellar.org
 VITE_SUPABASE_URL=your_supabase_url
@@ -458,7 +458,7 @@ TrustWork tracks application, deployment, and on-chain health through three sepa
 
 ### Blockchain Monitoring
 **Stellar Expert** surfaces on-chain activity for the deployed contract — invocation history, transaction success rate, and contract state verification.
-**Access:** [View Contract on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CCK3FVCZDFQBGG37BDDQRMONRI6DWTYC3MFN62FGKXWGSXXT7SCW7YMY)
+**Access:** [View Contract on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CCN4X76DLQGC5TWVVLZWSJZZGOPV2XTG3JQX35SJGH3LNW7OSC3TWB6Y)
 
 ---
 
