@@ -4,8 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [lib]
-crate-type = ["cdylib"]   # Required for Soroban WASM compilation
-path       = "lib.rs"
+crate-type = ["cdylib", "rlib"]   # Required for Soroban WASM compilation
 
 [dependencies]
 soroban-sdk = { version = "21.0.0", features = [] }
