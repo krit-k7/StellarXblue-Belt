@@ -244,3 +244,9 @@ You're done when:
 ---
 
 **Need help?** Check the console (F12) for errors or verify transactions on [Stellar Explorer](https://stellar.expert/explorer/testnet).
+
+---
+
+**Last Updated:** August 2026  
+**Version:** 1.1.0  
+**Environment:** Stellar Testnet
