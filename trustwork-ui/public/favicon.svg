@@ -1,35 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
-    <linearGradient id="tw-ring-grad" x1="100" y1="18" x2="100" y2="190" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#2dd4bf" />
-      <stop offset="1" stop-color="#0b5f57" />
+    <linearGradient id="ring" x1="20" y1="10" x2="80" y2="90">
+      <stop offset="0" stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#0b5f57"/>
     </linearGradient>
   </defs>
-  <circle cx="100" cy="104" r="86" fill="none" stroke="url(#tw-ring-grad)" stroke-width="13" />
+
+  <!-- Outer circle -->
+  <circle
+    cx="50"
+    cy="50"
+    r="43"
+    fill="white"
+    stroke="url(#ring)"
+    stroke-width="7"
+  />
+
+  <!-- Simplified TrustWork mark -->
   <path
-    d="M40,54 L64,74 L136,74 L160,54"
+    d="M25 30 L36 39 L64 39 L75 30"
     fill="none"
     stroke="#0e7d70"
-    stroke-width="12"
-    stroke-linejoin="miter"
-    stroke-linecap="square"
+    stroke-width="7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
   />
+
   <path
-    d="M100,74 L100,116"
+    d="M50 39 V57"
     fill="none"
     stroke="#0e7d70"
-    stroke-width="12"
-    stroke-linecap="square"
+    stroke-width="7"
+    stroke-linecap="round"
   />
+
   <path
-    d="M54,92 L72,148 L100,116 L128,148 L146,92"
+    d="M31 46 L39 70 L50 57 L61 70 L69 46"
     fill="none"
     stroke="#0e7d70"
-    stroke-width="12"
-    stroke-linejoin="miter"
-    stroke-linecap="square"
+    stroke-width="7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
   />
-  <polygon points="70,76 94,76 82,96" fill="#8fe6da" />
-  <polygon points="106,76 130,76 118,96" fill="#8fe6da" />
-  <polygon points="86,150 114,150 100,176" fill="#8fe6da" />
 </svg>
