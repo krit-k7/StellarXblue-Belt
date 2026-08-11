@@ -200,6 +200,6 @@ This security checklist is part of the TrustWork project and is licensed under M
 
 ---
 
-**Last Updated:** January 2025  
-**Version:** 1.0.0  
+**Last Updated:** August 2026
+**Version:** 1.1.0
 **Status:** Testnet Deployment
