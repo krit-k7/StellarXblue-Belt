@@ -6,6 +6,7 @@
 <p>
   <em>
     A blockchain-based escrow platform where clients and freelancers transact trustlessly using Soroban smart contracts on the Stellar network.
+    
     <br><br>
     No middlemen. No chargebacks. No "the client ghosted me after I delivered the work."
   </em>
